@@ -1,0 +1,120 @@
+{
+    "hero": {
+        "title": "Authentic Tube Sound",
+        "subtitle": "Premium tube amplifiers for true music lovers. Rare vintage and modern handmade.",
+        "cta": {
+            "browse": "Browse Tube Amps",
+            "matching": "Get Matching Advice"
+        }
+    },
+    "quickEntry": {
+        "title": "Find Your Perfect Amp",
+        "vocals": {
+            "title": "Vocals / Jazz",
+            "description": "SE 300B/2A3 - Sweet, detailed sound"
+        },
+        "power": {
+            "title": "More Power",
+            "description": "PP EL34/KT88 - Control, tight bass"
+        },
+        "smallRoom": {
+            "title": "Small Room / Low Volume",
+            "description": "Low-power SE - Delicate, smooth"
+        },
+        "hardSpeakers": {
+            "title": "Hard-to-Drive Speakers",
+            "description": "High-power PP - Flexible taps"
+        }
+    },
+    "featured": {
+        "title": "Featured Products",
+        "tabs": {
+            "bestSellers": "Best Sellers",
+            "newArrivals": "New Arrivals",
+            "vintage": "Curated Vintage"
+        }
+    },
+    "matching": {
+        "title": "Matching Tool",
+        "subtitle": "Enter your speaker and room specs to get amp recommendations",
+        "form": {
+            "sensitivity": {
+                "label": "Speaker Sensitivity (dB)",
+                "placeholder": "e.g. 88"
+            },
+            "impedance": {
+                "label": "Impedance (Ω)",
+                "options": {
+                    "4": "4Ω",
+                    "6": "6Ω",
+                    "8": "8Ω",
+                    "16": "16Ω"
+                }
+            },
+            "roomSize": {
+                "label": "Room Size",
+                "options": {
+                    "small": "Small (<15m²)",
+                    "medium": "Medium (15-30m²)",
+                    "large": "Large (>30m²)"
+                }
+            },
+            "listeningLevel": {
+                "label": "Listening Level",
+                "options": {
+                    "low": "Low (background)",
+                    "medium": "Medium",
+                    "loud": "Loud (party)"
+                }
+            },
+            "genres": {
+                "label": "Favorite Genres",
+                "placeholder": "e.g. Jazz, Vocal, Classical"
+            },
+            "submit": "Find Matching Amps"
+        },
+        "results": {
+            "fit": "Great fit",
+            "consider": "Consider",
+            "notRecommended": "Not recommended",
+            "chatCta": "Chat with us for detailed advice"
+        }
+    },
+    "trust": {
+        "title": "Why Choose Us",
+        "badges": {
+            "tested": {
+                "title": "Thoroughly Tested",
+                "description": "Noise/hum measured, all functions checked"
+            },
+            "packaging": {
+                "title": "Safe Packaging",
+                "description": "Professional protection, worry-free shipping"
+            },
+            "warranty": {
+                "title": "Clear Warranty",
+                "description": "Transparent policy, dedicated support"
+            },
+            "vintage": {
+                "title": "Verified Vintage",
+                "description": "Detailed checklist, clear provenance"
+            },
+            "setup": {
+                "title": "Setup Support",
+                "description": "Installation guide, safe usage tips"
+            },
+            "consultation": {
+                "title": "Expert Consultation",
+                "description": "Speaker matching, room optimization"
+            }
+        }
+    },
+    "customerSetups": {
+        "title": "Customer Setups",
+        "subtitle": "Beautiful systems from our music-loving community"
+    },
+    "guidesPreview": {
+        "title": "Beginner Guides",
+        "viewAll": "View All Guides"
+    }
+}

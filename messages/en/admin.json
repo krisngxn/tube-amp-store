@@ -1,0 +1,49 @@
+{
+    "title": "Admin",
+    "dashboard": {
+        "title": "Dashboard",
+        "stats": {
+            "totalProducts": "Total Products",
+            "totalOrders": "Total Orders",
+            "pendingOrders": "Pending Orders",
+            "revenue": "Revenue"
+        }
+    },
+    "products": {
+        "title": "Products",
+        "add": "Add Product",
+        "edit": "Edit",
+        "delete": "Delete",
+        "fields": {
+            "name": "Product name",
+            "slug": "Slug",
+            "price": "Price",
+            "condition": "Condition",
+            "stock": "Stock",
+            "topology": "Topology",
+            "tubeType": "Tube type",
+            "power": "Power (W)",
+            "taps": "Taps",
+            "minSensitivity": "Min sensitivity (dB)",
+            "images": "Images",
+            "description": "Description",
+            "specifications": "Specifications",
+            "allowDeposit": "Allow deposit",
+            "depositAmount": "Deposit amount"
+        }
+    },
+    "orders": {
+        "title": "Orders",
+        "view": "View",
+        "updateStatus": "Update Status",
+        "status": {
+            "pending": "Pending",
+            "confirmed": "Confirmed",
+            "deposited": "Deposited",
+            "processing": "Processing",
+            "shipped": "Shipped",
+            "delivered": "Delivered",
+            "cancelled": "Cancelled"
+        }
+    }
+}

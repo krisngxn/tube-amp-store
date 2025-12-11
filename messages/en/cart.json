@@ -1,0 +1,27 @@
+{
+    "title": "Shopping Cart",
+    "empty": {
+        "title": "Your cart is empty",
+        "description": "You don't have any items in your cart",
+        "cta": "Browse Tube Amps"
+    },
+    "items": {
+        "quantity": "Quantity",
+        "price": "Price",
+        "total": "Total",
+        "remove": "Remove",
+        "update": "Update"
+    },
+    "summary": {
+        "title": "Order Summary",
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "shippingNote": "Calculated at checkout",
+        "total": "Total",
+        "checkout": "Checkout"
+    },
+    "notes": {
+        "matchingAdvice": "Need matching advice?",
+        "chatCta": "Chat with us"
+    }
+}

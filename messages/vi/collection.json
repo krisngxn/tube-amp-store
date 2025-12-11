@@ -1,0 +1,78 @@
+{
+    "title": "Ampli Đèn",
+    "filters": {
+        "title": "Lọc",
+        "clear": "Xóa Bộ Lọc",
+        "topology": {
+            "label": "Topology",
+            "options": {
+                "se": "Single-Ended (SE)",
+                "pp": "Push-Pull (PP)"
+            }
+        },
+        "tubeType": {
+            "label": "Loại Đèn",
+            "options": {
+                "300b": "300B",
+                "2a3": "2A3",
+                "el34": "EL34",
+                "kt88": "KT88",
+                "kt66": "KT66",
+                "6l6": "6L6",
+                "el84": "EL84",
+                "6v6": "6V6"
+            }
+        },
+        "power": {
+            "label": "Công Suất",
+            "options": {
+                "low": "< 10W",
+                "medium": "10-25W",
+                "high": "> 25W"
+            }
+        },
+        "condition": {
+            "label": "Tình Trạng",
+            "options": {
+                "new": "Mới",
+                "likeNew": "Như Mới",
+                "vintage": "Vintage"
+            }
+        },
+        "price": {
+            "label": "Giá",
+            "min": "Tối thiểu",
+            "max": "Tối đa"
+        }
+    },
+    "sort": {
+        "label": "Sắp xếp",
+        "options": {
+            "newest": "Mới nhất",
+            "priceLow": "Giá thấp đến cao",
+            "priceHigh": "Giá cao đến thấp",
+            "bestSellers": "Bán chạy"
+        }
+    },
+    "results": {
+        "showing": "Hiển thị {count} sản phẩm",
+        "noResults": "Không tìm thấy sản phẩm phù hợp"
+    },
+    "productCard": {
+        "viewDetails": "Xem Chi Tiết",
+        "chatForMatching": "Chat Tư Vấn",
+        "power": "{watts}W",
+        "minSensitivity": "Loa tối thiểu: {db}dB",
+        "reserveWithDeposit": "Đặt Cọc"
+    },
+    "empty": {
+        "title": "Không tìm thấy sản phẩm",
+        "description": "Không có sản phẩm nào phù hợp với bộ lọc của bạn. Hãy thử điều chỉnh bộ lọc hoặc xóa tất cả.",
+        "clearFilters": "Xóa Tất Cả Bộ Lọc"
+    },
+    "pagination": {
+        "previous": "Trang Trước",
+        "next": "Trang Sau",
+        "pageOf": "Trang {current} / {total}"
+    }
+}

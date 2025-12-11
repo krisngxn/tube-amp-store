@@ -1,0 +1,38 @@
+{
+    "storeInfo": {
+        "title": "Classic Tube Amps",
+        "description": "Chuyên cung cấp ampli đèn cao cấp - vintage và handmade hiện đại",
+        "address": "Hà Nội, Việt Nam",
+        "phone": "+84 xxx xxx xxx",
+        "email": "hello@classictubeamps.vn"
+    },
+    "sections": {
+        "shop": "Cửa Hàng",
+        "support": "Hỗ Trợ",
+        "policies": "Chính Sách",
+        "connect": "Kết Nối"
+    },
+    "links": {
+        "tubeAmplifiers": "Ampli Đèn",
+        "vintage": "Vintage",
+        "newArrivals": "Hàng Mới",
+        "guides": "Hướng Dẫn",
+        "service": "Quy Trình Kiểm Tra",
+        "reviews": "Đánh Giá Khách Hàng",
+        "contact": "Liên Hệ",
+        "shipping": "Vận Chuyển",
+        "warranty": "Bảo Hành",
+        "returns": "Đổi Trả",
+        "payment": "Thanh Toán",
+        "privacy": "Bảo Mật",
+        "terms": "Điều Khoản"
+    },
+    "trust": {
+        "title": "Cam Kết Chất Lượng",
+        "tested": "Kiểm tra nhiễu/hum trước khi giao",
+        "packaging": "Đóng gói bảo vệ chuyên nghiệp",
+        "support": "Hỗ trợ setup và sử dụng",
+        "warranty": "Chính sách bảo hành rõ ràng"
+    },
+    "copyright": "© 2024 Classic Tube Amps. Tất cả quyền được bảo lưu."
+}

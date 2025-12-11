@@ -1,0 +1,69 @@
+{
+    "title": "Checkout",
+    "steps": {
+        "information": "Information",
+        "payment": "Payment",
+        "confirmation": "Confirmation"
+    },
+    "information": {
+        "title": "Shipping Information",
+        "fullName": {
+            "label": "Full name",
+            "placeholder": "John Doe"
+        },
+        "phone": {
+            "label": "Phone number",
+            "placeholder": "0xxx xxx xxx"
+        },
+        "email": {
+            "label": "Email",
+            "placeholder": "email@example.com"
+        },
+        "address": {
+            "label": "Address",
+            "placeholder": "Street address"
+        },
+        "city": {
+            "label": "City",
+            "placeholder": "Hanoi"
+        },
+        "district": {
+            "label": "District",
+            "placeholder": "Select district"
+        },
+        "note": {
+            "label": "Note (optional)",
+            "placeholder": "Note for delivery"
+        }
+    },
+    "payment": {
+        "title": "Payment Method",
+        "methods": {
+            "cod": {
+                "title": "Cash on Delivery (COD)",
+                "description": "Pay with cash when you receive"
+            },
+            "bankTransfer": {
+                "title": "Bank Transfer",
+                "description": "Transfer first, ship after confirmation"
+            }
+        }
+    },
+    "orderSummary": {
+        "title": "Order Summary",
+        "items": "{count} items",
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "total": "Total"
+    },
+    "actions": {
+        "backToCart": "Back to Cart",
+        "continue": "Continue",
+        "placeOrder": "Place Order"
+    },
+    "errors": {
+        "required": "This field is required",
+        "invalidEmail": "Invalid email",
+        "invalidPhone": "Invalid phone number"
+    }
+}

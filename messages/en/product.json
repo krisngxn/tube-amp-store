@@ -1,0 +1,78 @@
+{
+    "summary": {
+        "title": "10-Second Summary"
+    },
+    "cta": {
+        "addToCart": "Add to Cart",
+        "reserveWithDeposit": "Reserve with Deposit",
+        "chatForMatching": "Chat for Matching",
+        "outOfStock": "Out of Stock"
+    },
+    "trust": {
+        "tested": "Noise/hum tested",
+        "safeShipping": "Professional protective packaging",
+        "warranty": "Clear warranty",
+        "setupSupport": "Setup support"
+    },
+    "matching": {
+        "title": "Speaker & Room Matching",
+        "recommendedSensitivity": "Recommended speaker sensitivity: minimum {db}dB",
+        "taps": "Taps: {taps}",
+        "impedance": "Impedance: {impedance}",
+        "roomSize": "Room size: {size}",
+        "checkCompatibility": "Check Compatibility",
+        "results": {
+            "fit": "Great fit for your system",
+            "consider": "May fit - consider these factors",
+            "notRecommended": "Not recommended for your system"
+        }
+    },
+    "tabs": {
+        "overview": "Overview",
+        "specifications": "Specifications",
+        "sound": "Sound Character",
+        "matching": "Matching Notes",
+        "condition": "Condition",
+        "testing": "Testing Checklist",
+        "shipping": "Shipping & Warranty",
+        "faq": "FAQ",
+        "reviews": "Reviews"
+    },
+    "specifications": {
+        "topology": "Topology",
+        "tubeType": "Tube Type",
+        "power": "Power",
+        "taps": "Taps",
+        "frequency": "Frequency Response",
+        "snr": "SNR",
+        "thd": "THD",
+        "inputSensitivity": "Input Sensitivity",
+        "inputImpedance": "Input Impedance",
+        "dimensions": "Dimensions",
+        "weight": "Weight"
+    },
+    "sound": {
+        "character": "Sound Character",
+        "recommendedGenres": "Recommended Genres"
+    },
+    "condition": {
+        "new": "Brand New",
+        "likeNew": "Like New",
+        "vintage": "Vintage",
+        "recapStatus": "Capacitor Status",
+        "includedTubes": "Included Tubes",
+        "cosmetics": "Cosmetic Condition",
+        "originStory": "Provenance"
+    },
+    "deposit": {
+        "title": "Reserve with Deposit",
+        "amount": "Deposit amount: {amount}",
+        "reservationWindow": "Reservation period: {days} days",
+        "remainingPayment": "Pay remaining on delivery",
+        "cancellationPolicy": "Cancellation: 100% refund if cancelled within 24h"
+    },
+    "related": {
+        "title": "Related Products",
+        "accessories": "Recommended Accessories"
+    }
+}

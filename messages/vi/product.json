@@ -1,0 +1,78 @@
+{
+    "summary": {
+        "title": "Tóm Tắt 10 Giây"
+    },
+    "cta": {
+        "addToCart": "Thêm Vào Giỏ",
+        "reserveWithDeposit": "Đặt Cọc Giữ Hàng",
+        "chatForMatching": "Chat Tư Vấn Phối Ghép",
+        "outOfStock": "Hết Hàng"
+    },
+    "trust": {
+        "tested": "Đã kiểm tra nhiễu/hum",
+        "safeShipping": "Đóng gói bảo vệ chuyên nghiệp",
+        "warranty": "Bảo hành rõ ràng",
+        "setupSupport": "Hỗ trợ setup"
+    },
+    "matching": {
+        "title": "Phối Ghép Loa & Phòng Nghe",
+        "recommendedSensitivity": "Độ nhạy loa đề xuất: tối thiểu {db}dB",
+        "taps": "Taps: {taps}",
+        "impedance": "Trở kháng: {impedance}",
+        "roomSize": "Kích thước phòng: {size}",
+        "checkCompatibility": "Kiểm Tra Tương Thích",
+        "results": {
+            "fit": "Phù hợp tuyệt vời với hệ thống của bạn",
+            "consider": "Có thể phù hợp - cân nhắc các yếu tố sau",
+            "notRecommended": "Không đề xuất cho hệ thống của bạn"
+        }
+    },
+    "tabs": {
+        "overview": "Tổng Quan",
+        "specifications": "Thông Số",
+        "sound": "Đặc Tính Âm Thanh",
+        "matching": "Gợi Ý Phối Ghép",
+        "condition": "Tình Trạng",
+        "testing": "Quy Trình Kiểm Tra",
+        "shipping": "Vận Chuyển & Bảo Hành",
+        "faq": "FAQ",
+        "reviews": "Đánh Giá"
+    },
+    "specifications": {
+        "topology": "Topology",
+        "tubeType": "Loại Đèn",
+        "power": "Công Suất",
+        "taps": "Taps",
+        "frequency": "Đáp Tần",
+        "snr": "SNR",
+        "thd": "THD",
+        "inputSensitivity": "Độ Nhạy Đầu Vào",
+        "inputImpedance": "Trở Kháng Đầu Vào",
+        "dimensions": "Kích Thước",
+        "weight": "Trọng Lượng"
+    },
+    "sound": {
+        "character": "Đặc Tính Âm Thanh",
+        "recommendedGenres": "Thể Loại Nhạc Đề Xuất"
+    },
+    "condition": {
+        "new": "Mới 100%",
+        "likeNew": "Như mới",
+        "vintage": "Vintage",
+        "recapStatus": "Tình trạng tụ điện",
+        "includedTubes": "Đèn đi kèm",
+        "cosmetics": "Tình trạng ngoại quan",
+        "originStory": "Nguồn gốc"
+    },
+    "deposit": {
+        "title": "Đặt Cọc Giữ Hàng",
+        "amount": "Số tiền cọc: {amount}",
+        "reservationWindow": "Thời gian giữ: {days} ngày",
+        "remainingPayment": "Thanh toán còn lại khi nhận hàng",
+        "cancellationPolicy": "Chính sách hủy: Hoàn cọc 100% nếu hủy trong 24h"
+    },
+    "related": {
+        "title": "Sản Phẩm Liên Quan",
+        "accessories": "Phụ Kiện Đề Xuất"
+    }
+}

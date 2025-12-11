@@ -1,0 +1,69 @@
+{
+    "title": "Thanh Toán",
+    "steps": {
+        "information": "Thông Tin",
+        "payment": "Thanh Toán",
+        "confirmation": "Xác Nhận"
+    },
+    "information": {
+        "title": "Thông Tin Giao Hàng",
+        "fullName": {
+            "label": "Họ và tên",
+            "placeholder": "Nguyễn Văn A"
+        },
+        "phone": {
+            "label": "Số điện thoại",
+            "placeholder": "0xxx xxx xxx"
+        },
+        "email": {
+            "label": "Email",
+            "placeholder": "email@example.com"
+        },
+        "address": {
+            "label": "Địa chỉ",
+            "placeholder": "Số nhà, tên đường"
+        },
+        "city": {
+            "label": "Thành phố",
+            "placeholder": "Hà Nội"
+        },
+        "district": {
+            "label": "Quận/Huyện",
+            "placeholder": "Chọn quận/huyện"
+        },
+        "note": {
+            "label": "Ghi chú (tùy chọn)",
+            "placeholder": "Ghi chú cho người giao hàng"
+        }
+    },
+    "payment": {
+        "title": "Phương Thức Thanh Toán",
+        "methods": {
+            "cod": {
+                "title": "Thanh toán khi nhận hàng (COD)",
+                "description": "Thanh toán bằng tiền mặt khi nhận hàng"
+            },
+            "bankTransfer": {
+                "title": "Chuyển khoản ngân hàng",
+                "description": "Chuyển khoản trước, giao hàng sau khi xác nhận"
+            }
+        }
+    },
+    "orderSummary": {
+        "title": "Đơn Hàng",
+        "items": "{count} sản phẩm",
+        "subtotal": "Tạm tính",
+        "shipping": "Vận chuyển",
+        "total": "Tổng cộng"
+    },
+    "actions": {
+        "backToCart": "Quay Lại Giỏ Hàng",
+        "continue": "Tiếp Tục",
+        "placeOrder": "Đặt Hàng"
+    },
+    "errors": {
+        "required": "Trường này là bắt buộc",
+        "invalidEmail": "Email không hợp lệ",
+        "invalidPhone": "Số điện thoại không hợp lệ"
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "title": "Hướng Dẫn",
+    "subtitle": "Kiến thức cơ bản về ampli đèn",
+    "categories": {
+        "beginner": "Người Mới Bắt Đầu",
+        "technical": "Kỹ Thuật",
+        "matching": "Phối Ghép Hệ Thống"
+    },
+    "articles": {
+        "whatIsTubeAmp": {
+            "title": "Ampli đèn là gì?",
+            "description": "Giới thiệu cơ bản về ampli đèn và ưu điểm"
+        },
+        "seVsPp": {
+            "title": "SE vs PP: Khác biệt là gì?",
+            "description": "So sánh topology Single-Ended và Push-Pull"
+        },
+        "tubeTypes": {
+            "title": "Các loại đèn phổ biến",
+            "description": "300B, 2A3, EL34, KT88 và đặc tính của từng loại"
+        },
+        "speakerMatching": {
+            "title": "Phối ghép loa với ampli đèn",
+            "description": "Độ nhạy, trở kháng và cách chọn loa phù hợp"
+        },
+        "roomAcoustics": {
+            "title": "Âm học phòng nghe",
+            "description": "Tối ưu không gian nghe nhạc"
+        },
+        "maintenance": {
+            "title": "Bảo dưỡng ampli đèn",
+            "description": "Cách sử dụng và bảo quản đúng cách"
+        }
+    }
+}

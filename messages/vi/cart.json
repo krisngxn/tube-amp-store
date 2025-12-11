@@ -1,0 +1,27 @@
+{
+    "title": "Giỏ Hàng",
+    "empty": {
+        "title": "Giỏ hàng trống",
+        "description": "Bạn chưa có sản phẩm nào trong giỏ hàng",
+        "cta": "Khám Phá Ampli Đèn"
+    },
+    "items": {
+        "quantity": "Số lượng",
+        "price": "Giá",
+        "total": "Tổng",
+        "remove": "Xóa",
+        "update": "Cập nhật"
+    },
+    "summary": {
+        "title": "Tổng Đơn Hàng",
+        "subtotal": "Tạm tính",
+        "shipping": "Vận chuyển",
+        "shippingNote": "Tính khi thanh toán",
+        "total": "Tổng cộng",
+        "checkout": "Thanh Toán"
+    },
+    "notes": {
+        "matchingAdvice": "Cần tư vấn phối ghép?",
+        "chatCta": "Chat với chúng tôi"
+    }
+}

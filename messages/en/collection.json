@@ -1,0 +1,78 @@
+{
+    "title": "Tube Amplifiers",
+    "filters": {
+        "title": "Filters",
+        "clear": "Clear Filters",
+        "topology": {
+            "label": "Topology",
+            "options": {
+                "se": "Single-Ended (SE)",
+                "pp": "Push-Pull (PP)"
+            }
+        },
+        "tubeType": {
+            "label": "Tube Type",
+            "options": {
+                "300b": "300B",
+                "2a3": "2A3",
+                "el34": "EL34",
+                "kt88": "KT88",
+                "kt66": "KT66",
+                "6l6": "6L6",
+                "el84": "EL84",
+                "6v6": "6V6"
+            }
+        },
+        "power": {
+            "label": "Power",
+            "options": {
+                "low": "< 10W",
+                "medium": "10-25W",
+                "high": "> 25W"
+            }
+        },
+        "condition": {
+            "label": "Condition",
+            "options": {
+                "new": "New",
+                "likeNew": "Like New",
+                "vintage": "Vintage"
+            }
+        },
+        "price": {
+            "label": "Price",
+            "min": "Min",
+            "max": "Max"
+        }
+    },
+    "sort": {
+        "label": "Sort by",
+        "options": {
+            "newest": "Newest",
+            "priceLow": "Price: Low to High",
+            "priceHigh": "Price: High to Low",
+            "bestSellers": "Best Sellers"
+        }
+    },
+    "results": {
+        "showing": "Showing {count} products",
+        "noResults": "No products found"
+    },
+    "productCard": {
+        "viewDetails": "View Details",
+        "chatForMatching": "Chat for Advice",
+        "power": "{watts}W",
+        "minSensitivity": "Min Speaker: {db}dB",
+        "reserveWithDeposit": "Reserve with Deposit"
+    },
+    "empty": {
+        "title": "No Products Found",
+        "description": "No products match your current filters. Try adjusting your filters or clear all.",
+        "clearFilters": "Clear All Filters"
+    },
+    "pagination": {
+        "previous": "Previous",
+        "next": "Next",
+        "pageOf": "Page {current} of {total}"
+    }
+}

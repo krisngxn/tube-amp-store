@@ -1,0 +1,41 @@
+{
+    "success": {
+        "title": "Order Successful!",
+        "subtitle": "Thank you for your order",
+        "orderCode": "Order code: {code}",
+        "checkEmail": "We've sent a confirmation to your email"
+    },
+    "nextSteps": {
+        "title": "Next Steps",
+        "cod": {
+            "step1": "We'll contact you to confirm within 24h",
+            "step2": "Pack and ship (2-3 days)",
+            "step3": "Pay when you receive"
+        },
+        "bankTransfer": {
+            "step1": "Transfer to the account below",
+            "step2": "We confirm and pack (after receiving payment)",
+            "step3": "Ship to your address (2-3 days)",
+            "bankInfo": {
+                "title": "Bank Transfer Information",
+                "bank": "Bank",
+                "accountNumber": "Account Number",
+                "accountName": "Account Name",
+                "amount": "Amount",
+                "content": "Transfer Content"
+            }
+        }
+    },
+    "orderDetails": {
+        "title": "Order Details",
+        "items": "Items",
+        "shipping": "Ship to",
+        "payment": "Payment",
+        "total": "Total"
+    },
+    "actions": {
+        "continueShopping": "Continue Shopping",
+        "viewOrder": "View Order",
+        "contact": "Contact Support"
+    }
+}

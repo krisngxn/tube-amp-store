@@ -1,0 +1,49 @@
+{
+    "title": "Quản Trị",
+    "dashboard": {
+        "title": "Bảng Điều Khiển",
+        "stats": {
+            "totalProducts": "Tổng Sản Phẩm",
+            "totalOrders": "Tổng Đơn Hàng",
+            "pendingOrders": "Đơn Chờ Xử Lý",
+            "revenue": "Doanh Thu"
+        }
+    },
+    "products": {
+        "title": "Sản Phẩm",
+        "add": "Thêm Sản Phẩm",
+        "edit": "Chỉnh Sửa",
+        "delete": "Xóa",
+        "fields": {
+            "name": "Tên sản phẩm",
+            "slug": "Slug",
+            "price": "Giá",
+            "condition": "Tình trạng",
+            "stock": "Tồn kho",
+            "topology": "Topology",
+            "tubeType": "Loại đèn",
+            "power": "Công suất (W)",
+            "taps": "Taps",
+            "minSensitivity": "Độ nhạy tối thiểu (dB)",
+            "images": "Hình ảnh",
+            "description": "Mô tả",
+            "specifications": "Thông số kỹ thuật",
+            "allowDeposit": "Cho phép đặt cọc",
+            "depositAmount": "Số tiền cọc"
+        }
+    },
+    "orders": {
+        "title": "Đơn Hàng",
+        "view": "Xem",
+        "updateStatus": "Cập Nhật Trạng Thái",
+        "status": {
+            "pending": "Chờ xử lý",
+            "confirmed": "Đã xác nhận",
+            "deposited": "Đã đặt cọc",
+            "processing": "Đang xử lý",
+            "shipped": "Đã giao vận",
+            "delivered": "Đã giao hàng",
+            "cancelled": "Đã hủy"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "title": "Chính Sách",
+    "shipping": {
+        "title": "Vận Chuyển",
+        "content": "Thông tin về vận chuyển và đóng gói"
+    },
+    "warranty": {
+        "title": "Bảo Hành",
+        "content": "Chính sách bảo hành sản phẩm"
+    },
+    "returns": {
+        "title": "Đổi Trả",
+        "content": "Điều kiện và quy trình đổi trả"
+    },
+    "payment": {
+        "title": "Thanh Toán",
+        "content": "Các phương thức thanh toán được chấp nhận"
+    },
+    "privacy": {
+        "title": "Bảo Mật",
+        "content": "Chính sách bảo mật thông tin khách hàng"
+    },
+    "terms": {
+        "title": "Điều Khoản Sử Dụng",
+        "content": "Điều khoản và điều kiện sử dụng dịch vụ"
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "title": "Policies",
+    "shipping": {
+        "title": "Shipping",
+        "content": "Shipping and packaging information"
+    },
+    "warranty": {
+        "title": "Warranty",
+        "content": "Product warranty policy"
+    },
+    "returns": {
+        "title": "Returns",
+        "content": "Return conditions and process"
+    },
+    "payment": {
+        "title": "Payment",
+        "content": "Accepted payment methods"
+    },
+    "privacy": {
+        "title": "Privacy",
+        "content": "Customer information privacy policy"
+    },
+    "terms": {
+        "title": "Terms of Service",
+        "content": "Terms and conditions of service"
+    }
+}

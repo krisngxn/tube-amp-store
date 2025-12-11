@@ -1,0 +1,120 @@
+{
+    "hero": {
+        "title": "Âm Thanh Đèn Chân Thực",
+        "subtitle": "Ampli đèn cao cấp cho người yêu nhạc chân chính. Vintage quý hiếm và handmade hiện đại.",
+        "cta": {
+            "browse": "Khám Phá Ampli Đèn",
+            "matching": "Tư Vấn Phối Ghép"
+        }
+    },
+    "quickEntry": {
+        "title": "Tìm Ampli Phù Hợp",
+        "vocals": {
+            "title": "Vocal / Jazz",
+            "description": "SE 300B/2A3 - Âm thanh ngọt ngào, chi tiết"
+        },
+        "power": {
+            "title": "Công Suất Lớn",
+            "description": "PP EL34/KT88 - Kiểm soát tốt, bass chắc"
+        },
+        "smallRoom": {
+            "title": "Phòng Nhỏ / Âm Lượng Thấp",
+            "description": "SE công suất thấp - Tinh tế, êm ái"
+        },
+        "hardSpeakers": {
+            "title": "Loa Khó Kéo",
+            "description": "PP công suất cao - Taps linh hoạt"
+        }
+    },
+    "featured": {
+        "title": "Sản Phẩm Nổi Bật",
+        "tabs": {
+            "bestSellers": "Bán Chạy",
+            "newArrivals": "Hàng Mới",
+            "vintage": "Vintage Tuyển Chọn"
+        }
+    },
+    "matching": {
+        "title": "Công Cụ Phối Ghép",
+        "subtitle": "Nhập thông số loa và phòng nghe để nhận gợi ý ampli phù hợp",
+        "form": {
+            "sensitivity": {
+                "label": "Độ nhạy loa (dB)",
+                "placeholder": "VD: 88"
+            },
+            "impedance": {
+                "label": "Trở kháng (Ω)",
+                "options": {
+                    "4": "4Ω",
+                    "6": "6Ω",
+                    "8": "8Ω",
+                    "16": "16Ω"
+                }
+            },
+            "roomSize": {
+                "label": "Kích thước phòng",
+                "options": {
+                    "small": "Nhỏ (<15m²)",
+                    "medium": "Trung bình (15-30m²)",
+                    "large": "Lớn (>30m²)"
+                }
+            },
+            "listeningLevel": {
+                "label": "Mức nghe",
+                "options": {
+                    "low": "Thấp (nền nhạc)",
+                    "medium": "Trung bình",
+                    "loud": "Lớn (tiệc tùng)"
+                }
+            },
+            "genres": {
+                "label": "Thể loại nhạc yêu thích",
+                "placeholder": "VD: Jazz, Vocal, Classical"
+            },
+            "submit": "Tìm Ampli Phù Hợp"
+        },
+        "results": {
+            "fit": "Phù hợp tuyệt vời",
+            "consider": "Cân nhắc",
+            "notRecommended": "Không đề xuất",
+            "chatCta": "Chat với chúng tôi để được tư vấn chi tiết"
+        }
+    },
+    "trust": {
+        "title": "Tại Sao Chọn Chúng Tôi",
+        "badges": {
+            "tested": {
+                "title": "Kiểm Tra Kỹ Lưỡng",
+                "description": "Đo nhiễu/hum, kiểm tra toàn bộ chức năng"
+            },
+            "packaging": {
+                "title": "Đóng Gói An Toàn",
+                "description": "Bảo vệ chuyên nghiệp, vận chuyển an tâm"
+            },
+            "warranty": {
+                "title": "Bảo Hành Rõ Ràng",
+                "description": "Chính sách minh bạch, hỗ trợ tận tâm"
+            },
+            "vintage": {
+                "title": "Vintage Kiểm Định",
+                "description": "Checklist chi tiết, nguồn gốc rõ ràng"
+            },
+            "setup": {
+                "title": "Hỗ Trợ Setup",
+                "description": "Hướng dẫn lắp đặt, sử dụng an toàn"
+            },
+            "consultation": {
+                "title": "Tư Vấn Chuyên Sâu",
+                "description": "Phối ghép loa, phòng nghe tối ưu"
+            }
+        }
+    },
+    "customerSetups": {
+        "title": "Hệ Thống Khách Hàng",
+        "subtitle": "Những setup đẹp từ cộng đồng yêu nhạc"
+    },
+    "guidesPreview": {
+        "title": "Hướng Dẫn Cho Người Mới",
+        "viewAll": "Xem Tất Cả Hướng Dẫn"
+    }
+}

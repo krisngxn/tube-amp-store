@@ -1,0 +1,35 @@
+{
+    "title": "Guides",
+    "subtitle": "Essential knowledge about tube amplifiers",
+    "categories": {
+        "beginner": "Beginner",
+        "technical": "Technical",
+        "matching": "System Matching"
+    },
+    "articles": {
+        "whatIsTubeAmp": {
+            "title": "What is a tube amplifier?",
+            "description": "Basic introduction to tube amps and their advantages"
+        },
+        "seVsPp": {
+            "title": "SE vs PP: What's the difference?",
+            "description": "Comparing Single-Ended and Push-Pull topologies"
+        },
+        "tubeTypes": {
+            "title": "Common tube types",
+            "description": "300B, 2A3, EL34, KT88 and their characteristics"
+        },
+        "speakerMatching": {
+            "title": "Matching speakers with tube amps",
+            "description": "Sensitivity, impedance and how to choose compatible speakers"
+        },
+        "roomAcoustics": {
+            "title": "Room acoustics",
+            "description": "Optimizing your listening space"
+        },
+        "maintenance": {
+            "title": "Tube amp maintenance",
+            "description": "Proper usage and care"
+        }
+    }
+}

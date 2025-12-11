@@ -1,0 +1,41 @@
+{
+    "success": {
+        "title": "Đặt Hàng Thành Công!",
+        "subtitle": "Cảm ơn bạn đã đặt hàng",
+        "orderCode": "Mã đơn hàng: {code}",
+        "checkEmail": "Chúng tôi đã gửi xác nhận đến email của bạn"
+    },
+    "nextSteps": {
+        "title": "Bước Tiếp Theo",
+        "cod": {
+            "step1": "Chúng tôi sẽ liên hệ xác nhận đơn hàng trong 24h",
+            "step2": "Đóng gói và vận chuyển (2-3 ngày)",
+            "step3": "Thanh toán khi nhận hàng"
+        },
+        "bankTransfer": {
+            "step1": "Chuyển khoản theo thông tin bên dưới",
+            "step2": "Chúng tôi xác nhận và đóng gói (sau khi nhận tiền)",
+            "step3": "Vận chuyển đến địa chỉ của bạn (2-3 ngày)",
+            "bankInfo": {
+                "title": "Thông Tin Chuyển Khoản",
+                "bank": "Ngân hàng",
+                "accountNumber": "Số tài khoản",
+                "accountName": "Tên tài khoản",
+                "amount": "Số tiền",
+                "content": "Nội dung chuyển khoản"
+            }
+        }
+    },
+    "orderDetails": {
+        "title": "Chi Tiết Đơn Hàng",
+        "items": "Sản phẩm",
+        "shipping": "Giao đến",
+        "payment": "Thanh toán",
+        "total": "Tổng cộng"
+    },
+    "actions": {
+        "continueShopping": "Tiếp Tục Mua Sắm",
+        "viewOrder": "Xem Đơn Hàng",
+        "contact": "Liên Hệ Hỗ Trợ"
+    }
+}
