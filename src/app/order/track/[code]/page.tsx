@@ -296,7 +296,7 @@ export default async function TrackOrderDetailPage({ params, searchParams }: Tra
                      order.paymentMethod === 'bank_transfer' && 
                      order.paymentStatus === 'deposit_pending' && (
                         <DepositProofUploadSection 
-                            orderId={order.orderId}
+                            orderId={order.id}
                             orderCode={order.orderCode}
                             token={token!}
                             locale={locale}

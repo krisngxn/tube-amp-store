@@ -510,7 +510,7 @@ async function handleRefundUpdated(
         refundId: refund.id,
         amount: refund.amount,
         currency: refund.currency,
-        status: refund.status,
+        status: refund.status || 'unknown',
         chargeId,
         paymentIntentId,
     }, {

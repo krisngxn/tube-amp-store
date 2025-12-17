@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/admin/auth';
 import { adminGetOrderByCode, restoreOrderInventory, markOrderRefundPendingFromStripe } from '@/lib/repositories/admin/orders';
-import { getStripe } from '@/lib/stripe/server';
+import { getStripe, parseStripeMetadata } from '@/lib/stripe/server';
 import { createServiceClient } from '@/lib/supabase/service';
 
 /**

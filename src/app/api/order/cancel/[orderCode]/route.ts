@@ -33,7 +33,7 @@ export async function POST(
         // Get order by order code
         const { data: order, error: orderError } = await supabase
             .from('orders')
-            .select('id, order_number, status, payment_status, customer_email, customer_name, locale')
+            .select('id, order_number, status, payment_status, customer_email, customer_name, locale, customer_note')
             .eq('order_number', orderCode)
             .single();
 

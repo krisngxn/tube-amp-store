@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServiceClient } from '@/lib/supabase/service';
-import { isAdminAuthenticated } from '@/lib/admin/auth';
+import { isAdmin } from '@/lib/admin/auth';
 import { 
     getDepositProofByOrderId, 
     getAllDepositProofsForOrder,
@@ -19,8 +19,8 @@ interface RouteParams {
 export async function GET(request: NextRequest, { params }: RouteParams) {
     try {
         // Check admin authentication
-        const isAdmin = await isAdminAuthenticated();
-        if (!isAdmin) {
+        const adminCheck = await isAdmin();
+        if (!adminCheck) {
             return NextResponse.json(
                 { error: 'Unauthorized' },
                 { status: 401 }
@@ -75,8 +75,8 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 export async function POST(request: NextRequest, { params }: RouteParams) {
     try {
         // Check admin authentication
-        const isAdmin = await isAdminAuthenticated();
-        if (!isAdmin) {
+        const adminCheck = await isAdmin();
+        if (!adminCheck) {
             return NextResponse.json(
                 { error: 'Unauthorized' },
                 { status: 401 }

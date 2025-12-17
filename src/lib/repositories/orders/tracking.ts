@@ -30,6 +30,7 @@ export interface OrderStatusHistory {
 }
 
 export interface TrackedOrderDTO {
+    id: string;
     orderCode: string;
     createdAt: string;
     status: OrderStatus;
@@ -129,6 +130,7 @@ export async function trackOrderByCodeAndContact(
 
     // Map to DTO (sanitized - no PII beyond what user provided)
     return {
+        id: order.id,
         orderCode: order.order_number,
         createdAt: order.created_at,
         status: order.status as OrderStatus,
@@ -267,6 +269,7 @@ export async function trackOrderByToken(
 
     // Map to DTO
     return {
+        id: order.id,
         orderCode: order.order_number,
         createdAt: order.created_at,
         status: order.status as OrderStatus,
