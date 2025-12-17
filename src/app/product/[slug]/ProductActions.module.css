@@ -1,0 +1,73 @@
+.productActions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.stockStatus {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.quantitySelector {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.quantityControls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-md);
+    width: fit-content;
+}
+
+.quantityControls :global(button) {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--color-accent-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+}
+
+.quantityControls :global(button:hover:not(:disabled)) {
+    background: var(--color-accent-glow);
+    border-color: var(--color-accent-primary);
+}
+
+.quantityControls :global(button:disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.quantityValue {
+    min-width: 40px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.actionButtons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+@media (max-width: 768px) {
+    .quantityControls {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+

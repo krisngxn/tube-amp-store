@@ -77,9 +77,15 @@ export interface ProductDetailDTO extends ProductCardDTO {
 
     // Deposit reservation (if applicable)
     allowDeposit: boolean;
+    depositType?: 'percent' | 'fixed';
     depositAmount?: number;
     depositPercentage?: number;
-    reservationDays?: number;
+    depositDueHours?: number;
+    reservationPolicyNote?: string;
+
+    // Warranty and Returns
+    warrantyMonths?: number;
+    returnDays?: number;
 
     // SEO
     metaTitle?: string;

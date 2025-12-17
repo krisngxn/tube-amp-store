@@ -1,15 +1,23 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, getLocale } from 'next-intl/server';
+import StorefrontWrapper from '@/components/layout/StorefrontWrapper';
+import './globals.css';
 
-export const metadata: Metadata = {
-  title: "Classic Tube Amps - Premium Tube Amplifiers",
-  description: "Premium tube amplifiers for true music lovers. Vintage and modern handmade amplifiers.",
-};
+export default async function RootLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
+    const locale = await getLocale();
+    const messages = await getMessages();
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return children;
+    return (
+        <html lang={locale}>
+            <body>
+                <NextIntlClientProvider messages={messages}>
+                    <StorefrontWrapper>{children}</StorefrontWrapper>
+                </NextIntlClientProvider>
+            </body>
+        </html>
+    );
 }

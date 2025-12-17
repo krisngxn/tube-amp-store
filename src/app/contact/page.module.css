@@ -1,0 +1,27 @@
+.contactPage {
+    padding: var(--space-2xl) 0;
+    min-height: 100vh;
+}
+
+.contactPage :global(h1) {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+}
+
+.contactContent {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contactInfo {
+    padding: var(--space-2xl);
+}
+
+.infoItems {
+    margin-top: var(--space-lg);
+}
+
+.infoItems :global(p) {
+    margin-bottom: var(--space-md);
+}
+

@@ -1,4 +1,28 @@
 {
+    "breadcrumb": {
+        "home": "Trang chủ",
+        "collection": "Ampli Đèn"
+    },
+    "availability": {
+        "inStock": "Còn hàng",
+        "limitedStock": "Sắp hết hàng ({count} còn lại)",
+        "outOfStock": "Hết hàng",
+        "stockCount": "{count} sản phẩm có sẵn"
+    },
+    "pricing": {
+        "salePrice": "Giá khuyến mãi",
+        "originalPrice": "Giá gốc",
+        "saveAmount": "Tiết kiệm {amount}"
+    },
+    "gallery": {
+        "mainImage": "Ảnh chính",
+        "thumbnail": "Ảnh thu nhỏ {index}"
+    },
+    "actions": {
+        "quantity": "Số lượng",
+        "decrease": "Giảm",
+        "increase": "Tăng"
+    },
     "summary": {
         "title": "Tóm Tắt 10 Giây"
     },
@@ -65,14 +89,37 @@
         "originStory": "Nguồn gốc"
     },
     "deposit": {
+        "badge": "Có Thể Đặt Cọc",
         "title": "Đặt Cọc Giữ Hàng",
-        "amount": "Số tiền cọc: {amount}",
+        "description": "Đặt cọc để giữ sản phẩm này. Chúng tôi sẽ liên hệ với bạn để xác nhận thanh toán.",
+        "amount": "Số Tiền Cọc",
+        "remaining": "Số Tiền Còn Lại",
+        "deadline": "Hạn Chót",
+        "deadlineHours": "{hours} giờ",
         "reservationWindow": "Thời gian giữ: {days} ngày",
         "remainingPayment": "Thanh toán còn lại khi nhận hàng",
         "cancellationPolicy": "Chính sách hủy: Hoàn cọc 100% nếu hủy trong 24h"
     },
+    "shipping": {
+        "title": "Vận Chuyển & Bảo Hành",
+        "warranty": "Bảo hành {months}",
+        "returns": "Đổi trả trong {days}",
+        "freeShipping": "Miễn phí vận chuyển toàn quốc",
+        "packaging": "Đóng gói chuyên nghiệp, bảo vệ tối đa"
+    },
     "related": {
         "title": "Sản Phẩm Liên Quan",
         "accessories": "Phụ Kiện Đề Xuất"
+    },
+    "empty": {
+        "noDescription": "Mô tả sản phẩm đang được cập nhật.",
+        "noSpecs": "Thông số kỹ thuật đang được cập nhật.",
+        "noReviews": "Chưa có đánh giá nào.",
+        "noRelated": "Không có sản phẩm liên quan."
+    },
+    "notFound": {
+        "title": "Không tìm thấy sản phẩm",
+        "description": "Sản phẩm bạn đang tìm không tồn tại hoặc đã bị xóa.",
+        "backToCollection": "Quay lại danh sách sản phẩm"
     }
 }

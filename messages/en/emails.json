@@ -1,0 +1,125 @@
+{
+    "orderConfirmation": {
+        "subject": "Order Confirmation - {orderCode}",
+        "header": "Order Confirmation",
+        "greeting": "Hello {customerName},",
+        "message": "Thank you for your order! Your order {orderCode} has been received and is being processed.",
+        "orderDetails": "Order Details",
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "tax": "Tax",
+        "discount": "Discount",
+        "total": "Total",
+        "shippingAddress": "Shipping Address",
+        "paymentCod": {
+            "title": "Payment Method: Cash on Delivery (COD)",
+            "message": "You will pay when you receive the order. We will contact you within 24 hours to confirm your order."
+        },
+        "paymentBank": {
+            "title": "Payment Method: Bank Transfer",
+            "message": "Please transfer the total amount to the following bank account:",
+            "bank": "Bank",
+            "accountNumber": "Account Number",
+            "accountName": "Account Name",
+            "amount": "Amount",
+            "content": "Transfer Content"
+        },
+        "support": "If you have any questions, please contact us at support@restorethebasic.com or call +84 XXX XXX XXX.",
+        "footer": "If you did not place this order, please ignore this email.",
+        "footerBrand": "Restore The Basic",
+        "trackOrder": "Track Your Order",
+        "trackButton": "Track Order",
+        "trackNote": "Use this link to track your order status anytime."
+    },
+    "statusUpdate": {
+        "subject": "Order {orderCode} - Status Update: {status}",
+        "header": "Order Status Update",
+        "greeting": "Hello {customerName},",
+        "message": "Your order {orderCode} status has been updated to: {status}",
+        "note": "Note",
+        "statusLabels": {
+            "confirmed": "Confirmed",
+            "deposited": "Deposit Received",
+            "processing": "Processing",
+            "shipped": "Shipped",
+            "delivered": "Delivered",
+            "cancelled": "Cancelled"
+        },
+        "statusDescriptions": {
+            "confirmed": "Your order has been confirmed and is being prepared for processing.",
+            "deposited": "We have received your deposit payment. Your order is now being processed.",
+            "processing": "Your order is currently being processed and prepared for shipping.",
+            "shipped": "Your order has been shipped! You will receive it soon.",
+            "delivered": "Your order has been delivered. Thank you for your purchase!",
+            "cancelled": "Your order has been cancelled. If you have any questions, please contact us."
+        },
+        "support": "If you have any questions, please contact us at support@restorethebasic.com or call +84 XXX XXX XXX.",
+        "footerBrand": "Restore The Basic",
+        "trackOrder": "Track Your Order",
+        "trackButton": "Track Order",
+        "trackNote": "Use this link to track your order status anytime."
+    },
+    "refund": {
+        "header": "Refund Processed",
+        "greeting": "Hello {customerName},",
+        "orderCode": "Order Code",
+        "refundAmount": "Refund Amount",
+        "trackOrder": "Track Your Order",
+        "trackButton": "Track Order",
+        "support": "If you have any questions, please contact us at support@restorethebasic.com or call +84 XXX XXX XXX.",
+        "footerBrand": "Restore The Basic",
+        "partialRefund": {
+            "subject": "Partial Refund Processed - Order {orderCode}",
+            "title": "Partial Refund Processed",
+            "message": "A partial refund has been processed for your order {orderCode}. The refunded amount will be credited back to your original payment method within 5-10 business days."
+        },
+        "fullRefund": {
+            "subject": "Full Refund Processed - Order {orderCode}",
+            "title": "Full Refund Processed",
+            "message": "A full refund has been processed for your order {orderCode}. The refunded amount will be credited back to your original payment method within 5-10 business days."
+        }
+    },
+    "orderCancellation": {
+        "subject": "Order Cancelled - {orderCode}",
+        "header": "Order Cancelled",
+        "greeting": "Hello {customerName},",
+        "message": "Your order {orderCode} has been cancelled as requested.",
+        "orderCode": "Order Code",
+        "reason": "Cancellation Reason",
+        "trackOrder": "View Order Details",
+        "trackButton": "View Order",
+        "support": "If you have any questions, please contact us at support@restorethebasic.com or call +84 XXX XXX XXX.",
+        "footerBrand": "Restore The Basic"
+    },
+    "changeRequest": {
+        "header": "Change Request",
+        "messageLabel": "Customer Message",
+        "categoryChangeItems": "Change Items",
+        "categoryChangeAddress": "Change Address",
+        "categoryCancelRefund": "Cancel & Refund",
+        "categoryOther": "Other"
+    },
+    "depositApproved": {
+        "subject": "Deposit Confirmed - Order {orderCode}",
+        "header": "Deposit Confirmed!",
+        "greeting": "Hello {customerName},",
+        "message": "Great news! Your deposit for order {orderCode} has been verified and confirmed.",
+        "amountLabel": "Deposit Amount",
+        "nextSteps": "We will now process your order. You can track the status using the link below.",
+        "trackButton": "Track Your Order",
+        "support": "If you have any questions, please contact us at support@restorethebasic.com",
+        "footerBrand": "Restore The Basic"
+    },
+    "depositRejected": {
+        "subject": "Deposit Proof Needs Attention - Order {orderCode}",
+        "header": "Proof Needs Attention",
+        "greeting": "Hello {customerName},",
+        "message": "We reviewed the proof you uploaded for order {orderCode}, but we were unable to verify it.",
+        "noteLabel": "Note",
+        "action": "Please upload a clearer image of your bank transfer proof using the link below.",
+        "uploadButton": "Upload New Proof",
+        "support": "If you have any questions, please contact us at support@restorethebasic.com",
+        "footerBrand": "Restore The Basic"
+    }
+}
+

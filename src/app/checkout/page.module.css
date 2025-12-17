@@ -1,0 +1,149 @@
+.checkoutPage {
+    padding: var(--space-2xl) 0;
+    min-height: 100vh;
+}
+
+.checkoutPage :global(h1) {
+    margin-bottom: var(--space-2xl);
+}
+
+.checkoutLayout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: var(--space-2xl);
+    align-items: start;
+}
+
+.checkoutForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.formSection {
+    padding: var(--space-xl);
+}
+
+.formSection :global(h2) {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-lg);
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroupFullWidth {
+    grid-column: 1 / -1;
+}
+
+.paymentMethods {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.paymentMethod {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.paymentMethod:hover {
+    border-color: var(--color-accent-primary);
+    background: var(--color-accent-glow);
+}
+
+.paymentInfo :global(strong) {
+    display: block;
+    margin-bottom: var(--space-xs);
+}
+
+.paymentInfo :global(p) {
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.checkoutActions {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+}
+
+.orderSummary {
+    position: sticky;
+    top: 100px;
+    padding: var(--space-xl);
+}
+
+.summaryItems {
+    margin-bottom: var(--space-lg);
+}
+
+.summaryItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+    font-size: 0.9375rem;
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+.inputError {
+    border-color: var(--color-error);
+}
+
+.errorMessage {
+    color: var(--color-error);
+    font-size: 0.875rem;
+    margin-top: var(--space-xs);
+}
+
+.errorBanner {
+    padding: var(--space-lg);
+    background: var(--color-error-bg);
+    border: 1px solid var(--color-error);
+    color: var(--color-error);
+}
+
+.depositNotice {
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    background: var(--color-accent-glow);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+}
+
+.depositNotice :global(p) {
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .checkoutLayout {
+        grid-template-columns: 1fr;
+    }
+
+    .orderSummary {
+        position: static;
+    }
+
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+}
+

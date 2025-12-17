@@ -1,5 +1,5 @@
 -- =====================================================
--- Sample Seed Data for Classic Tube Amps
+-- Sample Seed Data for Restore The Basic
 -- =====================================================
 -- This file contains sample data to help you get started
 -- Run this AFTER running schema.sql

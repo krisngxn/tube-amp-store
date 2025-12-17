@@ -1,0 +1,207 @@
+.ordersPage {
+    padding: var(--space-xl) 0;
+}
+
+.header {
+    margin-bottom: var(--space-xl);
+}
+
+.header :global(h1) {
+    margin: 0;
+}
+
+.ordersList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.filters {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.searchForm {
+    display: flex;
+    gap: var(--space-sm);
+    flex: 1;
+    min-width: 300px;
+}
+
+.searchForm :global(input) {
+    flex: 1;
+}
+
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    min-width: 200px;
+}
+
+.filterGroup :global(label) {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.filterSelect {
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-primary);
+    font-size: 0.875rem;
+}
+
+.tableWrapper {
+    overflow-x: auto;
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead {
+    background: var(--color-bg-tertiary);
+}
+
+.table th {
+    padding: var(--space-md);
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.table td {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.table tbody tr:hover {
+    background: var(--color-bg-tertiary);
+}
+
+.customerPhone {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-xs);
+}
+
+.statusBadge {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.statusBadge.status-pending {
+    background: var(--color-warning);
+    color: white;
+}
+
+.statusBadge.status-confirmed {
+    background: var(--color-info);
+    color: white;
+}
+
+.statusBadge.status-deposited {
+    background: var(--color-accent);
+    color: white;
+}
+
+.statusBadge.status-processing {
+    background: var(--color-info);
+    color: white;
+}
+
+.statusBadge.status-shipped {
+    background: var(--color-success);
+    color: white;
+}
+
+.statusBadge.status-delivered {
+    background: var(--color-success);
+    color: white;
+}
+
+.statusBadge.status-cancelled {
+    background: var(--color-error);
+    color: white;
+}
+
+.statusBadge.status-refunded {
+    background: var(--color-text-tertiary);
+    color: white;
+}
+
+.statusBadge.payment-pending {
+    background: var(--color-warning);
+    color: white;
+}
+
+.statusBadge.payment-paid {
+    background: var(--color-success);
+    color: white;
+}
+
+.statusBadge.payment-failed {
+    background: var(--color-error);
+    color: white;
+}
+
+.statusBadge.payment-refunded {
+    background: var(--color-text-tertiary);
+    color: white;
+}
+
+.empty {
+    text-align: center;
+    padding: var(--space-2xl);
+    color: var(--color-text-secondary);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+
+.pageInfo {
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+    }
+
+    .filterGroup {
+        min-width: 100%;
+    }
+
+    .searchForm {
+        min-width: 100%;
+    }
+
+    .tableWrapper {
+        overflow-x: scroll;
+    }
+
+    .table {
+        min-width: 800px;
+    }
+}
+

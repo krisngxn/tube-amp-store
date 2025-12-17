@@ -1,31 +1,48 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-import { useTransition } from 'react';
-import { useRouter, usePathname } from '@/i18n/routing';
-import { locales, type Locale } from '@/config/locales';
+import { useTransition, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { locales, type Locale, defaultLocale } from '@/config/locales';
+import styles from './LocaleSwitcher.module.css';
+
+const LOCALE_COOKIE_NAME = 'NEXT_LOCALE';
 
 export default function LocaleSwitcher() {
     const router = useRouter();
-    const pathname = usePathname();
-    const params = useParams();
     const [isPending, startTransition] = useTransition();
+    const [currentLocale, setCurrentLocale] = useState<Locale>(defaultLocale);
 
-    const currentLocale = params.locale as Locale;
+    useEffect(() => {
+        // Get locale from cookie on mount
+        const cookieLocale = document.cookie
+            .split('; ')
+            .find(row => row.startsWith(`${LOCALE_COOKIE_NAME}=`))
+            ?.split('=')[1] as Locale | undefined;
+        
+        if (cookieLocale && locales.includes(cookieLocale)) {
+            setCurrentLocale(cookieLocale);
+        }
+    }, []);
 
     function onSelectChange(nextLocale: Locale) {
+        // Set cookie
+        document.cookie = `${LOCALE_COOKIE_NAME}=${nextLocale}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax`;
+        
+        setCurrentLocale(nextLocale);
+        
+        // Reload page to apply new locale
         startTransition(() => {
-            router.replace(pathname, { locale: nextLocale });
+            router.refresh();
         });
     }
 
     return (
-        <div className="locale-switcher">
+        <div className={styles.localeSwitcher}>
             <select
                 value={currentLocale}
                 onChange={(e) => onSelectChange(e.target.value as Locale)}
                 disabled={isPending}
-                className="locale-select"
+                className={styles.localeSelect}
                 aria-label="Select language"
             >
                 {locales.map((locale) => (
@@ -34,44 +51,6 @@ export default function LocaleSwitcher() {
                     </option>
                 ))}
             </select>
-
-            <style jsx>{`
-        .locale-switcher {
-          position: relative;
-        }
-
-        .locale-select {
-          appearance: none;
-          background: var(--color-bg-tertiary);
-          border: 1px solid var(--color-border-subtle);
-          border-radius: var(--radius-md);
-          color: var(--color-text-secondary);
-          font-size: 0.875rem;
-          font-weight: 500;
-          padding: var(--space-sm) var(--space-lg) var(--space-sm) var(--space-md);
-          cursor: pointer;
-          transition: all var(--transition-fast);
-          background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23a8a8a8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-          background-repeat: no-repeat;
-          background-position: right var(--space-sm) center;
-        }
-
-        .locale-select:hover {
-          border-color: var(--color-accent-primary);
-          color: var(--color-accent-primary);
-        }
-
-        .locale-select:focus {
-          outline: none;
-          border-color: var(--color-accent-primary);
-          box-shadow: 0 0 0 3px var(--color-accent-glow);
-        }
-
-        .locale-select:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
-      `}</style>
         </div>
     );
 }

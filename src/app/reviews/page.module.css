@@ -1,0 +1,10 @@
+.reviewsPage {
+    padding: var(--space-2xl) 0;
+    min-height: 100vh;
+}
+
+.reviewsPage :global(h1) {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+

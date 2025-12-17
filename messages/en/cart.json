@@ -1,5 +1,7 @@
 {
     "title": "Shopping Cart",
+    "addSuccess": "Added to cart",
+    "adding": "Adding...",
     "empty": {
         "title": "Your cart is empty",
         "description": "You don't have any items in your cart",
@@ -10,7 +12,10 @@
         "price": "Price",
         "total": "Total",
         "remove": "Remove",
-        "update": "Update"
+        "update": "Update",
+        "confirmRemove": "Remove this item from cart?",
+        "decrease": "Decrease quantity",
+        "increase": "Increase quantity"
     },
     "summary": {
         "title": "Order Summary",

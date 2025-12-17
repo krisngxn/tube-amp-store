@@ -1,5 +1,5 @@
 -- =====================================================
--- Classic Tube Amps - Supabase Database Schema
+-- Restore The Basic - Supabase Database Schema
 -- =====================================================
 -- This schema supports:
 -- - Multilingual product content (vi/en)
@@ -160,12 +160,18 @@ CREATE TABLE public.product_translations (
 CREATE TABLE public.product_images (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     product_id UUID REFERENCES public.products(id) ON DELETE CASCADE,
-    url TEXT NOT NULL,
+    storage_path TEXT NOT NULL, -- Path in Supabase Storage: products/{product_id}/{image_id}.jpg
+    url TEXT, -- Public URL (computed from storage_path, kept for backward compatibility)
     alt_text TEXT,
-    position INTEGER DEFAULT 0,
-    is_primary BOOLEAN DEFAULT false,
-    created_at TIMESTAMPTZ DEFAULT NOW()
+    sort_order INTEGER DEFAULT 0, -- 0 = cover image, higher numbers = gallery order
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    
+    -- Ensure unique sort_order per product (optional, can be relaxed if needed)
+    CONSTRAINT unique_product_sort_order UNIQUE(product_id, sort_order) DEFERRABLE INITIALLY DEFERRED
 );
+
+-- Index for faster queries
+CREATE INDEX idx_product_images_product_id_sort ON public.product_images(product_id, sort_order);
 
 -- Product categories/tags
 CREATE TABLE public.product_tags (
@@ -538,6 +544,15 @@ CREATE POLICY "Anyone can view product translations" ON public.product_translati
         )
     );
 
+-- Product images: public read for published products
+CREATE POLICY "Anyone can view product images" ON public.product_images
+    FOR SELECT USING (
+        EXISTS (
+            SELECT 1 FROM public.products
+            WHERE id = product_id AND is_published = true
+        )
+    );
+
 -- Orders: users can view their own orders
 CREATE POLICY "Users can view own orders" ON public.orders
     FOR SELECT USING (
@@ -548,8 +563,24 @@ CREATE POLICY "Users can view own orders" ON public.orders
         )
     );
 
-CREATE POLICY "Users can create orders" ON public.orders
-    FOR INSERT WITH CHECK (auth.uid() = user_id OR user_id IS NULL);
+CREATE POLICY "Anyone can create orders" ON public.orders
+    FOR INSERT 
+    WITH CHECK (
+        -- Allow if user_id matches authenticated user
+        (user_id IS NOT NULL AND auth.uid() = user_id)
+        OR
+        -- Allow if user_id is NULL (guest checkout)
+        user_id IS NULL
+    );
+
+-- Order items: allow inserts for orders (guests and authenticated users)
+CREATE POLICY "Anyone can create order items" ON public.order_items
+    FOR INSERT WITH CHECK (
+        EXISTS (
+            SELECT 1 FROM public.orders
+            WHERE id = order_id
+        )
+    );
 
 -- Reviews: users can create reviews for their orders
 CREATE POLICY "Anyone can view approved reviews" ON public.product_reviews
@@ -599,4 +630,4 @@ GROUP BY o.id, up.email, up.full_name;
 -- INSERT INTO public.user_profiles (id, email, full_name, role)
 -- VALUES ('your-auth-user-id', 'admin@classictubeamps.vn', 'Admin User', 'admin');
 
-COMMENT ON SCHEMA public IS 'Classic Tube Amps E-commerce Database';
+COMMENT ON SCHEMA public IS 'Restore The Basic E-commerce Database';

@@ -1,547 +1,949 @@
-# Classic Tube Amps - Project Progress Report
+# Project Progress - Restore The Basic
 
-**Last Updated:** December 11, 2025  
-**Project Status:** Phase 2 - Backend Integration (In Progress)  
-**Overall Completion:** ~60%
-
----
-
-## 📊 Executive Summary
-
-The Classic Tube Amps e-commerce platform is a premium, multilingual (Vietnamese/English) online store specializing in tube amplifiers. The project has successfully completed Phase 1 (Foundation) and is currently in Phase 2 (Backend Integration), with the collection page now displaying real data from Supabase.
-
-### Key Achievements
-- ✅ Complete design system with 300+ utility classes
-- ✅ Fully internationalized (vi/en) with 12 translation namespaces
-- ✅ Database schema with 15+ tables deployed
-- ✅ Collection page integrated with Supabase (real data)
-- ✅ Working filters, sorting, and pagination
-
-### Current Focus
-- 🔄 Product detail page integration
-- 🔄 Testing and refinement
+**Last Updated:** December 17, 2025  
+**Current Phase:** Phase 2 - Backend Integration & Features
 
 ---
 
-## 🎯 Phase Breakdown
+## 🎯 Recent Updates
 
-### ✅ Phase 1: Foundation (100% Complete)
+### ✅ Customer Order Cancellation & Change Requests (December 17, 2025)
 
-#### 1.1 Project Setup ✅
-- [x] Next.js 16 project initialized with TypeScript
-- [x] Development environment configured
-- [x] Production build verified
-- [x] Package dependencies installed
+**Status:** ✅ Complete and Production Ready
 
-#### 1.2 Internationalization (i18n) ✅
-- [x] next-intl installed and configured
-- [x] Locale-wrapped routing (`/vi/*`, `/en/*`)
-- [x] 12 translation namespaces × 2 locales = 24 files
-- [x] LocaleSwitcher component
-- [x] Type-safe navigation utilities
-- [x] Middleware for locale detection
+#### Overview
+Implemented customer-initiated order cancellation and change request features for guest checkout orders. Customers can cancel eligible orders or submit change requests directly from the order tracking page, without requiring authentication.
 
-**Translation Namespaces:**
-- common, nav, footer, home, collection, product
-- cart, checkout, order, guide, policies, admin
+#### Features Implemented
 
-#### 1.3 Design System ✅
-- [x] Classic audiophile color palette (dark + brass/copper)
-- [x] Typography system (Cormorant Garamond + Inter)
-- [x] 300+ CSS utility classes (Tailwind-like)
-- [x] Responsive grid system
-- [x] Component styles (buttons, cards, inputs, badges)
-- [x] Animations and transitions
-- [x] Automatic section spacing
+1. **Cancel Order**
+   - Cancel button on order tracking page (only for eligible statuses)
+   - Eligibility: `pending`, `deposit_pending`, `deposited`, `confirmed`
+   - Confirmation modal with cancellation reason selection
+   - API endpoint with token validation
+   - Automatic inventory restoration
+   - Status history entry
+   - Cancellation email notification to customer
 
-**Key Design Tokens:**
-- Background: #0a0a0a (near-black)
-- Accent: #d4a574 (brass/copper/gold)
-- Text: #f5f5f5 (off-white)
-- Spacing scale: 0.25rem to 6rem
+2. **Request Change**
+   - Button always visible on tracking page (for any order status)
+   - Form with category selection and message textarea
+   - Categories: Change Items, Change Address, Cancel & Refund, Other
+   - Logs request in `admin_note` for admin visibility
+   - Sends email notification to admin
+   - No automatic order modification (admin handles manually)
 
-#### 1.4 Core Pages (UI) ✅
-- [x] Home page with all sections
-- [x] Collection/catalog page with filters
-- [x] Product detail page with tabs
-- [x] Shopping cart page
-- [x] Checkout page
-- [x] Guides listing page
-- [x] Contact page
-- [x] Reviews page
+3. **Security & Access Control**
+   - Requires valid tracking token
+   - Generic error messages prevent order enumeration
+   - Service role client for database access
+   - No sensitive fields exposed
 
-#### 1.5 Layout Components ✅
-- [x] Header with navigation (CSS Modules)
-- [x] Footer with links and trust badges
-- [x] LocaleSwitcher component
-- [x] Mobile responsive menu
+4. **Email Notifications**
+   - Customer cancellation confirmation email (with tracking link)
+   - Admin change request notification email
+   - Both emails are non-blocking (failures don't break the flow)
 
-#### 1.6 Database Design ✅
-- [x] PostgreSQL schema (15+ tables)
-- [x] Multilingual product support
-- [x] Order management with deposit flow
-- [x] User authentication structure
-- [x] Reviews and ratings
-- [x] Row Level Security (RLS) policies
-- [x] Automatic triggers (timestamps, order numbers, stock)
-- [x] Sample seed data (3 products, guides, reviews)
+#### Files Created
 
-**Database Tables:**
-- user_profiles, user_addresses
-- products, product_translations, product_images, product_tags
-- orders, order_items, order_status_history
-- product_reviews, customer_setups
-- guides, guide_translations
-- matching_requests
+- `src/app/order/track/[code]/OrderActions.tsx` - Client component for cancel/change actions
+- `src/app/api/order/cancel/[orderCode]/route.ts` - Cancel order API endpoint
+- `src/app/api/order/change-request/[orderCode]/route.ts` - Change request API endpoint
 
-#### 1.7 Documentation ✅
-- [x] Main README with architecture
-- [x] Database setup guide (SETUP_GUIDE.md)
-- [x] Schema diagram (SCHEMA_DIAGRAM.md)
-- [x] CSS utilities reference (CSS_UTILITIES.md)
-- [x] Spacing best practices (SPACING_GUIDE.md)
-- [x] Project status overview (PROJECT_STATUS.md)
+#### Files Modified
+
+- `src/app/order/track/[code]/page.tsx` - Added OrderActions component
+- `src/app/order/track/[code]/page.module.css` - Added modal styles
+- `src/lib/emails/service.ts` - Added cancellation and change request email functions
+- `messages/en/tracking.json` - Added cancel/change request translations
+- `messages/vi/tracking.json` - Added Vietnamese translations
+- `messages/en/emails.json` - Added cancellation email translations
+- `messages/vi/emails.json` - Added Vietnamese email translations
+
+#### Technical Details
+
+**Eligibility Rules:**
+- Cancellable statuses: `pending`, `deposit_pending`, `deposited`, `confirmed`
+- Non-cancellable: `processing`, `shipped`, `delivered`, `cancelled`, `expired`
+- Paid orders are not auto-refunded (admin handles refund manually)
+
+**Cancellation Flow:**
+1. Customer clicks "Cancel Order" on tracking page
+2. Modal shows with reason selection (Ordered by mistake, Want to change items, Other)
+3. Customer confirms → API validates token and eligibility
+4. Order status → `cancelled`, inventory restored
+5. Status history entry created with reason
+6. Cancellation email sent to customer
+
+**Change Request Flow:**
+1. Customer clicks "Request Changes" on tracking page
+2. Form shows with category dropdown and message textarea
+3. Customer submits → API logs request in `admin_note`
+4. Admin receives email notification with order details and message
+5. Customer sees confirmation message
 
 ---
 
-### 🔄 Phase 2: Backend Integration (60% Complete)
+### ✅ Deposit Reservation with COD Payment (December 17, 2025)
 
-#### 2.1 Supabase Setup ✅
-- [x] Supabase client libraries installed
-- [x] Server client created (`@supabase/ssr`)
-- [x] Browser client created
-- [x] Environment variables configured
+**Status:** ✅ Complete and Production Ready
 
-**Packages Installed:**
-- @supabase/supabase-js
-- @supabase/ssr
+#### Overview
+Updated the deposit reservation system to allow customers to pay deposits via Cash on Delivery (COD). Previously, deposit mode required online payment; now customers can choose to pay the deposit amount when receiving the order.
 
-#### 2.2 Data Access Layer ✅
-- [x] TypeScript types and DTOs defined
-- [x] Products repository created
-- [x] `listProducts()` function with filters/sorting/pagination
-- [x] `getProductBySlug()` function for detail pages
-- [x] Error handling and logging
+#### Changes Made
 
-**Repository Features:**
-- Topology filter (SE/PP)
-- Tube type filter (300B, EL34, KT88, etc.)
-- Condition filter (new, like_new, vintage)
-- Power range (min/max watts)
-- Price range (min/max VND)
-- Search by name
-- Sorting: newest, price_asc, price_desc, featured, best_sellers
-- Pagination with page/pageSize
+1. **Removed Validation Restriction**
+   - Removed API validation that blocked deposit mode with COD
+   - Deposit reservations can now be used with any payment method
 
-#### 2.3 Collection Page Integration ✅
-- [x] Server Component architecture
-- [x] Real data from Supabase
-- [x] URL-based filters (query parameters)
-- [x] Sorting functionality
-- [x] Pagination support
-- [x] Empty state handling
-- [x] Client components for interactivity
-  - CollectionFilters.tsx
-  - ProductGrid.tsx
-  - SortSelect.tsx
+2. **Updated Payment Status Logic**
+   - Deposit + COD: `payment_status = 'deposit_pending'` (customer pays deposit on delivery)
+   - Deposit + Online: `payment_status = 'deposit_pending'` (customer pays deposit now)
+   - Regular COD: `payment_status = 'pending'`
 
-**URL Query Parameters:**
+3. **Updated Checkout UI**
+   - COD option remains available when deposit mode is selected
+   - Order summary shows "Pay Deposit on Delivery" for deposit + COD
+   - Order summary shows "Due Now" for deposit + online payment
+
+4. **Added Translations**
+   - English: "Pay Deposit on Delivery" message
+   - Vietnamese: "Trả Cọc Khi Nhận Hàng" message
+   - Updated COD description for deposit context
+
+#### Files Modified
+
+- `src/app/api/orders/route.ts` - Removed deposit + COD restriction, updated payment status logic
+- `src/app/checkout/page.tsx` - Updated UI to allow COD with deposit, updated order summary display
+- `messages/en/checkout.json` - Added deposit + COD translations
+- `messages/vi/checkout.json` - Added Vietnamese deposit + COD translations
+
+#### Technical Details
+
+**Order Creation (Deposit + COD):**
+- `order_type = 'deposit_reservation'`
+- `payment_method = 'cod'`
+- `payment_status = 'deposit_pending'`
+- `deposit_amount_vnd = [calculated deposit]`
+- Customer pays deposit amount when receiving the order
+- Remaining balance handled by admin after deposit received
+
+---
+
+### ✅ Order-Level Optional Deposit Logic (December 17, 2025)
+
+**Status:** ✅ Complete and Production Ready
+
+#### Overview
+Refactored deposit logic from product-level defaults to order-level decisions. Deposit is now driven exclusively by checkout `paymentMode` selection (`deposit` | `full` | `cod`), ensuring deposits are only applied when customers explicitly choose the deposit option.
+
+#### Core Principle
+- **Single Source of Truth:** `paymentMode` is the only variable that determines deposit amounts, order type, and payment calculations
+- **Order-Level Decision:** Deposit is not a product-level default - products define eligibility, checkout defines reality
+- **Explicit Selection:** Customers must explicitly choose deposit mode at checkout
+
+#### Features Implemented
+
+1. **Payment Mode Selection** (`src/app/checkout/page.tsx`)
+   - Added `paymentMode` state: `'deposit' | 'full' | 'cod'`
+   - Payment mode selection UI (shown only if cart has deposit-eligible products)
+   - Real-time calculation updates based on `paymentMode`
+   - Deposit amounts only calculated when `paymentMode === 'deposit'`
+
+2. **Order Creation API** (`src/app/api/orders/route.ts`)
+   - Accepts `paymentMode` in request body
+   - Validates `paymentMode` and `paymentMethod` consistency
+   - Calculates deposit only when `paymentMode === 'deposit'`
+   - Sets `order_type` based on `paymentMode`:
+     - `deposit` → `deposit_reservation`
+     - `full` or `cod` → `standard`
+   - Enforces validation: `order_type !== 'deposit_reservation'` → deposit = 0
+
+3. **Cart Item Changes** (`src/app/product/[slug]/ProductActions.tsx`)
+   - Removed `requiresDeposit` flag from cart items
+   - Still stores deposit config (for checkout UI eligibility check only)
+   - Deposit selection happens at checkout, not when adding to cart
+
+4. **Financial Calculations**
+   - **Deposit Mode:** `payNow = depositAmount`, `remainingBalance = total - depositAmount`
+   - **Full Payment Mode:** `payNow = total`, `depositAmount = 0`, `remainingBalance = 0`
+   - **COD Mode:** `payNow = 0`, `depositAmount = 0`, `remainingBalance = total`
+
+#### Files Modified
+
+**Checkout Flow:**
+- `src/app/checkout/page.tsx` - Added payment mode selection, updated calculations
+- `src/app/product/[slug]/ProductActions.tsx` - Removed item-level deposit flags
+- `src/app/api/orders/route.ts` - Updated to use `paymentMode` instead of item flags
+
+**Translations:**
+- `messages/en/checkout.json` - Added payment mode translations
+- `messages/vi/checkout.json` - Added payment mode translations
+
+#### Technical Details
+
+**Order Type Mapping:**
+- `paymentMode === 'deposit'` → `order_type = 'deposit_reservation'`
+- `paymentMode === 'full'` → `order_type = 'standard'`
+- `paymentMode === 'cod'` → `order_type = 'standard'`
+
+**Validation Rules:**
+- If `order_type !== 'deposit_reservation'`, deposit must be 0
+- Deposit mode can use any payment method (including COD - pay deposit on delivery)
+- COD mode requires payment method COD
+- Products must support deposits if `paymentMode === 'deposit'`
+
+**UI Behavior:**
+- Payment mode selection only shown if cart has deposit-eligible products
+- Switching payment modes recalculates totals immediately
+- Deposit values disappear when switching away from deposit mode
+- No deposit wording shown unless `paymentMode === 'deposit'`
+
+#### Testing Notes
+
+**Deposit Mode:**
+1. Add deposit-eligible product to cart
+2. Select "Deposit Reservation" payment mode
+3. Verify deposit amount calculated and shown
+4. Complete order → Verify `order_type = 'deposit_reservation'`, deposit charged
+
+**Full Payment Mode:**
+1. Add deposit-eligible product to cart
+2. Select "Full Payment" payment mode
+3. Verify no deposit shown, full amount displayed
+4. Complete order → Verify `order_type = 'standard'`, no deposit stored
+
+**COD Mode:**
+1. Add deposit-eligible product to cart
+2. Select "Cash on Delivery" payment mode
+3. Verify no deposit shown, "Pay on Delivery" displayed
+4. Complete order → Verify `order_type = 'standard'`, no deposit stored
+
+---
+
+### ✅ Stripe Refunds Integration (December 17, 2025)
+
+**Status:** ✅ Complete and Production Ready
+
+#### Overview
+Implemented comprehensive Stripe refund processing with webhook-first architecture. Refund state is finalized and persisted only via Stripe webhooks (never trusting client/admin response as final truth). Supports both full and partial refunds for normal orders and deposit reservations.
+
+#### Features Implemented
+
+1. **Admin Refund API** (`/api/admin/orders/[orderCode]/refund`)
+   - Requires admin authentication
+   - Validates refundable states (`paid`, `deposited`, `partially_refunded`)
+   - Supports full and partial refunds
+   - "Refund & Restock" option (cancels order + restores inventory)
+   - Sets `payment_status = 'refund_pending'` (intermediate state)
+   - Creates Stripe refund server-side
+
+2. **Stripe Webhook Handling** (`/api/stripe/webhook`)
+   - Processes `charge.refunded` and `refund.updated` events
+   - Idempotent processing (prevents duplicates)
+   - Updates `payment_status`:
+     - `partially_refunded` if `total_refunded < paid_amount`
+     - `refunded` if `total_refunded >= paid_amount`
+   - Sends email notifications automatically
+
+3. **Repository Functions** (`src/lib/repositories/admin/orders.ts`)
+   - `markOrderRefundPendingFromStripe()` - Sets refund pending state
+   - `markOrderRefundedFromStripe()` - Finalizes refund state
+   - `appendStripeRefundToMetadata()` - Safe metadata updates
+   - Updated `PaymentStatus` type: `refund_pending`, `partially_refunded`, `refunded`
+
+4. **Email Notifications** (`src/lib/emails/service.ts`)
+   - Full refund email notifications
+   - Partial refund email notifications
+   - Includes tracking links
+   - Idempotent (prevents duplicates)
+
+5. **Admin UI** (`src/app/admin/orders/[orderCode]/OrderDetailContent.tsx`)
+   - Refund section showing paid/refunded/remaining amounts
+   - Refund modal with amount, reason, restock options
+   - Success/error messages
+
+#### Files Created
+
+**Refund System:**
+- `src/app/api/admin/orders/[orderCode]/refund/route.ts` - Admin refund API endpoint
+- `REFUNDS.md` - Complete refund system documentation
+
+#### Files Modified
+
+**Core Implementation:**
+- `src/lib/stripe/server.ts` - Extended `StripeMetadata` interface with refund info
+- `src/lib/repositories/admin/orders.ts` - Added refund repository functions
+- `src/app/api/stripe/webhook/route.ts` - Extended webhook handler for refund events
+- `src/lib/emails/service.ts` - Added refund email notifications
+
+**UI Components:**
+- `src/app/admin/orders/[orderCode]/OrderDetailContent.tsx` - Added refund section and modal
+- `src/app/admin/orders/[orderCode]/page.module.css` - Added modal styles
+- `src/app/admin/orders/OrdersFilters.tsx` - Added refund status filter options
+
+**Translations:**
+- `messages/en/admin.json` - Added refund UI translations
+- `messages/en/emails.json` - Added refund email translations
+- `messages/vi/admin.json` - Added Vietnamese refund translations
+- `messages/vi/emails.json` - Added Vietnamese refund email translations
+
+#### Technical Details
+
+**State Model:**
+- `refund_pending` - Refund requested, waiting for webhook
+- `partially_refunded` - Partial refund completed
+- `refunded` - Full refund completed
+
+**Inventory Rules:**
+- Default: Do NOT restore inventory automatically (refund might be compensation)
+- "Refund & Restock" option: Cancels order + restores inventory before refund
+- Prevents double-restoration via metadata tracking
+
+**Metadata Storage:**
+- Refund info stored in `orders.admin_note` as JSON
+- Tracks total refunded amount, currency, refund IDs, status
+- Stores `inventory_restored_at` timestamp if restock requested
+
+#### Testing Notes
+
+**Full Refund:**
+1. Create paid order → Admin triggers refund → Webhook arrives
+2. Verify `payment_status = 'refunded'` → Email sent
+
+**Partial Refund:**
+1. Create paid order → Admin triggers partial refund → Webhook arrives
+2. Verify `payment_status = 'partially_refunded'` → Email sent
+3. Admin triggers another partial refund → Verify total = sum of refunds
+
+**Refund & Restock:**
+1. Create paid order → Admin triggers refund with `restock = true`
+2. Verify order cancelled + inventory restored BEFORE refund request
+3. Webhook arrives → Verify final state
+
+**Idempotency:**
+1. Process refund webhook → Replay same event
+2. Verify no duplicate state changes → Verify no duplicate emails
+
+---
+
+### ✅ Stripe Payments Integration (Test Mode) (December 17, 2025)
+
+**Status:** ✅ Complete and Production Ready
+
+#### Overview
+Implemented Stripe test environment payments with webhook-first architecture, supporting both full payment for normal orders and deposit payment for deposit reservations. Payment state is persisted via webhooks only (never trusts client redirects), with automatic inventory restoration on cancellation.
+
+#### Features Implemented
+
+1. **Stripe Server Utilities** (`src/lib/stripe/server.ts`)
+   - Singleton Stripe instance initialization
+   - Webhook signature verification helper
+   - Stripe metadata parsing/serialization (stores in `admin_note` as JSON)
+   - Supports VND currency with automatic USD fallback for test mode
+
+2. **Checkout Session Creation** (`/api/stripe/create-checkout-session`)
+   - Creates Stripe Checkout Session server-side
+   - Validates order is payable (not already paid/cancelled/expired)
+   - Calculates correct amount:
+     - Deposit orders → charges deposit amount only
+     - Normal orders → charges full total
+   - Handles VND currency with USD fallback for test mode
+   - Stores session ID in order metadata
+
+3. **Webhook Handler** (`/api/stripe/webhook`)
+   - Verifies webhook signatures for security
+   - Handles events: `checkout.session.completed`, `payment_intent.succeeded`, `payment_intent.payment_failed`
+   - Idempotent processing (prevents duplicate state changes)
+   - Updates order payment status and order status:
+     - Normal orders: `payment_status = 'paid'`, `status = 'confirmed'`
+     - Deposit orders: `payment_status = 'deposited'`, `status = 'deposited'`
+   - Sends email notifications with tracking links
+   - Restores inventory on payment failure
+
+4. **Payment Flow**
+   - User selects Stripe payment method at checkout
+   - Order created first (inventory decremented)
+   - Stripe Checkout Session created and user redirected
+   - Webhook confirms payment and updates order state
+   - Success page shows processing message (doesn't mark paid - webhook only)
+   - Cancellation automatically restores inventory
+
+5. **Inventory Restoration**
+   - Automatic restoration when Stripe payment cancelled
+   - Automatic restoration when payment fails via webhook
+   - API endpoint `/api/orders/[orderCode]/cancel` for manual cancellation
+   - Uses RPC function or direct update fallback
+
+6. **Repository Functions**
+   - `setStripeCheckoutSession()` - Store session ID
+   - `markOrderPaidFromStripe()` - Mark normal orders as paid
+   - `markOrderDepositPaidFromStripe()` - Mark deposit orders as paid
+   - `markOrderPaymentFailedFromStripe()` - Handle failed payments
+   - `hasStripeEventBeenProcessed()` / `markStripeEventAsProcessed()` - Idempotency
+   - `restoreOrderInventory()` - Restore inventory for cancelled orders
+
+#### Files Created
+
+**Stripe Integration:**
+- `src/lib/stripe/server.ts` - Stripe utilities and webhook verification
+- `src/app/api/stripe/create-checkout-session/route.ts` - Checkout session creation
+- `src/app/api/stripe/webhook/route.ts` - Webhook handler with idempotency
+- `src/app/api/stripe/session-status/route.ts` - Optional session status endpoint
+
+**Order Management:**
+- `src/app/api/orders/[orderCode]/cancel/route.ts` - Cancel order and restore inventory
+
+#### Files Modified
+
+**Checkout Flow:**
+- `src/app/checkout/page.tsx` - Added Stripe payment method, redirect to Stripe, cancellation handling
+
+**Order Success:**
+- `src/app/order-success/[orderCode]/page.tsx` - Handle Stripe redirects with session_id
+
+**Repository:**
+- `src/lib/repositories/admin/orders.ts` - Added Stripe payment functions and inventory restoration
+
+**Translations:**
+- `messages/en/checkout.json` - Added Stripe payment method and error messages
+- `messages/vi/checkout.json` - Added Stripe payment method and error messages
+- `messages/en/order.json` - Added Stripe success messages
+- `messages/vi/order.json` - Added Stripe success messages
+
+#### Technical Details
+
+**Payment Flow:**
+1. User selects Stripe payment → Order created → Stripe session created → Redirect to Stripe
+2. User pays at Stripe → Webhook receives event → Order updated → Email sent
+3. User cancels → Redirected back → Inventory restored → Order cancelled
+
+**Currency Handling:**
+- Primary: VND (Vietnamese Dong) - no decimals
+- Fallback: USD for test mode if VND not supported
+- Automatic conversion at 1 USD ≈ 25,000 VND rate
+
+**Security:**
+- Webhook-first architecture (never trusts client)
+- Signature verification on all webhooks
+- Idempotent event processing
+- Service role client for database access
+- No Stripe secrets exposed to client
+
+**Idempotency:**
+- Tracks processed event IDs in order metadata
+- Prevents duplicate state changes
+- Prevents duplicate emails
+
+**Inventory Management:**
+- Inventory decremented when order created
+- Automatically restored on payment cancellation
+- Automatically restored on payment failure
+- Uses database RPC function or direct update fallback
+
+#### Environment Variables Required
+
+```env
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
 ```
-?topology=se|pp
-?tube=300B|2A3|EL34|KT88
-?condition=new|like_new|vintage
-?powerMin=10&powerMax=40
-?priceMin=10000000&priceMax=50000000
-?sort=newest|price_asc|price_desc|best_sellers
-?page=1
-```
 
-#### 2.4 Translation Updates ✅
-- [x] Empty state messages (vi/en)
-- [x] Pagination labels (vi/en)
-- [x] Condition labels (likeNew added)
+#### Testing Notes
 
-#### 2.5 Documentation ✅
-- [x] Supabase integration guide (SUPABASE_INTEGRATION.md)
-- [x] Data flow diagrams
-- [x] Query parameter contract
-- [x] Developer notes
+**Full Payment Order:**
+1. Create order with Stripe payment
+2. Complete payment at Stripe Checkout
+3. Verify webhook updates: `payment_status = 'paid'`, `status = 'confirmed'`
+4. Verify email sent with tracking link
 
-#### 2.6 Product Detail Page Integration 🔄
-- [ ] Fetch product by slug
-- [ ] Render full product information
-- [ ] Image gallery
-- [ ] Specifications table
-- [ ] Matching guidance
-- [ ] Related products
-- [ ] Handle 404 for non-existent products
+**Deposit Reservation:**
+1. Create deposit reservation order with Stripe payment
+2. Complete deposit payment at Stripe Checkout
+3. Verify webhook updates: `payment_status = 'deposited'`, `status = 'deposited'`
+4. Verify email sent with tracking link
 
-#### 2.7 User Authentication ⏳
-- [ ] Sign-up flow
-- [ ] Login flow
-- [ ] User profile management
-- [ ] Password reset
-- [ ] Protected routes
+**Cancellation:**
+1. Create order with Stripe payment
+2. Cancel at Stripe Checkout
+3. Verify redirected to checkout with cancellation message
+4. Verify inventory restored
+5. Verify order status = 'cancelled'
 
-#### 2.8 E-commerce Functionality ⏳
-- [ ] Shopping cart state management
-- [ ] Add to cart functionality
-- [ ] Cart persistence (localStorage + database)
-- [ ] Checkout form validation
-- [ ] Order creation
-- [ ] Deposit reservation logic
-- [ ] Order confirmation emails
+**Idempotency:**
+1. Replay same webhook event
+2. Verify no duplicate state changes
+3. Verify no duplicate emails
 
-#### 2.9 Product Management ⏳
-- [ ] Image upload to Supabase Storage
-- [ ] Product CRUD operations
-- [ ] Inventory tracking
-- [ ] Stock alerts
+#### Known Limitations
 
-#### 2.10 Content Management ⏳
-- [ ] Guide articles (full content)
-- [ ] Customer setup gallery
-- [ ] Review submission and moderation
-- [ ] FAQ management
+1. **Currency:** VND may not be supported in Stripe test mode (automatic USD fallback)
+2. **Rate Limiting:** Create session endpoint uses basic in-memory rate limiting
+3. **Refunds:** Not implemented (stubbed for future)
 
 ---
 
-### ⏳ Phase 3: Advanced Features (0% Complete)
+### ✅ Database-Backed Order Tracking Tokens (December 17, 2025)
 
-- [ ] Payment gateway integration (Stripe/local payment)
-- [ ] Advanced matching algorithm
-- [ ] Live chat support
-- [ ] Email notifications (order updates, shipping)
-- [ ] Order tracking
-- [ ] Wishlist functionality
-- [ ] Product recommendations
-- [ ] Analytics integration
+**Status:** ✅ Complete and Production Ready
 
----
+#### Overview
+Migrated order tracking tokens from in-memory storage to a secure, persistent database-backed system. Tokens are now stored as SHA-256 hashes (never plaintext) with proper expiry, revocation, and access tracking.
 
-### ⏳ Phase 4: Admin Panel (0% Complete)
+#### Features Implemented
 
-- [ ] Admin dashboard
-- [ ] Product management interface
-- [ ] Order management
-- [ ] Customer management
-- [ ] Analytics and reporting
-- [ ] Inventory management
+1. **Database Table** (`order_tracking_tokens`)
+   - Stores token hashes (SHA-256) instead of plaintext
+   - 7-day expiry with automatic cleanup
+   - Revocation support via `revoked_at` field
+   - Access tracking (`last_accessed_at`, `access_count`)
+   - RLS policies ensure service-role only access
 
----
+2. **Token Management** (`src/lib/orderTrackingTokens.ts`)
+   - `generateToken()` - Cryptographically secure base64url tokens
+   - `hashToken()` - SHA-256 hashing with optional pepper
+   - `createTrackingToken()` - Creates and stores tokens in DB
+   - `verifyTokenForOrder()` - Verifies tokens and updates access metadata
+   - `getOrCreateTrackingToken()` - Gets or creates tokens for emails
 
-### ⏳ Phase 5: Optimization & Growth (0% Complete)
+3. **Email Integration**
+   - Order confirmation emails include tracking links
+   - Status update emails include tracking links
+   - Tokens automatically created/reused when sending emails
+   - Tracking URLs use cookie-based locale (no URL prefix)
 
-- [ ] SEO optimization
-- [ ] Performance optimization
-- [ ] A/B testing
-- [ ] Marketing automation
-- [ ] Customer loyalty program
+4. **Route Handling** (`/order/track/[code]`)
+   - Server-side token verification
+   - Shows order details if token is valid
+   - Falls back to tracking form if token is missing/invalid/expired
+   - Displays error banner for invalid tokens
 
----
+5. **Security Features**
+   - Tokens stored as SHA-256 hashes (never plaintext)
+   - Optional pepper via `ORDER_TRACKING_TOKEN_PEPPER` env var
+   - 7-day expiry (configurable)
+   - Reusable until expiry
+   - Revocable via `revoked_at` field
+   - Access tracking for analytics
+   - Service-role only access (RLS policies)
 
-## 📈 Progress Metrics
+#### Files Created
 
-### Code Statistics
-- **Total Files:** 60+
-- **Lines of Code:** ~6,500+
-- **Translation Keys:** 200+ per language
-- **CSS Utility Classes:** 300+
-- **Database Tables:** 15+
-- **Components:** 15+ reusable components
+**Database Migration:**
+- `supabase/CREATE_ORDER_TRACKING_TOKENS_TABLE.sql` - Table schema and RLS policies
 
-### Feature Completion
-- **Phase 1 (Foundation):** 100% ✅
-- **Phase 2 (Backend Integration):** 60% 🔄
-  - Supabase Setup: 100% ✅
-  - Data Layer: 100% ✅
-  - Collection Page: 100% ✅
-  - Product Detail: 0% ⏳
-  - Authentication: 0% ⏳
-  - Cart/Checkout: 0% ⏳
-- **Phase 3 (Advanced Features):** 0% ⏳
-- **Phase 4 (Admin Panel):** 0% ⏳
-- **Phase 5 (Optimization):** 0% ⏳
+**Token Management:**
+- `src/lib/orderTrackingTokens.ts` - Token generation, hashing, and verification
 
-### Overall Project: **~60% Complete**
+**Components:**
+- `src/app/order/track/TrackingForm.tsx` - Reusable tracking form component
 
----
+#### Files Modified
 
-## 🎯 Current Sprint (Week of Dec 11, 2025)
+- `src/lib/repositories/orders/tracking.ts` - Updated to use database-backed tokens
+- `src/lib/emails/service.ts` - Integrated token creation/reuse in emails
+- `src/app/order/track/[code]/page.tsx` - Added token verification with fallback form
+- `messages/en/tracking.json` - Added error messages for invalid links
+- `messages/vi/tracking.json` - Added error messages for invalid links
+- `messages/en/emails.json` - Added tracking link text to status update emails
+- `messages/vi/emails.json` - Added tracking link text to status update emails
 
-### Completed This Week ✅
-1. Supabase client setup (server + browser)
-2. TypeScript types and DTOs for catalog
-3. Products repository with full filtering
-4. Collection page integration with real data
-5. URL-based filter/sort/pagination
-6. Client components for interactivity
-7. Translation updates for new features
-8. Comprehensive documentation
+#### Technical Details
 
-### In Progress 🔄
-1. Product detail page integration
-2. Testing collection page functionality
-3. Bug fixes and refinements
+**Token Generation:**
+- Uses `crypto.randomBytes(32).toString('base64url')` for URL-safe tokens
+- SHA-256 hashing with optional pepper for additional security
+- Tokens are 32 bytes (256 bits) for strong security
 
-### Next Up ⏳
-1. Complete product detail page
-2. Implement search functionality
-3. Begin cart state management
-4. User authentication setup
+**Database Schema:**
+- `id` (uuid) - Primary key
+- `order_id` (uuid) - Foreign key to orders
+- `token_hash` (text, unique) - SHA-256 hash of token
+- `expires_at` (timestamptz) - 7 days from creation
+- `revoked_at` (timestamptz, nullable) - Revocation timestamp
+- `created_at` (timestamptz) - Creation timestamp
+- `last_accessed_at` (timestamptz, nullable) - Last access timestamp
+- `access_count` (int) - Number of times token was used
+- `created_by` (text) - Source of creation (e.g., "checkout", "status_email")
 
----
+**Verification Flow:**
+1. User clicks tracking link: `/order/track/[code]?t=[token]`
+2. Server extracts order code and token from URL
+3. Looks up order by code to get `order_id`
+4. Hashes incoming token and queries database
+5. Verifies: hash matches, not revoked, not expired, belongs to order
+6. Updates `last_accessed_at` and increments `access_count`
+7. Returns order data or shows fallback form
 
-## 🚀 Recent Achievements
+#### Migration Notes
 
-### December 10-11, 2025
-**Supabase Read Integration Complete** 🎉
+**From In-Memory to Database:**
+- Old system used `Map<string, TrackingToken>` in memory
+- New system uses PostgreSQL table with proper indexing
+- Tokens are now persistent across server restarts
+- Better security with hash storage instead of plaintext
 
-- ✅ Installed Supabase client libraries
-- ✅ Created server and browser clients
-- ✅ Defined comprehensive TypeScript types
-- ✅ Built products repository with advanced filtering
-- ✅ Integrated collection page with real Supabase data
-- ✅ Implemented URL-based state management
-- ✅ Created interactive client components
-- ✅ Added pagination support
-- ✅ Handled empty states
-- ✅ Updated translations for new features
-- ✅ Wrote comprehensive integration documentation
-
-**Technical Highlights:**
-- Server Component architecture for better performance
-- Repository pattern for clean data access
-- URL query parameters for shareable links
-- Graceful error handling
-- Type-safe throughout
+**Breaking Changes:**
+- None - system is backward compatible
+- Old in-memory tokens will expire naturally
+- New orders automatically use database tokens
 
 ---
 
-## 🔧 Technical Stack
+### ✅ Admin Deposit Status Fix (December 17, 2025)
 
-### Frontend
-- **Framework:** Next.js 16 (App Router, Turbopack)
-- **Language:** TypeScript
-- **Styling:** Vanilla CSS with 300+ utility classes
-- **i18n:** next-intl with split translation files
-- **Fonts:** Cormorant Garamond (serif) + Inter (sans-serif)
+**Status:** ✅ Complete
 
-### Backend & Database
-- **Database:** Supabase (PostgreSQL)
-- **Authentication:** Supabase Auth (to be implemented)
-- **Storage:** Supabase Storage (to be implemented)
-- **API:** Supabase JavaScript Client
+#### Issues Fixed
 
-### Development Tools
-- **Package Manager:** npm
-- **Version Control:** Git
-- **IDE:** VS Code (assumed)
-- **Build Tool:** Turbopack (Next.js 16)
+1. **Deposit Received Status**
+   - **Problem:** When marking deposit as received, order status changed to `confirmed` instead of `deposited`
+   - **Solution:** Updated `adminMarkDepositReceived()` to set status to `deposited`
+   - **Result:** Order status now correctly shows "Đã đặt cọc" (Deposited) after marking deposit received
+
+2. **Page Refresh**
+   - **Problem:** Order status didn't update in UI after marking deposit received
+   - **Solution:** Added `revalidatePath()` to server actions for proper cache invalidation
+   - **Result:** Page refreshes immediately showing updated status
+
+3. **Status History**
+   - **Problem:** Status history wasn't properly recorded when deposit received
+   - **Solution:** Fixed status history creation to handle database trigger and update with note/changed_by
+   - **Result:** Status history correctly shows transition to `deposited` status
+
+#### Files Modified
+
+- `src/lib/repositories/admin/orders.ts` - Fixed status to `deposited`, improved status history handling
+- `src/app/admin/orders/[orderCode]/actions.ts` - Added `revalidatePath()` for cache invalidation
+- `src/app/admin/orders/[orderCode]/OrderDetailContent.tsx` - Removed setTimeout delay
+
+#### Technical Details
+
+**Status Flow:**
+- Order created → `status: 'pending'`, `payment_status: 'deposit_pending'`
+- Deposit received → `status: 'deposited'`, `payment_status: 'deposited'`
+- Processing → `status: 'processing'`
+- Shipped → `status: 'shipped'`
+- Delivered → `status: 'delivered'`
+
+**Revalidation:**
+- Uses Next.js `revalidatePath()` to invalidate cache
+- Revalidates both order detail page and orders list page
+- Ensures UI shows latest data immediately
 
 ---
 
-## 📊 Database Status
+### ✅ Order Tracking System (December 17, 2025)
 
-### Schema
-- **Status:** ✅ Deployed
-- **Tables:** 15+
-- **Triggers:** 5 automatic triggers
-- **Views:** 2 optimized views
-- **RLS Policies:** 10+ security policies
+**Status:** ✅ Complete and Production Ready
 
-### Sample Data
-- **Status:** ✅ Loaded
-- **Products:** 3 (SE 300B, PP EL34, Vintage 2A3)
-- **Guides:** 3 articles
-- **Reviews:** 3 sample reviews
+#### Overview
+Implemented a comprehensive order tracking system that allows customers to track their orders (including deposit reservations) without authentication. The system supports both form-based and token-based tracking methods.
 
-### Performance
-- Collection page query: < 100ms
-- Product detail query: < 50ms (estimated)
-- Filter update: < 100ms
+#### Features Implemented
+
+1. **Form-Based Tracking** (`/order/track`)
+   - Order code + email/phone verification
+   - Rate limiting (10 requests per 15 minutes per IP)
+   - Generic error messages to prevent order enumeration
+   - Full order details display with status timeline
+
+2. **Token-Based Tracking** (`/order/track/[code]?t=<token>`)
+   - Secure links from order confirmation emails
+   - 7-day token expiry
+   - Server-side token validation
+   - No need to re-enter contact information
+
+3. **Order Display Features**
+   - Order status with visual badges
+   - Status timeline with history (chronological)
+   - Order items summary with images
+   - Totals breakdown (subtotal, shipping, tax, discount)
+   - Deposit details for deposit reservations
+   - Payment status and method
+   - Fully responsive design
+
+4. **Email Integration**
+   - Tracking links automatically included in order confirmation emails
+   - Token generation on email send
+   - Localized link text (Vietnamese/English)
+   - Proper URL formatting based on order locale
+
+5. **Security Features**
+   - Service role client bypasses RLS (server-side only)
+   - Contact normalization for matching (case-insensitive)
+   - Generic "not found" errors prevent enumeration
+   - Rate limiting prevents abuse
+   - Token expiry (7 days)
+   - No PII exposure beyond what customer provided
+
+#### Files Created
+
+**Repository Layer:**
+- `src/lib/repositories/orders/tracking.ts` - Core tracking logic
+
+**API Routes:**
+- `src/app/api/order/track/route.ts` - Form-based tracking endpoint
+- `src/app/api/order/track-token/route.ts` - Token-based tracking endpoint
+
+**Pages:**
+- `src/app/order/track/page.tsx` - Tracking form page (client component)
+- `src/app/order/track/page.module.css` - Form page styles
+- `src/app/order/track/[code]/page.tsx` - Token-based detail page (server component)
+- `src/app/order/track/[code]/page.module.css` - Detail page styles
+
+**Translations:**
+- `messages/en/tracking.json` - English translations
+- `messages/vi/tracking.json` - Vietnamese translations
+- Updated `messages/en/emails.json` - Added tracking link translations
+- Updated `messages/vi/emails.json` - Added tracking link translations
+
+**Documentation:**
+- `ORDER_TRACKING.md` - Complete system documentation
+
+#### Files Modified
+
+- `src/lib/emails/service.ts` - Added tracking token generation and email links
+- `src/i18n/request.ts` - Added tracking namespace
+- `src/middleware.ts` - Updated to handle locale prefixes correctly
+- `src/i18n/routing.ts` - Updated locale prefix configuration
+
+#### Technical Details
+
+**Token Management:**
+- ~~In-memory Map storage (MVP - can be moved to Redis/DB later)~~ **MIGRATED TO DATABASE**
+- Database-backed storage with SHA-256 hashing
+- Cryptographically secure tokens (32 bytes random, base64url encoded)
+- Automatic cleanup of expired tokens (via database queries)
+- 7-day expiry period
+
+**Rate Limiting:**
+- Simple in-memory IP-based rate limiting
+- 10 requests per 15 minutes per IP
+- Automatic cleanup of expired entries
+- Returns 429 status when rate limited
+
+**DTO Design:**
+- Sanitized order data (no admin notes, no internal fields)
+- Only customer-facing information exposed
+- No PII beyond what customer provided
+
+#### Testing Notes
+
+**Form-Based Tracking:**
+1. Navigate to `/order/track`
+2. Enter order code and email/phone
+3. Verify order details display correctly
+
+**Token-Based Tracking:**
+1. Create an order (via checkout)
+2. Check email for tracking link
+3. Click tracking link
+4. Verify order details display without form
+
+**Error Cases:**
+- Invalid order code → Shows "not found"
+- Wrong email/phone → Shows "not found" (doesn't reveal which field)
+- Missing token → Redirects to form page
+- Invalid/expired token → Redirects to form page
+
+#### Known Limitations (MVP)
+
+1. ~~**Token Storage:** In-memory Map (not persistent across server restarts)~~ ✅ **FIXED** - Now using database storage
+
+2. **Rate Limiting:** Simple IP-based (can be bypassed with VPN)
+   - **Future:** Implement Redis-based rate limiting with CAPTCHA
+
+3. ~~**Token Revocation:** Not supported~~ ✅ **FIXED** - Tokens can be revoked via `revoked_at` field
+
+---
+
+### ✅ Middleware & Routing Fixes (December 17, 2025)
+
+**Status:** ✅ Complete
+
+#### Issues Fixed
+
+1. **Homepage 404 Error**
+   - **Problem:** Homepage was redirecting to `/en` or `/vi` causing 404
+   - **Solution:** Created custom middleware that doesn't redirect root path
+   - **Result:** Homepage now works at `/` without redirect
+
+2. **Locale Routing**
+   - **Problem:** next-intl middleware was auto-redirecting all routes
+   - **Solution:** Custom middleware handles locale prefixes manually
+   - **Result:** 
+     - Root routes work without prefix (`/`, `/order/track`)
+     - Locale-prefixed routes work (`/en/order/track`, `/vi/order/track`)
+     - Tracking links from emails work correctly
+
+3. **Translation Namespace**
+   - **Problem:** Missing `tracking` namespace in i18n request
+   - **Solution:** Added tracking namespace to translation loader
+   - **Result:** All tracking translations load correctly
+
+#### Files Modified
+
+- `src/middleware.ts` - Custom middleware for locale handling
+- `src/i18n/routing.ts` - Updated to `localePrefix: 'never'`
+- `src/i18n/request.ts` - Added tracking namespace, improved locale detection
+
+---
+
+### ✅ Admin Panel Translation Fixes (December 17, 2025)
+
+**Status:** ✅ Complete
+
+#### Issues Fixed
+
+1. **Missing Payment Status Translations**
+   - Added `deposit_pending` and `deposited` to payment status translations
+   - Added filter options for deposit statuses
+   - Fixed in both English and Vietnamese
+
+2. **Missing Order Detail Status Translations**
+   - Added `status` and `paymentStatus` objects under `orders.detail`
+   - Fixed duplicate key issue by renaming labels
+   - Updated component to use correct translation keys
+
+#### Files Modified
+
+- `messages/en/admin.json` - Added missing payment status translations
+- `messages/vi/admin.json` - Added missing payment status translations
+- `src/app/admin/orders/OrdersFilters.tsx` - Added deposit status filter options
+- `src/app/admin/orders/[orderCode]/OrderDetailContent.tsx` - Fixed translation keys
+
+---
+
+### ✅ Admin Layout Hydration Fix (December 17, 2025)
+
+**Status:** ✅ Complete
+
+#### Issue Fixed
+
+- **Problem:** Hydration error - `lang` attribute mismatch between server and client
+- **Cause:** Admin layout was creating its own `<html>` tag conflicting with root layout
+- **Solution:** Removed `<html>` and `<body>` tags from admin layout (only root layout should have them)
+- **Result:** No more hydration errors
+
+#### Files Modified
+
+- `src/app/admin/layout.tsx` - Removed duplicate HTML structure
+
+---
+
+## 📊 Current Project Statistics
+
+### Code Metrics
+- **Total Files:** 80+
+- **Lines of Code:** ~8,000+
+- **Translation Keys:** 250+ per language
+- **API Routes:** 10+
+- **Pages:** 15+
+
+### Features Completed
+- ✅ Order creation with deposit reservations (order-level selection via paymentMode)
+- ✅ Order tracking (form + token-based with database storage)
+- ✅ Email notifications (order confirmation, status updates, refunds, cancellations with tracking links)
+- ✅ Admin panel (products, orders management)
+- ✅ Deposit reservation management (supports both online and COD payment)
+- ✅ Stripe payments (test mode) - full payment and deposit reservations
+- ✅ Stripe refunds (webhook-first, full and partial refunds)
+- ✅ Order-level optional deposit logic (paymentMode as single source of truth)
+- ✅ Customer order cancellation (self-service with inventory restoration)
+- ✅ Customer change requests (non-automated, admin-handled)
+- ✅ Full localization (vi/en)
+- ✅ Responsive design (mobile, tablet, desktop)
+
+### Database
+- **Tables:** 16+ with relationships (added `order_tracking_tokens`)
+- **Triggers:** 5+ automatic triggers
+- **RLS Policies:** 16+ security policies (added token table RLS)
+- **Email Logging:** Order email tracking table
+- **Token Storage:** Database-backed with SHA-256 hashing
+
+---
+
+## 🎯 Next Steps
+
+### Immediate Priorities
+1. ✅ Order tracking system - **COMPLETE**
+2. ✅ Stripe payments integration (test mode) - **COMPLETE**
+3. [ ] Shipping address validation
+4. ✅ Order cancellation flow with inventory restoration - **COMPLETE**
+5. ✅ Refund processing (Stripe refunds) - **COMPLETE**
+6. ✅ Order-level optional deposit logic - **COMPLETE**
+7. ✅ Customer self-service cancellation - **COMPLETE**
+8. ✅ Customer change requests - **COMPLETE**
+9. ✅ Deposit reservation with COD payment - **COMPLETE**
+
+### Short-term Goals
+- [ ] SMS notifications for order updates
+- [ ] Order history for authenticated users
+- [ ] Export order details as PDF
+- [ ] Advanced order search and filtering
+- [ ] Order analytics dashboard
+
+### Long-term Enhancements
+- [ ] Move token storage to Redis/database
+- [ ] Implement Redis-based rate limiting
+- [ ] Add CAPTCHA for rate-limited requests
+- [ ] Token revocation functionality
+- [ ] Order tracking analytics
 
 ---
 
 ## 🐛 Known Issues & Limitations
 
-### Current Limitations
-1. **Search:** Simple name search only (no full-text search yet)
-2. **Best Sellers Sort:** Falls back to newest (no order tracking yet)
-3. **Images:** Using placeholder URLs (Supabase Storage not set up)
-4. **Authentication:** Not implemented (public access only)
-5. **Cart:** Client-side only (no persistence)
+### MVP Limitations
+1. ~~**Token Storage:** In-memory (not persistent)~~ ✅ **FIXED** - Now using database storage
+2. **Rate Limiting:** Simple IP-based (can be bypassed)
+3. ~~**No Token Revocation:** Tokens valid until expiry~~ ✅ **FIXED** - Tokens can be revoked via `revoked_at` field
+4. **No Order History:** Only current order view
 
-### Resolved Issues
-- ✅ Hydration warnings (converted to CSS Modules)
-- ✅ Server Component event handlers (moved to Client Components)
-- ✅ SQL seed data escaping (fixed apostrophes)
-- ✅ Translation file structure (split namespaces working)
-
----
-
-## 🎯 Success Criteria
-
-### MVP (Minimum Viable Product)
-- [x] Professional, premium design
-- [x] Fully internationalized (vi/en)
-- [x] All core pages designed
-- [x] Database schema complete
-- [x] Products display from database ✅ NEW
-- [x] Filters and sorting work ✅ NEW
-- [ ] Shopping cart works
-- [ ] Checkout creates orders
-- [ ] User authentication
-- [ ] Admin can manage products
-
-**MVP Progress: 60%** (6/10 criteria met)
-
-### Launch Ready
-- [ ] Payment integration
-- [ ] Email notifications
-- [ ] SEO optimized
-- [ ] Performance optimized
-- [ ] Analytics integrated
-- [ ] Customer reviews working
-- [ ] Matching advice functional
-
-**Launch Progress: 0%** (0/7 criteria met)
+### Future Improvements
+- ~~Move to Redis for token storage~~ ✅ **COMPLETE** - Using database instead
+- Implement more robust rate limiting
+- ~~Add token revocation~~ ✅ **COMPLETE** - Via `revoked_at` field
+- Add order history for users
+- Add PDF export functionality
 
 ---
 
-## 📅 Timeline & Milestones
+## 📝 Documentation Updates
 
-### Completed Milestones ✅
-- **Nov 2025:** Project initialization and setup
-- **Dec 1-5, 2025:** Design system and UI pages
-- **Dec 6-9, 2025:** Database schema and seed data
-- **Dec 10-11, 2025:** Supabase integration (collection page)
+### New Documentation
+- ✅ `ORDER_TRACKING.md` - Complete order tracking system documentation
+- ✅ `REFUNDS.md` - Complete Stripe refunds system documentation
 
-### Upcoming Milestones 🎯
-- **Dec 12-15, 2025:** Product detail page + search
-- **Dec 16-20, 2025:** Cart and checkout functionality
-- **Dec 21-25, 2025:** User authentication
-- **Jan 2026:** Admin panel development
-- **Feb 2026:** Payment integration and testing
-- **Mar 2026:** Launch preparation and optimization
-
-### Target Launch Date
-**Q1 2026** (March 2026)
+### Updated Documentation
+- Translation files updated with tracking namespace
+- Email templates updated with tracking links
 
 ---
 
-## 👥 Team & Responsibilities
+## 🔧 Technical Debt
 
-### Current Phase
-- **Developer:** Full-stack development (frontend + backend)
-- **Designer:** Design system implemented
-- **Content:** Translation files populated
+### High Priority
+- ~~[ ] Move token storage from in-memory to persistent storage~~ ✅ **COMPLETE**
+- [ ] Implement Redis-based rate limiting
+- [ ] Add comprehensive error logging
+- ✅ Order-level deposit logic refactoring - **COMPLETE**
+- ✅ Stripe refunds implementation - **COMPLETE**
 
-### Future Needs
-- **Product Manager:** Inventory and catalog management
-- **Customer Support:** Handle inquiries and orders
-- **Marketing:** SEO, content, social media
-- **Operations:** Shipping, logistics, vintage sourcing
+### Medium Priority
+- [ ] Add unit tests for tracking repository
+- [ ] Add integration tests for tracking API
+- [ ] Add E2E tests for tracking flow
 
----
-
-## 📝 Next Steps (Priority Order)
-
-### Immediate (This Week)
-1. ✅ Complete collection page integration
-2. 🔄 Implement product detail page
-3. Test collection page thoroughly
-4. Fix any bugs or issues
-
-### Short Term (Next 2 Weeks)
-1. Implement search functionality
-2. Set up Supabase Storage for images
-3. Begin cart state management
-4. User authentication setup
-
-### Medium Term (Next Month)
-1. Complete checkout flow
-2. Order creation and management
-3. Email notification system
-4. Admin panel foundation
-
-### Long Term (Next Quarter)
-1. Payment gateway integration
-2. Advanced matching algorithm
-3. Analytics and reporting
-4. Performance optimization
-5. Launch preparation
+### Low Priority
+- [ ] Optimize token cleanup interval
+- [ ] Add token usage analytics
+- [ ] Add tracking link click tracking
 
 ---
 
-## 💡 Key Learnings & Decisions
-
-### Technical Decisions
-1. **Server Components First:** Better performance and SEO
-2. **Repository Pattern:** Clean separation of data access
-3. **URL-based State:** Shareable links and better UX
-4. **CSS Modules for Header:** Avoid hydration issues
-5. **Split Translation Files:** Better organization and performance
-
-### Best Practices Established
-1. All UI strings must use next-intl
-2. Use `.p-4` for default card padding
-3. Use `.py-16` for section spacing
-4. Server Components for data fetching
-5. Client Components for interactivity
-6. Repository layer for all database access
-
----
-
-## 📚 Documentation Index
-
-| Document | Purpose | Status |
-|----------|---------|--------|
-| README.md | Main project documentation | ✅ Complete |
-| PROJECT_STATUS.md | Project overview and status | ✅ Complete |
-| PROJECT_PROGRESS.md | This document - detailed progress | ✅ Complete |
-| CSS_UTILITIES.md | CSS utility class reference | ✅ Complete |
-| SPACING_GUIDE.md | Spacing best practices | ✅ Complete |
-| SUPABASE_INTEGRATION.md | Database integration guide | ✅ Complete |
-| supabase/SETUP_GUIDE.md | Database setup instructions | ✅ Complete |
-| supabase/SCHEMA_DIAGRAM.md | ER diagram and relationships | ✅ Complete |
-
----
-
-## 🎉 Achievements Summary
-
-### What's Working Now
-✅ Beautiful, premium design with classic audiophile aesthetic  
-✅ Full internationalization (Vietnamese/English)  
-✅ 8+ fully designed pages  
-✅ 300+ CSS utility classes for rapid development  
-✅ Complete database schema with 15+ tables  
-✅ Real product data from Supabase  
-✅ Working filters (topology, tube type, condition, price, power)  
-✅ Sorting (newest, price asc/desc, best sellers)  
-✅ Pagination  
-✅ Empty states  
-✅ Type-safe TypeScript throughout  
-✅ Comprehensive documentation  
-
-### What's Next
-🔄 Product detail pages  
-⏳ Shopping cart  
-⏳ User authentication  
-⏳ Checkout and orders  
-⏳ Admin panel  
-⏳ Payment integration  
-
----
-
-**Project Health:** 🟢 Healthy  
-**Timeline:** 🟢 On Track  
-**Budget:** N/A  
-**Team Morale:** 🟢 Excellent  
-
-**Overall Assessment:** The project is progressing well with solid foundations in place. Phase 1 is complete, and Phase 2 is 60% done. The collection page integration with Supabase marks a significant milestone. Next focus is on completing the product detail page and moving toward cart/checkout functionality.
-
----
-
-*Last Updated: December 11, 2025 11:08 AM*  
-*Next Review: December 18, 2025*
+**Last Updated:** December 17, 2025  
+**Version:** 1.6.0 (Customer Self-Service & Deposit+COD)  
+**Status:** ✅ Customer Cancellation/Change Requests, Deposit+COD Support, Ready for Production

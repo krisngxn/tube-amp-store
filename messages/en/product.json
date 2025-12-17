@@ -1,4 +1,28 @@
 {
+    "breadcrumb": {
+        "home": "Home",
+        "collection": "Tube Amplifiers"
+    },
+    "availability": {
+        "inStock": "In Stock",
+        "limitedStock": "Limited Stock ({count} left)",
+        "outOfStock": "Out of Stock",
+        "stockCount": "{count} available"
+    },
+    "pricing": {
+        "salePrice": "Sale Price",
+        "originalPrice": "Original Price",
+        "saveAmount": "Save {amount}"
+    },
+    "gallery": {
+        "mainImage": "Main image",
+        "thumbnail": "Thumbnail {index}"
+    },
+    "actions": {
+        "quantity": "Quantity",
+        "decrease": "Decrease",
+        "increase": "Increase"
+    },
     "summary": {
         "title": "10-Second Summary"
     },
@@ -65,14 +89,37 @@
         "originStory": "Provenance"
     },
     "deposit": {
+        "badge": "Deposit Reservation Available",
         "title": "Reserve with Deposit",
-        "amount": "Deposit amount: {amount}",
+        "description": "Reserve this item by placing a deposit. We will contact you to confirm payment.",
+        "amount": "Deposit Amount",
+        "remaining": "Remaining Balance",
+        "deadline": "Deadline",
+        "deadlineHours": "{hours} hours",
         "reservationWindow": "Reservation period: {days} days",
         "remainingPayment": "Pay remaining on delivery",
         "cancellationPolicy": "Cancellation: 100% refund if cancelled within 24h"
     },
+    "shipping": {
+        "title": "Shipping & Warranty",
+        "warranty": "Warranty {months}",
+        "returns": "Returns within {days}",
+        "freeShipping": "Free nationwide shipping",
+        "packaging": "Professional packaging, maximum protection"
+    },
     "related": {
         "title": "Related Products",
         "accessories": "Recommended Accessories"
+    },
+    "empty": {
+        "noDescription": "Product description coming soon.",
+        "noSpecs": "Specifications coming soon.",
+        "noReviews": "No reviews yet.",
+        "noRelated": "No related products."
+    },
+    "notFound": {
+        "title": "Product Not Found",
+        "description": "The product you're looking for doesn't exist or has been removed.",
+        "backToCollection": "Back to Collection"
     }
 }

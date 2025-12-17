@@ -1,0 +1,125 @@
+{
+    "orderConfirmation": {
+        "subject": "Xác Nhận Đơn Hàng - {orderCode}",
+        "header": "Xác Nhận Đơn Hàng",
+        "greeting": "Xin chào {customerName},",
+        "message": "Cảm ơn bạn đã đặt hàng! Đơn hàng {orderCode} của bạn đã được tiếp nhận và đang được xử lý.",
+        "orderDetails": "Chi Tiết Đơn Hàng",
+        "subtotal": "Tạm tính",
+        "shipping": "Phí vận chuyển",
+        "tax": "Thuế",
+        "discount": "Giảm giá",
+        "total": "Tổng cộng",
+        "shippingAddress": "Địa Chỉ Giao Hàng",
+        "paymentCod": {
+            "title": "Phương Thức Thanh Toán: Thanh Toán Khi Nhận Hàng (COD)",
+            "message": "Bạn sẽ thanh toán khi nhận hàng. Chúng tôi sẽ liên hệ với bạn trong vòng 24 giờ để xác nhận đơn hàng."
+        },
+        "paymentBank": {
+            "title": "Phương Thức Thanh Toán: Chuyển Khoản Ngân Hàng",
+            "message": "Vui lòng chuyển khoản tổng số tiền vào tài khoản ngân hàng sau:",
+            "bank": "Ngân hàng",
+            "accountNumber": "Số tài khoản",
+            "accountName": "Tên tài khoản",
+            "amount": "Số tiền",
+            "content": "Nội dung chuyển khoản"
+        },
+        "support": "Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi tại support@restorethebasic.com hoặc gọi +84 XXX XXX XXX.",
+        "footer": "Nếu bạn không đặt đơn hàng này, vui lòng bỏ qua email này.",
+        "footerBrand": "Restore The Basic",
+        "trackOrder": "Theo Dõi Đơn Hàng",
+        "trackButton": "Theo Dõi Đơn Hàng",
+        "trackNote": "Sử dụng liên kết này để theo dõi trạng thái đơn hàng bất cứ lúc nào."
+    },
+    "statusUpdate": {
+        "subject": "Đơn Hàng {orderCode} - Cập Nhật Trạng Thái: {status}",
+        "header": "Cập Nhật Trạng Thái Đơn Hàng",
+        "greeting": "Xin chào {customerName},",
+        "message": "Trạng thái đơn hàng {orderCode} của bạn đã được cập nhật thành: {status}",
+        "note": "Ghi chú",
+        "statusLabels": {
+            "confirmed": "Đã Xác Nhận",
+            "deposited": "Đã Nhận Cọc",
+            "processing": "Đang Xử Lý",
+            "shipped": "Đã Gửi Hàng",
+            "delivered": "Đã Giao Hàng",
+            "cancelled": "Đã Hủy"
+        },
+        "statusDescriptions": {
+            "confirmed": "Đơn hàng của bạn đã được xác nhận và đang được chuẩn bị để xử lý.",
+            "deposited": "Chúng tôi đã nhận được tiền cọc của bạn. Đơn hàng của bạn hiện đang được xử lý.",
+            "processing": "Đơn hàng của bạn hiện đang được xử lý và chuẩn bị để gửi hàng.",
+            "shipped": "Đơn hàng của bạn đã được gửi! Bạn sẽ nhận được hàng sớm.",
+            "delivered": "Đơn hàng của bạn đã được giao. Cảm ơn bạn đã mua hàng!",
+            "cancelled": "Đơn hàng của bạn đã bị hủy. Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi."
+        },
+        "support": "Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi tại support@restorethebasic.com hoặc gọi +84 XXX XXX XXX.",
+        "footerBrand": "Restore The Basic",
+        "trackOrder": "Theo Dõi Đơn Hàng",
+        "trackButton": "Theo Dõi Đơn Hàng",
+        "trackNote": "Sử dụng liên kết này để theo dõi trạng thái đơn hàng bất cứ lúc nào."
+    },
+    "refund": {
+        "header": "Đã Hoàn Tiền",
+        "greeting": "Xin chào {customerName},",
+        "orderCode": "Mã Đơn Hàng",
+        "refundAmount": "Số Tiền Hoàn",
+        "trackOrder": "Theo Dõi Đơn Hàng",
+        "trackButton": "Theo Dõi Đơn Hàng",
+        "support": "Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi tại support@restorethebasic.com hoặc gọi +84 XXX XXX XXX.",
+        "footerBrand": "Restore The Basic",
+        "partialRefund": {
+            "subject": "Đã Hoàn Tiền Một Phần - Đơn Hàng {orderCode}",
+            "title": "Đã Hoàn Tiền Một Phần",
+            "message": "Một khoản hoàn tiền một phần đã được xử lý cho đơn hàng {orderCode} của bạn. Số tiền hoàn sẽ được ghi có vào phương thức thanh toán ban đầu của bạn trong vòng 5-10 ngày làm việc."
+        },
+        "fullRefund": {
+            "subject": "Đã Hoàn Tiền Đầy Đủ - Đơn Hàng {orderCode}",
+            "title": "Đã Hoàn Tiền Đầy Đủ",
+            "message": "Một khoản hoàn tiền đầy đủ đã được xử lý cho đơn hàng {orderCode} của bạn. Số tiền hoàn sẽ được ghi có vào phương thức thanh toán ban đầu của bạn trong vòng 5-10 ngày làm việc."
+        }
+    },
+    "orderCancellation": {
+        "subject": "Đơn Hàng Đã Hủy - {orderCode}",
+        "header": "Đơn Hàng Đã Hủy",
+        "greeting": "Xin chào {customerName},",
+        "message": "Đơn hàng {orderCode} của bạn đã được hủy theo yêu cầu.",
+        "orderCode": "Mã Đơn Hàng",
+        "reason": "Lý Do Hủy",
+        "trackOrder": "Xem Chi Tiết Đơn Hàng",
+        "trackButton": "Xem Đơn Hàng",
+        "support": "Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi tại support@restorethebasic.com hoặc gọi +84 XXX XXX XXX.",
+        "footerBrand": "Restore The Basic"
+    },
+    "changeRequest": {
+        "header": "Yêu Cầu Thay Đổi",
+        "messageLabel": "Tin Nhắn Của Khách Hàng",
+        "categoryChangeItems": "Thay Đổi Sản Phẩm",
+        "categoryChangeAddress": "Thay Đổi Địa Chỉ",
+        "categoryCancelRefund": "Hủy & Hoàn Tiền",
+        "categoryOther": "Khác"
+    },
+    "depositApproved": {
+        "subject": "Tiền Cọc Đã Được Xác Nhận - Đơn Hàng {orderCode}",
+        "header": "Tiền Cọc Đã Được Xác Nhận!",
+        "greeting": "Xin chào {customerName},",
+        "message": "Tin tốt! Tiền cọc cho đơn hàng {orderCode} của bạn đã được xác minh và xác nhận.",
+        "amountLabel": "Số Tiền Cọc",
+        "nextSteps": "Chúng tôi sẽ tiến hành xử lý đơn hàng của bạn. Bạn có thể theo dõi trạng thái bằng liên kết bên dưới.",
+        "trackButton": "Theo Dõi Đơn Hàng",
+        "support": "Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi tại support@restorethebasic.com",
+        "footerBrand": "Restore The Basic"
+    },
+    "depositRejected": {
+        "subject": "Minh Chứng Cọc Cần Chú Ý - Đơn Hàng {orderCode}",
+        "header": "Minh Chứng Cần Chú Ý",
+        "greeting": "Xin chào {customerName},",
+        "message": "Chúng tôi đã xem xét minh chứng bạn tải lên cho đơn hàng {orderCode}, nhưng không thể xác minh được.",
+        "noteLabel": "Ghi chú",
+        "action": "Vui lòng tải lên hình ảnh rõ nét hơn của minh chứng chuyển khoản bằng liên kết bên dưới.",
+        "uploadButton": "Tải Lên Minh Chứng Mới",
+        "support": "Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi tại support@restorethebasic.com",
+        "footerBrand": "Restore The Basic"
+    }
+}
+

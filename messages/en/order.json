@@ -3,7 +3,19 @@
         "title": "Order Successful!",
         "subtitle": "Thank you for your order",
         "orderCode": "Order code: {code}",
-        "checkEmail": "We've sent a confirmation to your email"
+        "checkEmail": "We've sent a confirmation to your email",
+        "depositTitle": "Deposit Reservation Confirmed!",
+        "depositSubtitle": "Your deposit reservation has been created. Please complete the deposit payment to secure your item.",
+        "stripeSubtitle": "Your payment is being processed. You will receive a confirmation email shortly.",
+        "stripeNote": "Note: Payment confirmation may take a few moments. Please check your email for updates."
+    },
+    "deposit": {
+        "title": "Deposit Reservation Details",
+        "amount": "Deposit Amount",
+        "dueAt": "Deposit Due By",
+        "remaining": "Remaining Balance",
+        "warning": "Important: Please complete the deposit payment by the deadline above. If the deposit is not received by the deadline, your reservation may expire.",
+        "remainingNote": "(Remaining balance: {amount} to be paid later)"
     },
     "nextSteps": {
         "title": "Next Steps",
@@ -31,11 +43,42 @@
         "items": "Items",
         "shipping": "Ship to",
         "payment": "Payment",
-        "total": "Total"
+        "subtotal": "Subtotal",
+        "total": "Total",
+        "depositAmount": "Deposit Amount Due Now",
+        "remainingBalance": "Remaining Balance",
+        "depositDue": "Deposit Due Now"
+    },
+    "paymentMethods": {
+        "cod": "Cash on Delivery (COD)",
+        "bankTransfer": "Bank Transfer"
     },
     "actions": {
         "continueShopping": "Continue Shopping",
         "viewOrder": "View Order",
         "contact": "Contact Support"
+    },
+    "bankTransfer": {
+        "title": "Bank Transfer Instructions",
+        "qrTitle": "Scan VietQR to Pay",
+        "qrInstructions": "Open your banking app and scan this QR code to complete the deposit payment. The amount and transfer memo will be pre-filled.",
+        "bankDetails": "Bank Account Details",
+        "bankName": "Bank",
+        "accountNumber": "Account Number",
+        "accountName": "Account Name",
+        "amount": "Deposit Amount",
+        "memo": "Transfer Memo",
+        "memoNote": "Important: Please include this memo exactly as shown. This helps us identify your payment.",
+        "copyMemo": "Copy",
+        "copied": "Copied!",
+        "deadline": "Payment Deadline",
+        "deadlineWarning": "Please complete the transfer before this deadline. If payment is not received, your reservation may expire.",
+        "nextSteps": {
+            "title": "What Happens Next?",
+            "step1": "Complete the bank transfer using the details above",
+            "step2": "Upload proof of transfer on the order tracking page",
+            "step3": "We will verify your payment and confirm your order"
+        },
+        "fallbackMessage": "If the QR code doesn't work with your banking app, please use the bank details below to transfer manually."
     }
 }

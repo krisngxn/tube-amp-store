@@ -1,7 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Link, usePathname } from '@/i18n/routing';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import LocaleSwitcher from '../LocaleSwitcher';
 import styles from './Header.module.css';
@@ -33,7 +34,7 @@ export default function Header() {
         <div className={styles['header-content']}>
           {/* Logo */}
           <Link href="/" className={styles.logo}>
-            <span className={styles['logo-text']}>Classic Tube Amps</span>
+            <span className={styles['logo-text']}>Restore The Basic</span>
           </Link>
 
           {/* Desktop Navigation */}

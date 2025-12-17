@@ -1,8 +1,8 @@
-# Classic Tube Amps - Project Overview
+# Restore The Basic - Project Overview
 
 ## 📖 What is This Project?
 
-**Classic Tube Amps** is a premium e-commerce platform specialized in selling tube amplifiers (both vintage and modern handmade). The project is designed for audiophiles who appreciate high-quality sound equipment and want a sophisticated, trust-first shopping experience.
+**Restore The Basic** is a premium e-commerce platform specialized in selling tube amplifiers (both vintage and modern handmade). The project is designed for audiophiles who appreciate high-quality sound equipment and want a sophisticated, trust-first shopping experience.
 
 ### 🎯 Business Model
 

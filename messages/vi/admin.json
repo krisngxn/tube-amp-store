@@ -1,5 +1,15 @@
 {
     "title": "Quản Trị",
+    "loading": "Đang tải...",
+    "logout": "Đăng xuất",
+    "login": {
+        "title": "Đăng Nhập Quản Trị",
+        "subtitle": "Đăng nhập để truy cập bảng quản trị",
+        "email": "Email",
+        "password": "Mật khẩu",
+        "submit": "Đăng Nhập",
+        "loading": "Đang đăng nhập..."
+    },
     "dashboard": {
         "title": "Bảng Điều Khiển",
         "stats": {
@@ -14,10 +24,64 @@
         "add": "Thêm Sản Phẩm",
         "edit": "Chỉnh Sửa",
         "delete": "Xóa",
+        "save": "Lưu",
+        "saveDraft": "Lưu Bản Nháp",
+        "publish": "Xuất Bản",
+        "unpublish": "Gỡ Xuất Bản",
+        "list": {
+            "name": "Tên",
+            "status": "Trạng Thái",
+            "price": "Giá",
+            "stock": "Tồn Kho",
+            "condition": "Tình Trạng",
+            "topology": "Topology",
+            "tubeType": "Loại Đèn",
+            "updatedAt": "Cập Nhật",
+            "actions": "Thao Tác",
+            "empty": "Không tìm thấy sản phẩm",
+            "searchPlaceholder": "Tìm kiếm theo tên hoặc slug...",
+            "search": "Tìm Kiếm",
+            "statusAll": "Tất Cả",
+            "published": "Đã Xuất Bản",
+            "draft": "Bản Nháp",
+            "conditionAll": "Tất Cả",
+            "conditionNew": "Mới",
+            "conditionLikeNew": "Như Mới",
+            "conditionVintage": "Vintage",
+            "topologyAll": "Tất Cả",
+            "saving": "Đang lưu...",
+            "saved": "Lưu thành công",
+            "error": "Lỗi khi lưu sản phẩm"
+        },
+        "form": {
+            "basicInfo": "Thông Tin Cơ Bản",
+            "specifications": "Thông Số Kỹ Thuật",
+            "translations": "Bản Dịch",
+            "publishing": "Xuất Bản",
+            "depositReservation": "Đặt Cọc Giữ Hàng",
+            "allowDeposit": "Cho Phép Đặt Cọc",
+            "depositType": "Loại Cọc",
+            "depositPercent": "Phần Trăm",
+            "depositFixed": "Số Tiền Cố Định",
+            "depositPercentage": "Phần Trăm Cọc (%)",
+            "depositAmount": "Số Tiền Cọc (VND)",
+            "depositDueHours": "Thời Hạn Đặt Cọc (giờ)",
+            "reservationPolicyNote": "Ghi Chú Chính Sách Đặt Cọc",
+            "reservationPolicyNotePlaceholder": "Ghi chú tùy chọn về chính sách đặt cọc cho sản phẩm này",
+            "published": "Đã Xuất Bản",
+            "featured": "Nổi Bật",
+            "vintage": "Vintage"
+        },
+        "condition": {
+            "new": "Mới",
+            "likeNew": "Như Mới",
+            "vintage": "Vintage"
+        },
         "fields": {
             "name": "Tên sản phẩm",
             "slug": "Slug",
             "price": "Giá",
+            "compareAtPrice": "Giá So Sánh",
             "condition": "Tình trạng",
             "stock": "Tồn kho",
             "topology": "Topology",
@@ -30,7 +94,32 @@
             "specifications": "Thông số kỹ thuật",
             "allowDeposit": "Cho phép đặt cọc",
             "depositAmount": "Số tiền cọc"
+        },
+        "images": {
+            "title": "Hình Ảnh Sản Phẩm",
+            "upload": "Tải Lên Hình Ảnh",
+            "uploading": "Đang tải lên...",
+            "loading": "Đang tải hình ảnh...",
+            "empty": "Chưa có hình ảnh. Tải lên hình ảnh để hiển thị trên cửa hàng.",
+            "cover": "Ảnh Bìa",
+            "setCover": "Đặt Làm Ảnh Bìa",
+            "delete": "Xóa",
+            "deleteConfirm": "Bạn có chắc muốn xóa hình ảnh này?",
+            "moveUp": "Di Chuyển Lên",
+            "moveDown": "Di Chuyển Xuống",
+            "editAlt": "Chỉnh Sửa Alt Text",
+            "altPlaceholder": "Alt text cho khả năng truy cập",
+            "save": "Lưu",
+            "cancel": "Hủy",
+            "noAlt": "Không có alt text",
+            "saveFirst": "Lưu sản phẩm trước để tải lên hình ảnh",
+            "saveFirstHint": "Sau khi lưu, bạn sẽ có thể tải lên và quản lý hình ảnh sản phẩm tại đây."
         }
+    },
+    "pagination": {
+        "previous": "Trước",
+        "next": "Sau",
+        "page": "Trang {current} / {total}"
     },
     "orders": {
         "title": "Đơn Hàng",
@@ -43,7 +132,182 @@
             "processing": "Đang xử lý",
             "shipped": "Đã giao vận",
             "delivered": "Đã giao hàng",
-            "cancelled": "Đã hủy"
+            "cancelled": "Đã hủy",
+            "refunded": "Đã hoàn tiền"
+        },
+        "paymentStatus": {
+            "pending": "Chờ thanh toán",
+            "deposit_pending": "Chờ đặt cọc",
+            "deposited": "Đã nhận cọc",
+            "paid": "Đã thanh toán",
+            "failed": "Thanh toán thất bại",
+            "refund_pending": "Chờ hoàn tiền",
+            "partially_refunded": "Đã hoàn tiền một phần",
+            "refunded": "Đã hoàn tiền"
+        },
+        "list": {
+            "orderCode": "Mã Đơn",
+            "dateTime": "Ngày/Giờ",
+            "customer": "Khách Hàng",
+            "total": "Tổng Tiền",
+            "status": "Trạng Thái",
+            "paymentStatus": "Trạng Thái Thanh Toán",
+            "actions": "Thao Tác",
+            "empty": "Không tìm thấy đơn hàng",
+            "searchPlaceholder": "Tìm kiếm theo mã đơn, số điện thoại hoặc email...",
+            "search": "Tìm Kiếm",
+            "statusAll": "Tất Cả Trạng Thái",
+            "statusPending": "Chờ xử lý",
+            "statusConfirmed": "Đã xác nhận",
+            "statusDeposited": "Đã đặt cọc",
+            "statusProcessing": "Đang xử lý",
+            "statusShipped": "Đã giao vận",
+            "statusDelivered": "Đã giao hàng",
+            "statusCancelled": "Đã hủy",
+            "statusRefunded": "Đã hoàn tiền",
+            "paymentStatusAll": "Tất Cả Trạng Thái Thanh Toán",
+            "paymentStatusPending": "Chờ thanh toán",
+            "paymentStatusDepositPending": "Chờ đặt cọc",
+            "paymentStatusDeposited": "Đã nhận cọc",
+            "paymentStatusPaid": "Đã thanh toán",
+            "paymentStatusFailed": "Thanh toán thất bại",
+            "paymentStatusRefundPending": "Chờ hoàn tiền",
+            "paymentStatusPartiallyRefunded": "Đã hoàn tiền một phần",
+            "paymentStatusRefunded": "Đã hoàn tiền"
+        },
+        "detail": {
+            "title": "Đơn Hàng",
+            "orderCode": "Mã Đơn",
+            "createdAt": "Ngày Tạo",
+            "statusLabel": "Trạng Thái",
+            "paymentStatusLabel": "Trạng Thái Thanh Toán",
+            "status": {
+                "pending": "Chờ xử lý",
+                "confirmed": "Đã xác nhận",
+                "deposited": "Đã đặt cọc",
+                "processing": "Đang xử lý",
+                "shipped": "Đã giao vận",
+                "delivered": "Đã giao hàng",
+                "cancelled": "Đã hủy",
+                "refunded": "Đã hoàn tiền",
+                "expired": "Đã hết hạn"
+            },
+            "paymentStatus": {
+                "pending": "Chờ thanh toán",
+                "deposit_pending": "Chờ đặt cọc",
+                "deposited": "Đã nhận cọc",
+                "paid": "Đã thanh toán",
+                "failed": "Thanh toán thất bại",
+                "refund_pending": "Chờ hoàn tiền",
+                "partially_refunded": "Đã hoàn tiền một phần",
+                "refunded": "Đã hoàn tiền"
+            },
+            "customer": {
+                "title": "Thông Tin Khách Hàng",
+                "name": "Tên",
+                "phone": "Điện Thoại",
+                "email": "Email"
+            },
+            "shipping": {
+                "title": "Địa Chỉ Giao Hàng"
+            },
+            "items": {
+                "title": "Sản Phẩm",
+                "product": "Sản Phẩm",
+                "price": "Đơn Giá",
+                "quantity": "Số Lượng",
+                "subtotal": "Thành Tiền"
+            },
+            "totals": {
+                "title": "Tổng Tiền",
+                "subtotal": "Tạm Tính",
+                "shipping": "Phí Vận Chuyển",
+                "tax": "Thuế",
+                "discount": "Giảm Giá",
+                "total": "Tổng Cộng"
+            },
+            "customerNote": {
+                "title": "Ghi Chú Của Khách Hàng"
+            },
+            "statusUpdate": {
+                "title": "Cập Nhật Trạng Thái Đơn Hàng",
+                "newStatus": "Trạng Thái Mới",
+                "note": "Ghi Chú",
+                "noteOptional": "Tùy chọn",
+                "notePlaceholder": "Thêm ghi chú về thay đổi trạng thái này...",
+                "update": "Cập Nhật Trạng Thái",
+                "saving": "Đang lưu...",
+                "success": "Cập nhật trạng thái thành công",
+                "error": "Không thể cập nhật trạng thái",
+                "sameStatus": "Đơn hàng đã ở trạng thái này"
+            },
+            "statusHistory": {
+                "title": "Lịch Sử Trạng Thái",
+                "date": "Ngày",
+                "from": "Từ",
+                "to": "Đến",
+                "note": "Ghi Chú",
+                "initial": "Ban đầu"
+            },
+            "emailStatus": {
+                "title": "Thông Báo Email",
+                "confirmation": "Email Xác Nhận",
+                "lastStatusUpdate": "Email Cập Nhật Trạng Thái Cuối",
+                "status": {
+                    "queued": "Đang Chờ",
+                    "sent": "Đã Gửi",
+                    "failed": "Thất Bại",
+                    "skipped_no_email": "Bỏ Qua (Không Có Email)"
+                }
+            },
+            "deposit": {
+                "title": "Đặt Cọc Giữ Hàng",
+                "amount": "Số Tiền Cọc",
+                "dueAt": "Hạn Đặt Cọc",
+                "receivedAt": "Ngày Nhận Cọc",
+                "remaining": "Số Tiền Còn Lại",
+                "markReceived": "Đánh Dấu Đã Nhận Cọc",
+                "expire": "Hết Hạn Đặt Cọc",
+                "cancel": "Hủy Đặt Cọc",
+                "markReceivedError": "Không thể đánh dấu đã nhận cọc",
+                "expireError": "Không thể hết hạn đặt cọc",
+                "cancelError": "Không thể hủy đặt cọc",
+                "expireConfirm": "Bạn có chắc muốn hết hạn đặt cọc này? Điều này sẽ giải phóng tồn kho.",
+                "cancelConfirm": "Bạn có chắc muốn hủy đặt cọc này? Điều này sẽ giải phóng tồn kho."
+            },
+            "refund": {
+                "title": "Hoàn Tiền",
+                "button": "Hoàn Tiền",
+                "buttonPartial": "Hoàn Tiền Một Phần",
+                "modalTitle": "Xử Lý Hoàn Tiền",
+                "modalTitlePartial": "Xử Lý Hoàn Tiền Một Phần",
+                "amount": "Số Tiền Hoàn",
+                "amountPlaceholder": "Nhập số tiền (để trống để hoàn toàn bộ)",
+                "reason": "Lý Do Hoàn Tiền",
+                "reasonPlaceholder": "Chọn lý do",
+                "reasonRequestedByCustomer": "Khách Hàng Yêu Cầu",
+                "reasonDuplicate": "Trùng Lặp",
+                "reasonFraudulent": "Gian Lận",
+                "reasonOther": "Khác",
+                "restock": "Hoàn Tiền & Nhập Kho",
+                "restockDescription": "Hủy đơn hàng và nhập lại kho trước khi hoàn tiền",
+                "note": "Ghi Chú Admin",
+                "notePlaceholder": "Ghi chú tùy chọn cho việc hoàn tiền này",
+                "submit": "Xử Lý Hoàn Tiền",
+                "submitting": "Đang xử lý...",
+                "success": "Yêu cầu hoàn tiền thành công. Đang chờ webhook Stripe để hoàn tất.",
+                "error": "Không thể xử lý hoàn tiền",
+                "errorNoStripe": "Không thể hoàn tiền: thiếu tham chiếu thanh toán Stripe. Đơn hàng này không được thanh toán qua Stripe.",
+                "errorAlreadyRefunded": "Đơn hàng đã được hoàn tiền đầy đủ",
+                "errorInvalidAmount": "Số tiền hoàn không hợp lệ",
+                "errorNotRefundable": "Đơn hàng không thể hoàn tiền ở trạng thái thanh toán hiện tại",
+                "refundedAmount": "Số Tiền Đã Hoàn",
+                "paidAmount": "Số Tiền Đã Thanh Toán",
+                "remainingRefundable": "Số Tiền Còn Lại Có Thể Hoàn",
+                "refundStatus": "Trạng Thái Hoàn Tiền",
+                "lastRefundId": "ID Hoàn Tiền Cuối Cùng",
+                "noRefunds": "Chưa có hoàn tiền nào"
+            }
         }
     }
 }

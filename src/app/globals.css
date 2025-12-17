@@ -1172,3 +1172,15 @@ section:first-of-type {
     padding: var(--space-3xl) 0;
   }
 }
+
+/* Admin Layout */
+.admin-layout {
+  min-height: 100vh;
+  background: var(--color-bg-primary);
+}
+
+.admin-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-lg);
+}

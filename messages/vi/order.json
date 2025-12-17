@@ -3,7 +3,19 @@
         "title": "Đặt Hàng Thành Công!",
         "subtitle": "Cảm ơn bạn đã đặt hàng",
         "orderCode": "Mã đơn hàng: {code}",
-        "checkEmail": "Chúng tôi đã gửi xác nhận đến email của bạn"
+        "checkEmail": "Chúng tôi đã gửi xác nhận đến email của bạn",
+        "depositTitle": "Đặt Cọc Giữ Hàng Thành Công!",
+        "depositSubtitle": "Đơn đặt cọc của bạn đã được tạo. Vui lòng hoàn tất thanh toán cọc để giữ sản phẩm.",
+        "stripeSubtitle": "Thanh toán của bạn đang được xử lý. Bạn sẽ nhận được email xác nhận trong thời gian ngắn.",
+        "stripeNote": "Lưu ý: Xác nhận thanh toán có thể mất vài phút. Vui lòng kiểm tra email để cập nhật."
+    },
+    "deposit": {
+        "title": "Chi Tiết Đặt Cọc",
+        "amount": "Số Tiền Cọc",
+        "dueAt": "Hạn Đặt Cọc",
+        "remaining": "Số Tiền Còn Lại",
+        "warning": "Quan trọng: Vui lòng hoàn tất thanh toán cọc trước thời hạn trên. Nếu không nhận được cọc trước thời hạn, đơn đặt cọc của bạn có thể hết hạn.",
+        "remainingNote": "(Số tiền còn lại: {amount} sẽ thanh toán sau)"
     },
     "nextSteps": {
         "title": "Bước Tiếp Theo",
@@ -31,11 +43,42 @@
         "items": "Sản phẩm",
         "shipping": "Giao đến",
         "payment": "Thanh toán",
-        "total": "Tổng cộng"
+        "subtotal": "Tạm tính",
+        "total": "Tổng cộng",
+        "depositAmount": "Số Tiền Cọc Phải Trả",
+        "remainingBalance": "Số Tiền Còn Lại",
+        "depositDue": "Cọc Phải Trả Ngay"
+    },
+    "paymentMethods": {
+        "cod": "Thanh toán khi nhận hàng (COD)",
+        "bankTransfer": "Chuyển khoản ngân hàng"
     },
     "actions": {
         "continueShopping": "Tiếp Tục Mua Sắm",
         "viewOrder": "Xem Đơn Hàng",
         "contact": "Liên Hệ Hỗ Trợ"
+    },
+    "bankTransfer": {
+        "title": "Hướng Dẫn Chuyển Khoản",
+        "qrTitle": "Quét VietQR để Thanh Toán",
+        "qrInstructions": "Mở ứng dụng ngân hàng và quét mã QR này để hoàn tất thanh toán cọc. Số tiền và nội dung chuyển khoản sẽ được điền sẵn.",
+        "bankDetails": "Thông Tin Tài Khoản",
+        "bankName": "Ngân hàng",
+        "accountNumber": "Số tài khoản",
+        "accountName": "Tên tài khoản",
+        "amount": "Số tiền cọc",
+        "memo": "Nội dung chuyển khoản",
+        "memoNote": "Quan trọng: Vui lòng nhập chính xác nội dung chuyển khoản như hiển thị. Điều này giúp chúng tôi xác định thanh toán của bạn.",
+        "copyMemo": "Sao chép",
+        "copied": "Đã sao chép!",
+        "deadline": "Hạn Thanh Toán",
+        "deadlineWarning": "Vui lòng hoàn tất chuyển khoản trước thời hạn này. Nếu không nhận được thanh toán, đơn đặt cọc có thể hết hạn.",
+        "nextSteps": {
+            "title": "Các Bước Tiếp Theo",
+            "step1": "Hoàn tất chuyển khoản theo thông tin trên",
+            "step2": "Tải lên minh chứng chuyển khoản trên trang theo dõi đơn hàng",
+            "step3": "Chúng tôi sẽ xác minh thanh toán và xác nhận đơn hàng"
+        },
+        "fallbackMessage": "Nếu mã QR không hoạt động với ứng dụng ngân hàng của bạn, vui lòng sử dụng thông tin tài khoản bên dưới để chuyển khoản thủ công."
     }
 }

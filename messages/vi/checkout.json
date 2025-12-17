@@ -36,16 +36,37 @@
             "placeholder": "Ghi chú cho người giao hàng"
         }
     },
+    "paymentMode": {
+        "title": "Chế Độ Thanh Toán",
+        "description": "Chọn cách bạn muốn thanh toán cho đơn hàng này",
+        "deposit": {
+            "title": "Đặt Cọc Giữ Hàng",
+            "description": "Trả cọc ngay, trả phần còn lại sau"
+        },
+        "full": {
+            "title": "Thanh Toán Toàn Bộ",
+            "description": "Thanh toán toàn bộ số tiền ngay"
+        },
+        "cod": {
+            "title": "Thanh Toán Khi Nhận Hàng",
+            "description": "Thanh toán khi nhận được đơn hàng"
+        }
+    },
     "payment": {
         "title": "Phương Thức Thanh Toán",
         "methods": {
             "cod": {
                 "title": "Thanh toán khi nhận hàng (COD)",
-                "description": "Thanh toán bằng tiền mặt khi nhận hàng"
+                "description": "Thanh toán bằng tiền mặt khi nhận hàng",
+                "descriptionDeposit": "Thanh toán số tiền cọc khi nhận hàng"
             },
             "bankTransfer": {
                 "title": "Chuyển khoản ngân hàng",
                 "description": "Chuyển khoản trước, giao hàng sau khi xác nhận"
+            },
+            "stripe": {
+                "title": "Thẻ Tín Dụng/Ghi Nợ (Stripe)",
+                "description": "Thanh toán an toàn bằng thẻ của bạn"
             }
         }
     },
@@ -54,16 +75,32 @@
         "items": "{count} sản phẩm",
         "subtotal": "Tạm tính",
         "shipping": "Vận chuyển",
-        "total": "Tổng cộng"
+        "total": "Tổng cộng",
+        "depositAmount": "Số Tiền Cọc Phải Trả",
+        "remainingBalance": "Số Tiền Còn Lại",
+        "depositDueNow": "(cọc phải trả ngay)",
+        "payOnDelivery": "Thanh toán khi nhận hàng"
+    },
+    "deposit": {
+        "title": "Đặt Cọc Giữ Hàng",
+        "description": "Đơn hàng này yêu cầu đặt cọc để giữ sản phẩm. Bạn sẽ thanh toán số tiền còn lại sau.",
+        "dueNow": "Phải Trả Ngay",
+        "payOnDelivery": "Trả Cọc Khi Nhận Hàng"
     },
     "actions": {
         "backToCart": "Quay Lại Giỏ Hàng",
         "continue": "Tiếp Tục",
-        "placeOrder": "Đặt Hàng"
+        "placeOrder": "Đặt Hàng",
+        "processing": "Đang xử lý..."
     },
     "errors": {
         "required": "Trường này là bắt buộc",
         "invalidEmail": "Email không hợp lệ",
-        "invalidPhone": "Số điện thoại không hợp lệ"
-    }
+        "invalidPhone": "Số điện thoại không hợp lệ",
+        "submitFailed": "Đặt hàng thất bại. Vui lòng thử lại.",
+        "stripeFailed": "Không thể tạo phiên thanh toán. Vui lòng thử lại.",
+        "stripeNoUrl": "Phiên thanh toán đã được tạo nhưng không nhận được URL chuyển hướng.",
+        "stripeCancelled": "Thanh toán đã bị hủy. Bạn có thể thử lại hoặc chọn phương thức thanh toán khác."
+    },
+    "depositNotice": "Đơn hàng này chứa sản phẩm yêu cầu đặt cọc."
 }

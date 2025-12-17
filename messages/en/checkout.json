@@ -36,16 +36,37 @@
             "placeholder": "Note for delivery"
         }
     },
+    "paymentMode": {
+        "title": "Payment Mode",
+        "description": "Choose how you want to pay for this order",
+        "deposit": {
+            "title": "Deposit Reservation",
+            "description": "Pay a deposit now, pay the rest later"
+        },
+        "full": {
+            "title": "Full Payment",
+            "description": "Pay the full amount now"
+        },
+        "cod": {
+            "title": "Cash on Delivery",
+            "description": "Pay when you receive the order"
+        }
+    },
     "payment": {
         "title": "Payment Method",
         "methods": {
             "cod": {
                 "title": "Cash on Delivery (COD)",
-                "description": "Pay with cash when you receive"
+                "description": "Pay with cash when you receive",
+                "descriptionDeposit": "Pay deposit amount when you receive the order"
             },
             "bankTransfer": {
                 "title": "Bank Transfer",
                 "description": "Transfer first, ship after confirmation"
+            },
+            "stripe": {
+                "title": "Credit/Debit Card (Stripe)",
+                "description": "Pay securely with your card"
             }
         }
     },
@@ -54,16 +75,32 @@
         "items": "{count} items",
         "subtotal": "Subtotal",
         "shipping": "Shipping",
-        "total": "Total"
+        "total": "Total",
+        "depositAmount": "Deposit Amount Due Now",
+        "remainingBalance": "Remaining Balance",
+        "depositDueNow": "(deposit due now)",
+        "payOnDelivery": "Pay on Delivery"
+    },
+    "deposit": {
+        "title": "Deposit Reservation",
+        "description": "This order requires a deposit to reserve the item. You will pay the remaining balance later.",
+        "dueNow": "Due Now",
+        "payOnDelivery": "Pay Deposit on Delivery"
     },
     "actions": {
         "backToCart": "Back to Cart",
         "continue": "Continue",
-        "placeOrder": "Place Order"
+        "placeOrder": "Place Order",
+        "processing": "Processing..."
     },
     "errors": {
         "required": "This field is required",
         "invalidEmail": "Invalid email",
-        "invalidPhone": "Invalid phone number"
-    }
+        "invalidPhone": "Invalid phone number",
+        "submitFailed": "Failed to place order. Please try again.",
+        "stripeFailed": "Failed to create payment session. Please try again.",
+        "stripeNoUrl": "Payment session created but no redirect URL received.",
+        "stripeCancelled": "Payment was cancelled. You can try again or choose a different payment method."
+    },
+    "depositNotice": "This order contains items that require a deposit reservation."
 }

@@ -1,5 +1,5 @@
 {
-    "brand": "Classic Tube Amps",
+    "brand": "Restore The Basic",
     "loading": "Đang tải...",
     "error": "Đã xảy ra lỗi",
     "retry": "Thử lại",
@@ -13,6 +13,7 @@
     "filter": "Lọc",
     "sort": "Sắp xếp",
     "currency": "₫",
+    "quantity": "Số lượng",
     "outOfStock": "Hết hàng",
     "inStock": "Còn hàng",
     "limitedStock": "Số lượng có hạn",

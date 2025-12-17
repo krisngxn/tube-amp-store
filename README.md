@@ -1,4 +1,4 @@
-# Classic Tube Amps - Premium E-commerce Store
+# Restore The Basic - Premium E-commerce Store
 
 A premium, classic-styled e-commerce website specialized in tube amplifiers (vintage and modern handmade), built with **Next.js 16**, **next-intl**, and **locale-wrapped routing**.
 

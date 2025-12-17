@@ -1,12 +1,25 @@
-import { notFound } from 'next/navigation';
 import { getRequestConfig } from 'next-intl/server';
-import { isValidLocale, type Locale } from '../config/locales';
+import { routing } from './routing';
+import { defaultLocale, isValidLocale } from '../config/locales';
+import { cookies, headers } from 'next/headers';
+
+const LOCALE_COOKIE_NAME = 'NEXT_LOCALE';
 
 export default getRequestConfig(async ({ requestLocale }) => {
-    const locale = (await requestLocale) as string;
-
-    if (!isValidLocale(locale)) {
-        notFound();
+    // Try to get locale from next-intl's requestLocale first
+    let locale = await requestLocale;
+    
+    // If not available, get from cookie or header (set by our custom middleware)
+    if (!locale || !isValidLocale(locale)) {
+        const cookieStore = await cookies();
+        const cookieLocale = cookieStore.get(LOCALE_COOKIE_NAME)?.value;
+        const headerLocale = (await headers()).get('x-locale');
+        
+        locale = (cookieLocale && isValidLocale(cookieLocale))
+            ? cookieLocale
+            : (headerLocale && isValidLocale(headerLocale))
+            ? headerLocale
+            : defaultLocale;
     }
 
     // Import all namespace files for the locale and compose into single messages object
@@ -23,6 +36,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
         guide,
         policies,
         admin,
+        tracking,
     ] = await Promise.all([
         import(`../../messages/${locale}/common.json`),
         import(`../../messages/${locale}/nav.json`),
@@ -36,6 +50,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
         import(`../../messages/${locale}/guide.json`),
         import(`../../messages/${locale}/policies.json`),
         import(`../../messages/${locale}/admin.json`),
+        import(`../../messages/${locale}/tracking.json`),
     ]);
 
     return {
@@ -53,6 +68,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
             guide: guide.default,
             policies: policies.default,
             admin: admin.default,
+            tracking: tracking.default,
         },
     };
 });

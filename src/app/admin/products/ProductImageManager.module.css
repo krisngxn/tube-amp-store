@@ -1,0 +1,129 @@
+.imageManager {
+    margin-top: var(--space-xl);
+    padding: var(--space-xl);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.header :global(h3) {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.error {
+    padding: var(--space-md);
+    background: var(--color-error-bg);
+    border: 1px solid var(--color-error);
+    color: var(--color-error);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-lg);
+}
+
+.loading,
+.empty {
+    padding: var(--space-xl);
+    text-align: center;
+    color: var(--color-text-secondary);
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-lg);
+}
+
+.imageCard {
+    position: relative;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.coverBadge {
+    position: absolute;
+    top: var(--space-xs);
+    right: var(--space-xs);
+    background: var(--color-primary);
+    color: white;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.imagePreview {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--color-bg-tertiary);
+}
+
+.imageActions {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.controls {
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+}
+
+.altText {
+    margin-top: var(--space-xs);
+}
+
+.altDisplay {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.altDisplay :global(span) {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.altEdit {
+    display: flex;
+    gap: var(--space-xs);
+    align-items: center;
+}
+
+.altEdit :global(input) {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .controls :global(button) {
+        width: 100%;
+    }
+}
+

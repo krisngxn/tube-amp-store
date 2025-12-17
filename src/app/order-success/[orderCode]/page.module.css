@@ -1,0 +1,483 @@
+.orderSuccessPage {
+    padding: var(--space-2xl) 0;
+    min-height: 100vh;
+}
+
+.successHeader {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+}
+
+.successIcon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-lg);
+    background: var(--color-accent-glow);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent-primary);
+}
+
+.successHeader :global(h1) {
+    margin-bottom: var(--space-md);
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.orderCode {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-accent-primary);
+    font-family: var(--font-mono);
+}
+
+.orderDetails {
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+}
+
+.orderDetails :global(h2) {
+    margin-bottom: var(--space-xl);
+    font-size: 1.5rem;
+}
+
+.itemsSection,
+.addressSection,
+.paymentSection {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.itemsSection :global(h3),
+.addressSection :global(h3),
+.paymentSection :global(h3) {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-secondary);
+}
+
+.itemsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.orderItem {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+    padding: var(--space-md);
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-md);
+}
+
+.itemImage {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+}
+
+.itemInfo {
+    flex: 1;
+}
+
+.itemInfo :global(h4) {
+    margin-bottom: var(--space-xs);
+    font-size: 1rem;
+}
+
+.itemInfo :global(p) {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.itemTotal {
+    font-weight: 600;
+    color: var(--color-accent-primary);
+}
+
+.addressSection :global(p),
+.paymentSection :global(p) {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.totalSection {
+    margin-top: var(--space-xl);
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+    font-size: 0.9375rem;
+}
+
+.totalRowFinal {
+    font-size: 1.125rem;
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.nextSteps {
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+}
+
+.nextSteps :global(h2) {
+    margin-bottom: var(--space-lg);
+    font-size: 1.5rem;
+}
+
+.stepsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.stepsList :global(p) {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.bankInfo {
+    margin: var(--space-lg) 0;
+    padding: var(--space-lg);
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+}
+
+.bankInfo :global(h3) {
+    margin-bottom: var(--space-md);
+    font-size: 1rem;
+}
+
+.bankInfo :global(p) {
+    margin-bottom: var(--space-sm);
+    font-size: 0.9375rem;
+}
+
+.bankInfo :global(p:last-child) {
+    margin-bottom: 0;
+}
+
+.actions {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.depositNotice {
+    background: var(--color-accent-glow);
+    border: 2px solid var(--color-accent-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+}
+
+.depositNotice :global(h2) {
+    color: var(--color-accent-primary);
+    margin-bottom: var(--space-lg);
+    font-size: 1.5rem;
+}
+
+.depositInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.depositRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.depositRow:last-child {
+    border-bottom: none;
+}
+
+.depositWarning {
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--color-warning);
+}
+
+.depositWarning :global(p) {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+}
+
+/* Bank Transfer Instructions with VietQR */
+.bankTransferSection {
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+    border: 2px solid var(--color-accent-primary);
+}
+
+.bankTransferSection > h2 {
+    color: var(--color-accent-primary);
+    margin-bottom: var(--space-xl);
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.qrSection {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.qrSection h3 {
+    margin-bottom: var(--space-md);
+    font-size: 1.25rem;
+}
+
+.qrInstructions {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-lg);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.qrContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-lg);
+}
+
+.qrImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.fallbackMessage {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+.bankDetails {
+    margin-bottom: var(--space-xl);
+}
+
+.bankDetails h3 {
+    margin-bottom: var(--space-lg);
+    font-size: 1.125rem;
+    color: var(--color-text-primary);
+}
+
+.bankTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bankTable td {
+    padding: var(--space-md) var(--space-sm);
+    border-bottom: 1px solid var(--color-border-subtle);
+    vertical-align: top;
+}
+
+.bankTable tr:last-child td {
+    border-bottom: none;
+}
+
+.bankTable td:first-child {
+    width: 40%;
+    color: var(--color-text-secondary);
+}
+
+.accountCode {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    background: var(--color-bg-primary);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    user-select: all;
+}
+
+.amountValue {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-accent-primary);
+}
+
+.memoContainer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.memoCode {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 600;
+    background: var(--color-accent-glow);
+    color: var(--color-accent-primary);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-sm);
+    user-select: all;
+}
+
+.copyButton {
+    padding: var(--space-xs) var(--space-md);
+    background: var(--color-accent-primary);
+    color: var(--color-bg-primary);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.copyButton:hover {
+    background: var(--color-accent-hover);
+}
+
+.memoNote {
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    background: var(--color-bg-primary);
+    border-left: 4px solid var(--color-warning);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+}
+
+.deadlineSection {
+    margin-bottom: var(--space-xl);
+    padding: var(--space-lg);
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.deadlineSection h4 {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.deadlineTime {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-accent-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.deadlineWarning {
+    font-size: 0.875rem;
+    color: var(--color-warning);
+    margin: 0;
+}
+
+.nextStepsSection {
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.nextStepsSection h3 {
+    margin-bottom: var(--space-lg);
+    font-size: 1.125rem;
+}
+
+.nextStepsSection .stepsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: steps;
+}
+
+.nextStepsSection .stepsList li {
+    counter-increment: steps;
+    padding: var(--space-md) 0;
+    padding-left: var(--space-2xl);
+    position: relative;
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.nextStepsSection .stepsList li:last-child {
+    border-bottom: none;
+}
+
+.nextStepsSection .stepsList li::before {
+    content: counter(steps);
+    position: absolute;
+    left: 0;
+    top: var(--space-md);
+    width: 24px;
+    height: 24px;
+    background: var(--color-accent-primary);
+    color: var(--color-bg-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .orderItem {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .itemTotal {
+        align-self: flex-end;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .actions :global(.btn) {
+        width: 100%;
+    }
+
+    .bankTable td:first-child {
+        width: 35%;
+    }
+
+    .memoContainer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .qrImage {
+        max-width: 280px;
+    }
+}
+

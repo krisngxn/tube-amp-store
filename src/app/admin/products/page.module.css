@@ -1,0 +1,121 @@
+.productsPage {
+    padding: var(--space-xl) 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+}
+
+.header :global(h1) {
+    margin: 0;
+}
+
+.filters {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+    flex-wrap: wrap;
+}
+
+.filterGroup {
+    flex: 1;
+    min-width: 200px;
+}
+
+.tableContainer {
+    overflow-x: auto;
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+}
+
+.productsTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.productsTable thead {
+    background: var(--color-bg-tertiary);
+}
+
+.productsTable th {
+    padding: var(--space-md);
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.productsTable td {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.productsTable tbody tr:hover {
+    background: var(--color-bg-tertiary);
+}
+
+.slug {
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+}
+
+.status {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status.published {
+    background: var(--color-success);
+    color: white;
+}
+
+.status.draft {
+    background: var(--color-text-tertiary);
+    color: white;
+}
+
+.empty {
+    text-align: center;
+    padding: var(--space-2xl);
+    color: var(--color-text-secondary);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+
+.pagination :global(span) {
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+    }
+
+    .filterGroup {
+        min-width: 100%;
+    }
+
+    .tableContainer {
+        overflow-x: scroll;
+    }
+
+    .productsTable {
+        min-width: 800px;
+    }
+}
+

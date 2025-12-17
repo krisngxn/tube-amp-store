@@ -1,5 +1,5 @@
 {
-    "brand": "Classic Tube Amps",
+    "brand": "Restore The Basic",
     "loading": "Loading...",
     "error": "An error occurred",
     "retry": "Retry",
@@ -13,6 +13,7 @@
     "filter": "Filter",
     "sort": "Sort",
     "currency": "$",
+    "quantity": "Quantity",
     "outOfStock": "Out of Stock",
     "inStock": "In Stock",
     "limitedStock": "Limited Stock",

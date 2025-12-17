@@ -1,5 +1,7 @@
 {
     "title": "Giỏ Hàng",
+    "addSuccess": "Đã thêm vào giỏ hàng",
+    "adding": "Đang thêm...",
     "empty": {
         "title": "Giỏ hàng trống",
         "description": "Bạn chưa có sản phẩm nào trong giỏ hàng",
@@ -10,7 +12,10 @@
         "price": "Giá",
         "total": "Tổng",
         "remove": "Xóa",
-        "update": "Cập nhật"
+        "update": "Cập nhật",
+        "confirmRemove": "Xóa sản phẩm này khỏi giỏ hàng?",
+        "decrease": "Giảm số lượng",
+        "increase": "Tăng số lượng"
     },
     "summary": {
         "title": "Tổng Đơn Hàng",

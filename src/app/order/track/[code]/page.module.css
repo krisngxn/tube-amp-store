@@ -1,0 +1,635 @@
+.trackPage {
+    padding: var(--space-2xl) 0;
+    min-height: 100vh;
+}
+
+.trackHeader {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+}
+
+.trackHeader h1 {
+    margin-bottom: var(--space-md);
+}
+
+.subtitle {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+}
+
+.orderDetails {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.orderHeader {
+    padding: var(--space-xl);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-subtle);
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: var(--space-lg);
+}
+
+.orderHeader h2 {
+    margin-bottom: var(--space-xs);
+}
+
+.orderDate {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+}
+
+.statusBadge {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    align-items: flex-end;
+}
+
+.statusLabel {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.statusValue {
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.status-pending {
+    background: rgba(201, 160, 95, 0.2);
+    color: var(--color-warning);
+}
+
+.status-confirmed {
+    background: rgba(107, 155, 110, 0.2);
+    color: var(--color-success);
+}
+
+.status-deposited {
+    background: rgba(107, 155, 110, 0.2);
+    color: var(--color-success);
+}
+
+.status-processing {
+    background: rgba(107, 143, 201, 0.2);
+    color: var(--color-info);
+}
+
+.status-shipped {
+    background: rgba(107, 143, 201, 0.2);
+    color: var(--color-info);
+}
+
+.status-delivered {
+    background: rgba(107, 155, 110, 0.2);
+    color: var(--color-success);
+}
+
+.status-cancelled {
+    background: rgba(201, 107, 107, 0.2);
+    color: var(--color-error);
+}
+
+.status-expired {
+    background: rgba(201, 107, 107, 0.2);
+    color: var(--color-error);
+}
+
+.statusTimeline,
+.itemsSection,
+.totalsSection,
+.depositSection,
+.paymentSection {
+    padding: var(--space-xl);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-subtle);
+}
+
+.statusTimeline h3,
+.itemsSection h3,
+.totalsSection h3,
+.depositSection h3,
+.paymentSection h3 {
+    margin-bottom: var(--space-lg);
+    font-size: 1.25rem;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    position: relative;
+    padding-left: var(--space-xl);
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-border-subtle);
+}
+
+.timelineItem {
+    position: relative;
+    display: flex;
+    gap: var(--space-md);
+}
+
+.timelineDot {
+    position: absolute;
+    left: -24px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-accent-primary);
+    border: 2px solid var(--color-bg-secondary);
+    z-index: 1;
+}
+
+.timelineContent {
+    flex: 1;
+}
+
+.timelineStatus {
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+}
+
+.timelineDate {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: var(--space-xs);
+}
+
+.timelineNote {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    font-style: italic;
+}
+
+.itemsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.orderItem {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+}
+
+.itemImage {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+}
+
+.itemInfo {
+    flex: 1;
+}
+
+.itemInfo h4 {
+    margin-bottom: var(--space-xs);
+    font-size: 1rem;
+}
+
+.itemInfo p {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+}
+
+.itemTotal {
+    font-weight: 600;
+    color: var(--color-accent-primary);
+    align-self: center;
+}
+
+.totalsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.totalRowFinal {
+    border-bottom: none;
+    padding-top: var(--space-md);
+    border-top: 2px solid var(--color-accent-primary);
+    font-size: 1.125rem;
+}
+
+.depositRow {
+    color: var(--color-accent-primary);
+}
+
+.depositInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.depositSection .depositRow {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-md);
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+}
+
+.paymentSection p {
+    margin-bottom: var(--space-sm);
+}
+
+.paymentMethod {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+}
+
+.actions {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    padding-top: var(--space-xl);
+}
+
+@media (max-width: 768px) {
+    .orderHeader {
+        flex-direction: column;
+    }
+
+    .statusBadge {
+        align-items: flex-start;
+    }
+
+    .orderItem {
+        flex-wrap: wrap;
+    }
+
+    .itemImage {
+        width: 60px;
+        height: 60px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: var(--space-lg);
+}
+
+.modal {
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl);
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal h3 {
+    margin: 0 0 var(--space-lg) 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.modal p {
+    margin-bottom: var(--space-md);
+    color: var(--color-text-secondary);
+}
+
+.warning {
+    color: var(--color-error);
+    font-weight: 600;
+    padding: var(--space-md);
+    background: rgba(201, 107, 107, 0.1);
+    border-radius: var(--radius-sm);
+    border-left: 4px solid var(--color-error);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+}
+
+.formGroup label {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.error {
+    padding: var(--space-md);
+    background: var(--color-error);
+    color: white;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    margin-bottom: var(--space-md);
+}
+
+.success {
+    padding: var(--space-md);
+    background: var(--color-success);
+    color: white;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    margin-bottom: var(--space-md);
+}
+
+.modalActions {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+    justify-content: flex-end;
+}
+
+.errorBanner {
+    padding: var(--space-lg);
+    background: rgba(201, 107, 107, 0.1);
+    border-left: 4px solid var(--color-error);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-xl);
+}
+
+.errorBanner h3 {
+    color: var(--color-error);
+    margin-bottom: var(--space-xs);
+}
+
+.errorBanner p {
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* Deposit Proof Upload Styles */
+.proofSection {
+    padding: var(--space-xl);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--color-accent-primary);
+}
+
+.proofSection h3 {
+    margin-bottom: var(--space-sm);
+    font-size: 1.25rem;
+    color: var(--color-accent-primary);
+}
+
+.proofSubtitle {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-lg);
+}
+
+.proofStatusPending,
+.proofStatusApproved,
+.proofCannotUpload {
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.proofStatusPending {
+    background: rgba(201, 160, 95, 0.1);
+    border: 1px solid var(--color-warning);
+}
+
+.proofStatusApproved {
+    background: rgba(107, 155, 110, 0.1);
+    border: 1px solid var(--color-success);
+}
+
+.proofCannotUpload {
+    background: var(--color-bg-primary);
+    color: var(--color-text-secondary);
+}
+
+.statusIcon {
+    font-size: 2rem;
+    margin-bottom: var(--space-md);
+}
+
+.submittedAt {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-sm);
+}
+
+.rejectionNotice {
+    padding: var(--space-lg);
+    background: rgba(201, 107, 107, 0.1);
+    border-left: 4px solid var(--color-error);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.rejectionNotice p {
+    margin: 0;
+}
+
+.rejectionNote {
+    margin-top: var(--space-sm) !important;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.proofSuccess {
+    padding: var(--space-md);
+    background: var(--color-success);
+    color: white;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.proofSuccess p {
+    margin: 0;
+}
+
+.proofError {
+    padding: var(--space-md);
+    background: var(--color-error);
+    color: white;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.proofError p {
+    margin: 0;
+}
+
+.dropzone {
+    border: 2px dashed var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-2xl);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--color-bg-primary);
+    margin-bottom: var(--space-lg);
+}
+
+.dropzone:hover {
+    border-color: var(--color-accent-primary);
+    background: var(--color-accent-glow);
+}
+
+.dropzoneActive {
+    border-color: var(--color-accent-primary);
+    background: var(--color-accent-glow);
+}
+
+.fileInput {
+    display: none;
+}
+
+.dropzoneContent {
+    pointer-events: none;
+}
+
+.dropzoneIcon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+}
+
+.dropzoneHint {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-sm);
+}
+
+.selectedFiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.selectedFile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm);
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    max-width: 120px;
+}
+
+.filePreview {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+}
+
+.fileName {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.removeFile {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--color-error);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.removeFile:hover {
+    background: #b52b2b;
+}
+
+.noteField {
+    margin-bottom: var(--space-lg);
+}
+
+.noteField label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.noteField textarea {
+    width: 100%;
+    padding: var(--space-md);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: inherit;
+    font-size: 0.875rem;
+    resize: vertical;
+}
+
+.noteField textarea:focus {
+    outline: none;
+    border-color: var(--color-accent-primary);
+}
+
+.uploadButton {
+    width: 100%;
+}
+
+.reasonText {
+    font-size: 0.875rem;
+    margin-top: var(--space-sm);
+}
+

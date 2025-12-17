@@ -1,6 +1,6 @@
 # Supabase Database Setup Guide
 
-This guide will help you set up the Supabase database for the Classic Tube Amps e-commerce store.
+This guide will help you set up the Supabase database for the Restore The Basic e-commerce store.
 
 ## 📋 Prerequisites
 
