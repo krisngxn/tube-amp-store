@@ -10,11 +10,23 @@ export default async function AdminLayout({
     children: React.ReactNode;
 }) {
     // Check if user is admin (don't redirect here - let pages handle it)
-    const user = await getAdminUser();
+    let user;
+    try {
+        user = await getAdminUser();
+    } catch (error) {
+        console.error('Error getting admin user:', error);
+        user = null;
+    }
     
     // Use default locale (vi) for admin translations
     const locale = 'vi';
-    const messages = await getMessages({ locale });
+    let messages;
+    try {
+        messages = await getMessages({ locale });
+    } catch (error) {
+        console.error('Error loading admin messages:', error);
+        messages = {};
+    }
 
     return (
         <NextIntlClientProvider messages={messages}>

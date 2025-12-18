@@ -4,12 +4,26 @@
  */
 
 // Polyfill __dirname for ESM (use process.cwd() as project root)
-if (typeof (global as any).__dirname === 'undefined') {
-  (global as any).__dirname = process.cwd();
-}
+// This must be set before any code that might use __dirname
+const projectDir = process.cwd();
 
-// Also set it on globalThis for broader compatibility
-if (typeof (globalThis as any).__dirname === 'undefined') {
-  (globalThis as any).__dirname = process.cwd();
-}
+// Set on global and globalThis
+(global as any).__dirname = projectDir;
+(globalThis as any).__dirname = projectDir;
+
+// Also define it as a global variable using Object.defineProperty
+// This makes it available as a direct variable reference
+Object.defineProperty(global, '__dirname', {
+  value: projectDir,
+  writable: false,
+  enumerable: false,
+  configurable: false,
+});
+
+Object.defineProperty(globalThis, '__dirname', {
+  value: projectDir,
+  writable: false,
+  enumerable: false,
+  configurable: false,
+});
 

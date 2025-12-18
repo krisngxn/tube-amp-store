@@ -57,19 +57,30 @@ export async function requireAdmin(locale?: string) {
  * Get admin user or null
  */
 export async function getAdminUser() {
-    const supabase = await createClient();
-    const {
-        data: { user },
-    } = await supabase.auth.getUser();
+    try {
+        const supabase = await createClient();
+        const {
+            data: { user },
+            error,
+        } = await supabase.auth.getUser();
 
-    if (!user || !user.email) {
+        if (error) {
+            console.error('Error getting user from Supabase:', error);
+            return null;
+        }
+
+        if (!user || !user.email) {
+            return null;
+        }
+
+        if (!ADMIN_EMAILS.includes(user.email.toLowerCase())) {
+            return null;
+        }
+
+        return user;
+    } catch (error) {
+        console.error('Error in getAdminUser:', error);
         return null;
     }
-
-    if (!ADMIN_EMAILS.includes(user.email.toLowerCase())) {
-        return null;
-    }
-
-    return user;
 }
 

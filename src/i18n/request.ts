@@ -1,8 +1,7 @@
 // Polyfill __dirname early (before any imports that might use it)
 // This is needed because some dependencies use CommonJS __dirname in ESM context
-const projectDir = process.cwd();
-(global as any).__dirname = projectDir;
-(globalThis as any).__dirname = projectDir;
+// Import the polyfill module to ensure it runs first
+import '../lib/polyfills';
 
 import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
