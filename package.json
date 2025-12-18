@@ -13,7 +13,7 @@
     "@supabase/supabase-js": "^2.87.1",
     "@types/uuid": "^10.0.0",
     "dynamic-vietqr": "^0.0.81",
-    "next": "16.0.8",
+    "next": "16.0.10",
     "next-intl": "^4.5.8",
     "react": "19.2.1",
     "react-dom": "19.2.1",
