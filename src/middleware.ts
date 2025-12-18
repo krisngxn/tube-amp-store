@@ -1,6 +1,6 @@
 // middleware.ts
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
+import { defaultLocale } from './config/locales';
 
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
@@ -8,7 +8,12 @@ export function middleware(request: NextRequest) {
   // Set default locale cookie if not present (for root route)
   const localeCookie = request.cookies.get('NEXT_LOCALE');
   if (!localeCookie && request.nextUrl.pathname === '/') {
-    response.cookies.set('NEXT_LOCALE', 'vi', { path: '/', maxAge: 60 * 60 * 24 * 365 });
+    response.cookies.set('NEXT_LOCALE', defaultLocale, { 
+      path: '/', 
+      maxAge: 60 * 60 * 24 * 365,
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production'
+    });
   }
   
   return response;
