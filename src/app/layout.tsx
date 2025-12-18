@@ -1,3 +1,6 @@
+// Import polyfills first
+import '@/lib/polyfills';
+
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getLocale } from 'next-intl/server';
 import StorefrontWrapper from '@/components/layout/StorefrontWrapper';

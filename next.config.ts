@@ -21,13 +21,19 @@ const nextConfig: NextConfig = {
   webpack: (config, { isServer, dir }) => {
     // Fix for CommonJS packages that use __dirname in ESM context
     if (isServer) {
-      // Provide __dirname polyfill for server-side CommonJS packages
       const webpack = require('webpack');
+      
+      // Provide __dirname polyfill
       config.plugins.push(
         new webpack.DefinePlugin({
           __dirname: JSON.stringify(dir),
         })
       );
+      
+      // Configure Node.js polyfills
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+      };
     }
     return config;
   },
