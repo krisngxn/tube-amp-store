@@ -13,9 +13,22 @@ export default function AdminNav() {
     const router = useRouter();
 
     const handleLogout = async () => {
-        const supabase = createClient();
-        await supabase.auth.signOut();
-        router.push('/admin/login');
+        try {
+            const supabase = createClient();
+            const { error } = await supabase.auth.signOut();
+            
+            if (error) {
+                console.error('[AdminNav] Logout error:', {
+                    code: error.code,
+                    message: error.message,
+                });
+            }
+            
+            router.push('/admin/login');
+        } catch (error: any) {
+            console.error('[AdminNav] Logout exception:', error);
+            router.push('/admin/login');
+        }
     };
 
     return (

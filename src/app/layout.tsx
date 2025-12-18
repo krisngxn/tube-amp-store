@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getLocale } from 'next-intl/server';
 import StorefrontWrapper from '@/components/layout/StorefrontWrapper';
 import { defaultLocale } from '@/config/locales';
+import { GlobalErrorHandler } from './error-handler';
 import './globals.css';
 
 export default async function RootLayout({
@@ -44,6 +45,7 @@ export default async function RootLayout({
     return (
         <html lang={locale}>
             <body>
+                <GlobalErrorHandler />
                 <NextIntlClientProvider messages={messages}>
                     <StorefrontWrapper>{children}</StorefrontWrapper>
                 </NextIntlClientProvider>

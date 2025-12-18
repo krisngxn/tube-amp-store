@@ -27,6 +27,12 @@ export default function AdminLoginPage() {
             });
 
             if (signInError) {
+                // Log detailed error for debugging
+                console.error('[AdminLogin] Sign in error:', {
+                    code: signInError.code,
+                    message: signInError.message,
+                    status: signInError.status,
+                });
                 setError(signInError.message);
                 return;
             }
