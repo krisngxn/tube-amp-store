@@ -23,17 +23,13 @@ const nextConfig: NextConfig = {
     if (isServer) {
       const webpack = require('webpack');
       
-      // Provide __dirname polyfill
+      // Use DefinePlugin to replace __dirname at build time
+      // This replaces all occurrences of __dirname with the project directory
       config.plugins.push(
         new webpack.DefinePlugin({
           __dirname: JSON.stringify(dir),
         })
       );
-      
-      // Configure Node.js polyfills
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-      };
     }
     return config;
   },
