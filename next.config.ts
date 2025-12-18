@@ -21,15 +21,19 @@ const nextConfig: NextConfig = {
   webpack: (config, { isServer, dir }) => {
     // Fix for CommonJS packages that use __dirname in ESM context
     if (isServer) {
-      const webpack = require('webpack');
-      
-      // Use DefinePlugin to replace __dirname at build time
-      // This replaces all occurrences of __dirname with the project directory
-      config.plugins.push(
-        new webpack.DefinePlugin({
-          __dirname: JSON.stringify(dir),
-        })
-      );
+      try {
+        const webpack = require('webpack');
+        
+        // Use DefinePlugin to replace __dirname at build time
+        // This replaces all occurrences of __dirname with the project directory
+        config.plugins.push(
+          new webpack.DefinePlugin({
+            __dirname: JSON.stringify(dir),
+          })
+        );
+      } catch (error) {
+        console.warn('Failed to configure webpack DefinePlugin:', error);
+      }
     }
     return config;
   },
