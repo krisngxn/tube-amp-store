@@ -13,8 +13,15 @@ export default async function AdminLayout({
     let user;
     try {
         user = await getAdminUser();
-    } catch (error) {
-        console.error('Error getting admin user:', error);
+    } catch (error: any) {
+        // Log the error with full details to identify 404 source
+        console.error('[AdminLayout] Error getting admin user:', {
+            error,
+            message: error?.message,
+            code: error?.code,
+            details: error?.details,
+            stack: error?.stack,
+        });
         user = null;
     }
     
@@ -23,8 +30,12 @@ export default async function AdminLayout({
     let messages;
     try {
         messages = await getMessages({ locale });
-    } catch (error) {
-        console.error('Error loading admin messages:', error);
+    } catch (error: any) {
+        console.error('[AdminLayout] Error loading admin messages:', {
+            error,
+            message: error?.message,
+            code: error?.code,
+        });
         messages = {};
     }
 

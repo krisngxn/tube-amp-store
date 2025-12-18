@@ -18,15 +18,25 @@ export default async function RootLayout({
     try {
         locale = await getLocale();
         messages = await getMessages();
-    } catch (error) {
-        console.error('Error loading locale/messages:', error);
+    } catch (error: any) {
+        // Log detailed error to identify 404 source
+        console.error('[RootLayout] Error loading locale/messages:', {
+            error,
+            message: error?.message,
+            code: error?.code,
+            details: error?.details,
+            stack: error?.stack,
+        });
         // Fallback to default locale if there's an error
         locale = defaultLocale;
         try {
             const defaultMessages = await import(`../../messages/${defaultLocale}/common.json`);
             messages = { common: defaultMessages.default };
-        } catch (fallbackError) {
-            console.error('Error loading fallback messages:', fallbackError);
+        } catch (fallbackError: any) {
+            console.error('[RootLayout] Error loading fallback messages:', {
+                error: fallbackError,
+                message: fallbackError?.message,
+            });
             messages = {};
         }
     }
