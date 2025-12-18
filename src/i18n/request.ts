@@ -23,21 +23,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
     }
 
     // Import all namespace files for the locale and compose into single messages object
-    const [
-        common,
-        nav,
-        footer,
-        home,
-        collection,
-        product,
-        cart,
-        checkout,
-        order,
-        guide,
-        policies,
-        admin,
-        tracking,
-    ] = await Promise.all([
+    // Use Promise.allSettled to handle missing files gracefully
+    const translationImports = await Promise.allSettled([
         import(`../../messages/${locale}/common.json`),
         import(`../../messages/${locale}/nav.json`),
         import(`../../messages/${locale}/footer.json`),
@@ -52,6 +39,30 @@ export default getRequestConfig(async ({ requestLocale }) => {
         import(`../../messages/${locale}/admin.json`),
         import(`../../messages/${locale}/tracking.json`),
     ]);
+
+    // Extract successful imports, use empty object for failed ones
+    const [
+        common,
+        nav,
+        footer,
+        home,
+        collection,
+        product,
+        cart,
+        checkout,
+        order,
+        guide,
+        policies,
+        admin,
+        tracking,
+    ] = translationImports.map((result, index) => {
+        if (result.status === 'fulfilled') {
+            return result.value;
+        } else {
+            console.warn(`Failed to load translation namespace at index ${index} for locale ${locale}:`, result.reason);
+            return { default: {} };
+        }
+    });
 
     return {
         locale,
