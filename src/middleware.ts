@@ -1,19 +1,12 @@
 // middleware.ts
-import { NextRequest, NextResponse } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
+import { routing } from './i18n/routing';
 
-export function middleware(request: NextRequest) {
-  return NextResponse.next();
-}
+export default createMiddleware(routing);
 
-// Apply to all routes except API routes and static files
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next (Next.js internals)
-     * - files with extensions (e.g., .png, .jpg, .svg)
-     */
-    '/((?!api|_next|.*\\..*).*)',
-  ],
+  // Match all pathnames except for
+  // - … if they start with `/api`, `/_next` or `/_vercel`
+  // - … the ones containing a dot (e.g. `favicon.ico`)
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
 };
