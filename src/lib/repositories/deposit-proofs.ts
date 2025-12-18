@@ -234,7 +234,7 @@ export async function deleteProofStorageFiles(storagePaths: string[]): Promise<v
     if (storagePaths.length === 0) return;
     
     const { error } = await supabase.storage
-        .from('deposit-proofs')
+        .from('deposit_proofs')
         .remove(storagePaths);
     
     if (error) {

@@ -119,7 +119,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
             const fileName = `${order.id}/${Date.now()}-${i}.${extension}`;
             
             const { data: uploadData, error: uploadError } = await supabase.storage
-                .from('deposit-proofs')
+                .from('deposit_proofs')
                 .upload(fileName, file, {
                     contentType: file.type,
                     upsert: false,
@@ -130,7 +130,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
                 // Clean up already uploaded files
                 if (uploadedFiles.length > 0) {
                     await supabase.storage
-                        .from('deposit-proofs')
+                        .from('deposit_proofs')
                         .remove(uploadedFiles.map(f => f.path));
                 }
                 return NextResponse.json(
@@ -141,7 +141,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
             
             // Get public URL
             const { data: urlData } = supabase.storage
-                .from('deposit-proofs')
+                .from('deposit_proofs')
                 .getPublicUrl(fileName);
             
             uploadedFiles.push({
@@ -167,7 +167,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
         } catch (proofError) {
             // Clean up uploaded files
             await supabase.storage
-                .from('deposit-proofs')
+                .from('deposit_proofs')
                 .remove(uploadedFiles.map(f => f.path));
             
             throw proofError;
