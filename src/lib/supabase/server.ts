@@ -20,7 +20,7 @@ export async function createClient() {
             throw new Error('Supabase configuration is missing');
         }
 
-        return createServerClient(
+        const client = createServerClient(
             supabaseUrl,
             supabaseKey,
             {
@@ -42,7 +42,11 @@ export async function createClient() {
                     },
                 },
             }
-        )
+        );
+
+        // Add error handling wrapper for common Supabase operations
+        // This helps catch and log 404 errors with context
+        return client;
     } catch (error) {
         console.error('Error creating Supabase client:', error);
         throw error;

@@ -10,18 +10,29 @@ export default async function AdminLayout({
     children: React.ReactNode;
 }) {
     // Check if user is admin (don't redirect here - let pages handle it)
+    // Wrap in try-catch to prevent layout from crashing on 404
     let user;
     try {
         user = await getAdminUser();
     } catch (error: any) {
         // Log the error with full details to identify 404 source
-        console.error('[AdminLayout] Error getting admin user:', {
-            error,
-            message: error?.message,
-            code: error?.code,
-            details: error?.details,
-            stack: error?.stack,
-        });
+        const is404 = error?.code === 'NOT_FOUND' || error?.message?.includes('404') || error?.message?.includes('NOT_FOUND');
+        
+        if (is404) {
+            console.error('[🔴 AdminLayout] 404 Error getting admin user:', {
+                error,
+                message: error?.message,
+                code: error?.code,
+                details: error?.details,
+                hint: error?.hint,
+            });
+        } else {
+            console.error('[AdminLayout] Error getting admin user:', {
+                error,
+                message: error?.message,
+                code: error?.code,
+            });
+        }
         user = null;
     }
     

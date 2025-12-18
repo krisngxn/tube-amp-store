@@ -96,7 +96,17 @@ export async function getAdminUser() {
         } = await supabase.auth.getUser();
 
         if (error) {
-            console.error('Error getting user from Supabase:', error);
+            // 404 from auth.getUser() is normal for unauthenticated users
+            // Don't log it as an error to avoid noise
+            if (error.message?.includes('404') || error.message?.includes('NOT_FOUND') || error.code === 'NOT_FOUND') {
+                // This is expected - user is not authenticated
+                return null;
+            }
+            // Log other auth errors
+            console.error('[getAdminUser] Auth error:', {
+                code: error.code,
+                message: error.message,
+            });
             return null;
         }
 
@@ -109,8 +119,14 @@ export async function getAdminUser() {
         }
 
         return user;
-    } catch (error) {
-        console.error('Error in getAdminUser:', error);
+    } catch (error: any) {
+        // Catch any unexpected errors
+        console.error('[getAdminUser] Unexpected error:', {
+            error,
+            message: error?.message,
+            code: error?.code,
+            name: error?.name,
+        });
         return null;
     }
 }
