@@ -8,6 +8,12 @@ import { defaultLocale } from '@/config/locales';
 import { GlobalErrorHandler } from './error-handler';
 import './globals.css';
 
+// This app uses cookies, headers and next-intl in Server Components.
+// Force dynamic rendering globally to avoid DYNAMIC_SERVER_USAGE errors.
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+export const revalidate = 0;
+
 export default async function RootLayout({
     children,
 }: {

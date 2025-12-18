@@ -1,5 +1,10 @@
 import Link from 'next/link';
 
+// Not-found route uses next-intl and may rely on headers; mark as dynamic
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+export const revalidate = 0;
+
 export default function NotFound() {
     // Simple 404 page without i18n to avoid any potential errors
     const t = (key: string) => {

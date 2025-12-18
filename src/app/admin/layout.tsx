@@ -4,6 +4,11 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import '../globals.css';
 
+// Admin layout uses Supabase cookies and next-intl, so it must be dynamic
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+export const revalidate = 0;
+
 export default async function AdminLayout({
     children,
 }: {
