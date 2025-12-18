@@ -1,9 +1,2 @@
-{
-  "crons": [
-    {
-      "path": "/api/cron/expire-deposits",
-      "schedule": "*/15 * * * *"
-    }
-  ]
-}
+{}
 
