@@ -1,11 +1,47 @@
 # Project Progress - Restore The Basic
 
-**Last Updated:** December 17, 2025  
-**Current Phase:** Phase 2 - Backend Integration & Features
+**Last Updated:** December 18, 2025  
+**Current Phase:** Phase 3 - Deployment & Reliability
 
 ---
 
 ## 🎯 Recent Updates
+
+### ✅ Deployment Stability & Dynamic Rendering Fixes (December 18, 2025)
+
+**Status:** ✅ Complete and Production Ready  
+
+#### Overview
+Stabilized production deployment on Vercel by resolving dynamic rendering constraints from `next-intl`, Supabase auth (cookies/headers), and error boundaries. Eliminated `DYNAMIC_SERVER_USAGE` and `MIDDLEWARE_INVOCATION_FAILED` errors and ensured all core routes render reliably in production.
+
+#### Changes Made
+
+1. **Dynamic Rendering Configuration**
+   - Marked root `RootLayout` as dynamic (`dynamic = 'force-dynamic'`, `fetchCache = 'force-no-store'`, `revalidate = 0`)
+   - Marked `AdminLayout` as dynamic to support Supabase cookie-based auth and `next-intl`
+   - Marked `not-found` route as dynamic to avoid static rendering errors when using headers/intl
+
+2. **`__dirname` & Build Environment Fixes**
+   - Added webpack `DefinePlugin` to safely polyfill `__dirname` for server builds
+   - Introduced `src/lib/polyfills.ts` to set `__dirname` on `global` and `globalThis` via `process.cwd()`
+   - Removed unused `dynamic-vietqr` dependency that pulled in incompatible CommonJS behavior
+   - Updated `tsconfig.json` to exclude `supabase/functions` and `.next/dev` to avoid `Deno` type errors
+
+3. **Supabase 404 Diagnostics & Error Handling**
+   - Added `supabase/CHECK_MISSING_RESOURCES.sql`, `COMPREHENSIVE_CHECK.sql`, `FIND_FAILING_QUERY.sql` and related helper scripts
+   - Implemented server-side error wrappers and diagnostics for Supabase queries with structured logging
+   - Implemented client-side handlers for Supabase errors (admin login/logout, global error handler)
+   - Created `global-error.tsx` and simplified `not-found.tsx` to be robust against i18n/storage failures
+
+4. **Middleware & Routing Simplification**
+   - Removed custom `src/middleware.ts` that was causing `MIDDLEWARE_INVOCATION_FAILED` in production
+   - Relied on `src/i18n/request.ts` for locale resolution instead of middleware redirects
+   - Ensured homepage and core routes work without locale prefixes while still supporting vi/en translations
+
+5. **Vercel Deployment Cleanup**
+   - Removed obsolete cron-related API routes and Supabase Edge Function that were no longer used
+   - Emptied `vercel.json` and removed cron configuration to prevent confusing build/runtime behavior
+   - Verified clean `next build` with Turbopack and confirmed all app routes are generated as dynamic pages
 
 ### ✅ Customer Order Cancellation & Change Requests (December 17, 2025)
 
@@ -928,7 +964,7 @@ Implemented a comprehensive order tracking system that allows customers to track
 ### High Priority
 - ~~[ ] Move token storage from in-memory to persistent storage~~ ✅ **COMPLETE**
 - [ ] Implement Redis-based rate limiting
-- [ ] Add comprehensive error logging
+- ✅ Add comprehensive error logging - **COMPLETE**
 - ✅ Order-level deposit logic refactoring - **COMPLETE**
 - ✅ Stripe refunds implementation - **COMPLETE**
 
@@ -944,6 +980,6 @@ Implemented a comprehensive order tracking system that allows customers to track
 
 ---
 
-**Last Updated:** December 17, 2025  
-**Version:** 1.6.0 (Customer Self-Service & Deposit+COD)  
-**Status:** ✅ Customer Cancellation/Change Requests, Deposit+COD Support, Ready for Production
+**Last Updated:** December 18, 2025  
+**Version:** 1.7.0 (Deployment Stability & Dynamic Rendering)  
+**Status:** ✅ Deployment stabilized on Vercel, dynamic rendering and Supabase/i18n errors resolved
