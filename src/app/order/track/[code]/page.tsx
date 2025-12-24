@@ -1,7 +1,7 @@
 import { getTranslations, getLocale } from 'next-intl/server';
 import { getTrackableOrderByToken } from '@/lib/repositories/orders/tracking';
 import styles from './page.module.css';
-import TrackingForm from '@/app/order/track/TrackingForm';
+import TrackingFormWrapper from './TrackingFormWrapper';
 import OrderActions from './OrderActions';
 import DepositProofUpload from './DepositProofUpload';
 import ClaimOrderCTA from '@/app/order/track/ClaimOrderCTA';
@@ -61,14 +61,10 @@ export default async function TrackOrderDetailPage({ params, searchParams }: Tra
                         <p className={styles.subtitle}>{t('subtitle')}</p>
                     </div>
                     
-                    {showError && (
-                        <div className={styles.errorBanner}>
-                            <h3>{t('errors.invalidLinkTitle')}</h3>
-                            <p>{t('errors.invalidLinkBody')}</p>
-                        </div>
-                    )}
-                    
-                    <TrackingForm initialOrderCode={code} />
+                    <TrackingFormWrapper 
+                        initialOrderCode={code}
+                        errorMessage={showError ? t('errors.invalidLinkBody') : undefined}
+                    />
                 </div>
             </div>
         );
