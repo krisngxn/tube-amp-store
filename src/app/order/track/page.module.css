@@ -1,6 +1,6 @@
 .trackPage {
     padding: var(--space-2xl) 0;
-    min-height: 100vh;
+    min-height: 60vh;
 }
 
 .trackHeader {
@@ -9,63 +9,16 @@
 }
 
 .trackHeader h1 {
-    margin-bottom: var(--space-md);
+    margin: 0 0 var(--space-sm) 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-text-primary);
 }
 
 .subtitle {
+    margin: 0;
     color: var(--color-text-secondary);
     font-size: 1rem;
-}
-
-.trackForm {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: var(--space-xl);
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border-subtle);
-}
-
-.formGroup {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-    margin-bottom: var(--space-lg);
-}
-
-.formGroup label {
-    font-weight: 500;
-    color: var(--color-text-primary);
-}
-
-.formGroup input {
-    padding: var(--space-md);
-    background: var(--color-bg-primary);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-md);
-    color: var(--color-text-primary);
-    font-size: 1rem;
-    transition: border-color var(--transition-fast);
-}
-
-.formGroup input:focus {
-    outline: none;
-    border-color: var(--color-accent-primary);
-}
-
-.formGroup input:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.errorMessage {
-    padding: var(--space-md);
-    background: var(--color-error-bg);
-    border: 1px solid var(--color-error);
-    color: var(--color-error);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--space-lg);
-    font-size: 0.875rem;
 }
 
 .errorBanner {
@@ -81,297 +34,19 @@
 .errorBanner h3 {
     margin: 0 0 var(--space-sm) 0;
     color: var(--color-error);
-    font-size: 1.125rem;
+    font-size: var(--text-lg);
+    font-weight: 600;
 }
 
 .errorBanner p {
     margin: 0;
     color: var(--color-error);
-    font-size: 0.875rem;
+    font-size: var(--text-sm);
     line-height: 1.5;
 }
 
-.orderDetails {
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xl);
+.emptyStateWrapper {
+    margin-top: var(--space-xl);
 }
 
-.orderHeader {
-    padding: var(--space-xl);
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border-subtle);
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    gap: var(--space-lg);
-}
-
-.orderHeader h2 {
-    margin-bottom: var(--space-xs);
-}
-
-.orderDate {
-    color: var(--color-text-secondary);
-    font-size: 0.875rem;
-}
-
-.statusBadge {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-    align-items: flex-end;
-}
-
-.statusLabel {
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
-}
-
-.statusValue {
-    padding: var(--space-xs) var(--space-md);
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    font-size: 0.875rem;
-}
-
-.status-pending {
-    background: rgba(201, 160, 95, 0.2);
-    color: var(--color-warning);
-}
-
-.status-confirmed {
-    background: rgba(107, 155, 110, 0.2);
-    color: var(--color-success);
-}
-
-.status-deposited {
-    background: rgba(107, 155, 110, 0.2);
-    color: var(--color-success);
-}
-
-.status-processing {
-    background: rgba(107, 143, 201, 0.2);
-    color: var(--color-info);
-}
-
-.status-shipped {
-    background: rgba(107, 143, 201, 0.2);
-    color: var(--color-info);
-}
-
-.status-delivered {
-    background: rgba(107, 155, 110, 0.2);
-    color: var(--color-success);
-}
-
-.status-cancelled {
-    background: rgba(201, 107, 107, 0.2);
-    color: var(--color-error);
-}
-
-.status-expired {
-    background: rgba(201, 107, 107, 0.2);
-    color: var(--color-error);
-}
-
-.statusTimeline,
-.itemsSection,
-.totalsSection,
-.depositSection,
-.paymentSection {
-    padding: var(--space-xl);
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border-subtle);
-}
-
-.statusTimeline h3,
-.itemsSection h3,
-.totalsSection h3,
-.depositSection h3,
-.paymentSection h3 {
-    margin-bottom: var(--space-lg);
-    font-size: 1.25rem;
-}
-
-.timeline {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-    position: relative;
-    padding-left: var(--space-xl);
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 8px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--color-border-subtle);
-}
-
-.timelineItem {
-    position: relative;
-    display: flex;
-    gap: var(--space-md);
-}
-
-.timelineDot {
-    position: absolute;
-    left: -24px;
-    top: 4px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--color-accent-primary);
-    border: 2px solid var(--color-bg-secondary);
-    z-index: 1;
-}
-
-.timelineContent {
-    flex: 1;
-}
-
-.timelineStatus {
-    font-weight: 600;
-    margin-bottom: var(--space-xs);
-}
-
-.timelineDate {
-    color: var(--color-text-secondary);
-    font-size: 0.875rem;
-    margin-bottom: var(--space-xs);
-}
-
-.timelineNote {
-    color: var(--color-text-secondary);
-    font-size: 0.875rem;
-    font-style: italic;
-}
-
-.itemsList {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-}
-
-.orderItem {
-    display: flex;
-    gap: var(--space-md);
-    padding: var(--space-md);
-    background: var(--color-bg-primary);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-border-subtle);
-}
-
-.itemImage {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: var(--radius-md);
-}
-
-.itemInfo {
-    flex: 1;
-}
-
-.itemInfo h4 {
-    margin-bottom: var(--space-xs);
-    font-size: 1rem;
-}
-
-.itemInfo p {
-    color: var(--color-text-secondary);
-    font-size: 0.875rem;
-}
-
-.itemTotal {
-    font-weight: 600;
-    color: var(--color-accent-primary);
-    align-self: center;
-}
-
-.totalsList {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-}
-
-.totalRow {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: var(--space-md);
-    border-bottom: 1px solid var(--color-border-subtle);
-}
-
-.totalRowFinal {
-    border-bottom: none;
-    padding-top: var(--space-md);
-    border-top: 2px solid var(--color-accent-primary);
-    font-size: 1.125rem;
-}
-
-.depositRow {
-    color: var(--color-accent-primary);
-}
-
-.depositInfo {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-}
-
-.depositSection .depositRow {
-    display: flex;
-    justify-content: space-between;
-    padding: var(--space-md);
-    background: var(--color-bg-primary);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-border-subtle);
-}
-
-.paymentSection p {
-    margin-bottom: var(--space-sm);
-}
-
-.paymentMethod {
-    color: var(--color-text-secondary);
-    font-size: 0.875rem;
-}
-
-.actions {
-    display: flex;
-    gap: var(--space-md);
-    justify-content: center;
-    padding-top: var(--space-xl);
-}
-
-@media (max-width: 768px) {
-    .orderHeader {
-        flex-direction: column;
-    }
-
-    .statusBadge {
-        align-items: flex-start;
-    }
-
-    .orderItem {
-        flex-wrap: wrap;
-    }
-
-    .itemImage {
-        width: 60px;
-        height: 60px;
-    }
-
-    .actions {
-        flex-direction: column;
-    }
-}
 

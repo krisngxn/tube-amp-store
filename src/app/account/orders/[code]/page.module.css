@@ -1,0 +1,186 @@
+.orderDetailPage {
+    /* Page container */
+}
+
+.orderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    gap: var(--space-md);
+}
+
+.orderHeader h1 {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.orderDate {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+}
+
+.statusBadges {
+    display: flex;
+    gap: var(--space-sm);
+    flex-shrink: 0;
+}
+
+.statusTimeline,
+.itemsSection,
+.totalsSection,
+.paymentSection {
+    margin-bottom: var(--space-xl);
+}
+
+.statusTimeline h2,
+.itemsSection h2,
+.totalsSection h2,
+.paymentSection h2 {
+    margin: 0 0 var(--space-md) 0;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.timelineItem {
+    display: flex;
+    gap: var(--space-md);
+    position: relative;
+}
+
+.timelineDot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.timelineContent {
+    flex: 1;
+}
+
+.timelineStatus {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.timelineDate {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xs);
+}
+
+.timelineNote {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+.itemsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.orderItem {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.itemImage {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+}
+
+.itemInfo {
+    flex: 1;
+}
+
+.itemInfo h3 {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
+.itemInfo p {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+}
+
+.productLink {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.productLink:hover {
+    text-decoration: underline;
+}
+
+.itemTotal {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    align-self: flex-start;
+}
+
+.totalsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-xs) 0;
+}
+
+.totalRowFinal {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-xs);
+}
+
+.depositRow {
+    color: var(--color-primary);
+}
+
+.paymentSection p {
+    margin: var(--space-xs) 0;
+    color: var(--color-text-primary);
+}
+
+.paymentMethod {
+    color: var(--color-text-secondary) !important;
+    font-size: var(--text-sm);
+}
+

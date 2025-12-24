@@ -228,6 +228,7 @@ async function generateOrderConfirmationEmail(
     payload: OrderConfirmationPayload
 ): Promise<{ subject: string; html: string; text: string }> {
     const t = getEmailTranslations(locale);
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
     const formatCurrency = (amount: number) => {
         return new Intl.NumberFormat('vi-VN').format(amount);
     };
@@ -388,6 +389,16 @@ async function generateOrderConfirmationEmail(
                                 </p>
                             </div>
                             ` : ''}
+                            
+                            <!-- Sign In CTA -->
+                            <div style="margin: 30px 0; padding: 20px; background-color: #f9f9f9; border-radius: 8px; text-align: center;">
+                                <p style="margin: 0 0 15px 0; color: #333; font-size: 14px; line-height: 1.6;">
+                                    ${t.orderConfirmation.signInPrompt || 'Sign in to view all your orders and track them easily.'}
+                                </p>
+                                <a href="${baseUrl}/auth/sign-in" style="display: inline-block; padding: 12px 24px; background-color: #d4a574; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 500; font-size: 14px;">
+                                    ${t.orderConfirmation.signInButton || 'Sign In'}
+                                </a>
+                            </div>
                             
                             <!-- Support -->
                             <p style="margin: 30px 0 0 0; color: #666; font-size: 14px; line-height: 1.6;">

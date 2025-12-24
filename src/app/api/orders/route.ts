@@ -64,6 +64,38 @@ export async function POST(request: NextRequest) {
         // This is safe because we validate everything server-side
         const supabase = createServiceClient();
 
+        // Check if user is authenticated (for attaching order to account)
+        let userId: string | null = null;
+        try {
+            const { createClient: createServerClient } = await import('@/lib/supabase/server');
+            const serverSupabase = await createServerClient();
+            const { data: { user } } = await serverSupabase.auth.getUser();
+            
+            if (user?.id) {
+                // Ensure user profile exists before creating order
+                const { error: profileError } = await supabase
+                    .from('user_profiles')
+                    .upsert({
+                        id: user.id,
+                        email: user.email || body.customerInfo.email || '',
+                        updated_at: new Date().toISOString(),
+                    }, {
+                        onConflict: 'id',
+                    });
+
+                if (profileError) {
+                    console.error('Error ensuring user profile exists:', profileError);
+                    // Continue as guest if profile creation fails
+                    userId = null;
+                } else {
+                    userId = user.id;
+                }
+            }
+        } catch (error) {
+            // User not authenticated or error - continue as guest
+            console.log('User not authenticated or error, creating guest order:', error);
+        }
+
         // Get locale from cookie or default to 'vi'
         const localeCookie = request.cookies.get('NEXT_LOCALE')?.value;
         const locale: Locale = (localeCookie === 'vi' || localeCookie === 'en') ? localeCookie : defaultLocale;
@@ -297,7 +329,7 @@ export async function POST(request: NextRequest) {
         const { data: order, error: orderError } = await supabase
             .from('orders')
             .insert({
-                user_id: null, // Guest checkout
+                user_id: userId, // Attach to user if authenticated, null for guest
                 customer_email: body.customerInfo.email || '',
                 customer_name: body.customerInfo.fullName,
                 customer_phone: body.customerInfo.phone,

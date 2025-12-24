@@ -1,339 +1,209 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import styles from './page.module.css';
+import { useTranslations } from 'next-intl';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import type { TrackedOrderDTO } from '@/lib/repositories/orders/tracking';
+import styles from './TrackingForm.module.css';
 
 interface TrackingFormProps {
     initialOrderCode?: string;
     errorMessage?: string;
+    onSubmit: (orderCode: string, contact: string) => Promise<TrackedOrderDTO | null>;
+    onSuccess: (order: TrackedOrderDTO) => void;
+    onError: (error: string) => void;
 }
 
-export default function TrackingForm({ initialOrderCode = '', errorMessage }: TrackingFormProps) {
+export default function TrackingForm({
+    initialOrderCode = '',
+    errorMessage,
+    onSubmit,
+    onSuccess,
+    onError,
+}: TrackingFormProps) {
     const t = useTranslations('tracking');
-    const tCommon = useTranslations('common');
-    const locale = useLocale();
-    const router = useRouter();
-
+    
     const [orderCode, setOrderCode] = useState(initialOrderCode);
-    const [emailOrPhone, setEmailOrPhone] = useState('');
+    const [contactType, setContactType] = useState<'email' | 'phone'>('email');
+    const [contact, setContact] = useState('');
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(errorMessage || null);
-    const [order, setOrder] = useState<TrackedOrderDTO | null>(null);
+    const [errors, setErrors] = useState<{
+        orderCode?: string;
+        contact?: string;
+    }>({});
+
+    // Validate email format
+    const isValidEmail = (email: string): boolean => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    // Validate phone format (basic - allows digits, spaces, dashes, plus)
+    const isValidPhone = (phone: string): boolean => {
+        const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+        return phoneRegex.test(phone) && phone.replace(/\D/g, '').length >= 8;
+    };
+
+    const validateForm = (): boolean => {
+        const newErrors: typeof errors = {};
+
+        if (!orderCode.trim()) {
+            newErrors.orderCode = t('form.errors.orderCodeRequired');
+        }
+
+        if (!contact.trim()) {
+            newErrors.contact = t('form.errors.contactRequired');
+        } else if (contactType === 'email' && !isValidEmail(contact.trim())) {
+            newErrors.contact = t('form.errors.invalidEmail');
+        } else if (contactType === 'phone' && !isValidPhone(contact.trim())) {
+            newErrors.contact = t('form.errors.invalidPhone');
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setError(null);
+        
+        if (!validateForm()) {
+            return;
+        }
+
         setLoading(true);
+        setErrors({});
+        onError(''); // Clear previous error
 
         try {
-            const response = await fetch('/api/order/track', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    orderCode: orderCode.trim(),
-                    emailOrPhone: emailOrPhone.trim(),
-                }),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                setError(data.error || t('errors.notFound'));
-                setOrder(null);
-                return;
+            const order = await onSubmit(orderCode.trim(), contact.trim());
+            
+            if (order) {
+                onSuccess(order);
+            } else {
+                onError(t('errors.notFound'));
             }
-
-            setOrder(data.order);
-            setError(null);
         } catch (err) {
-            setError(t('errors.network'));
-            setOrder(null);
+            onError(err instanceof Error ? err.message : t('errors.network'));
         } finally {
             setLoading(false);
         }
     };
 
-    const formatCurrency = (amount: number) => {
-        return new Intl.NumberFormat('vi-VN').format(amount);
-    };
-
-    const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleString(locale === 'vi' ? 'vi-VN' : 'en-US', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-        });
-    };
-
-    const getStatusLabel = (status: string) => {
-        return t(`status.${status}`, { defaultValue: status });
-    };
-
-    const getPaymentStatusLabel = (status: string) => {
-        return t(`paymentStatus.${status}`, { defaultValue: status });
-    };
-
-    if (order) {
-        return (
-            <div className={styles.orderDetails}>
-                {/* Order Header */}
-                <div className={styles.orderHeader}>
-                    <div>
-                        <h2>{t('order.orderCode')}: {order.orderCode}</h2>
-                        <p className={styles.orderDate}>
-                            {t('order.createdAt')}: {formatDate(order.createdAt)}
-                        </p>
-                    </div>
-                    <div className={styles.statusBadge}>
-                        <span className={styles.statusLabel}>{t('order.status')}:</span>
-                        <span className={`${styles.statusValue} ${styles[`status-${order.status}`]}`}>
-                            {getStatusLabel(order.status)}
-                        </span>
-                    </div>
-                </div>
-
-                {/* Status Timeline */}
-                {order.statusHistory.length > 0 && (
-                    <div className={styles.statusTimeline}>
-                        <h3>{t('order.timeline')}</h3>
-                        <div className={styles.timeline}>
-                            {order.statusHistory.map((history) => (
-                                <div key={history.id} className={styles.timelineItem}>
-                                    <div className={styles.timelineDot} />
-                                    <div className={styles.timelineContent}>
-                                        <div className={styles.timelineStatus}>
-                                            {history.fromStatus ? (
-                                                <>
-                                                    {getStatusLabel(history.fromStatus)} → {getStatusLabel(history.toStatus)}
-                                                </>
-                                            ) : (
-                                                getStatusLabel(history.toStatus)
-                                            )}
-                                        </div>
-                                        <div className={styles.timelineDate}>
-                                            {formatDate(history.createdAt)}
-                                        </div>
-                                        {history.note && (
-                                            <div className={styles.timelineNote}>
-                                                {history.note}
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-
-                {/* Order Items */}
-                <div className={styles.itemsSection}>
-                    <h3>{t('order.items')}</h3>
-                    <div className={styles.itemsList}>
-                        {order.orderItems.map((item) => (
-                            <div key={item.id} className={styles.orderItem}>
-                                {item.productImageUrl && (
-                                    <img
-                                        src={item.productImageUrl}
-                                        alt={item.productName}
-                                        className={styles.itemImage}
-                                    />
-                                )}
-                                <div className={styles.itemInfo}>
-                                    <h4>{item.productName}</h4>
-                                    <p>
-                                        {tCommon('quantity')}: {item.quantity} × {formatCurrency(item.unitPrice)} {tCommon('currency')}
-                                    </p>
-                                </div>
-                                <div className={styles.itemTotal}>
-                                    {formatCurrency(item.subtotal)} {tCommon('currency')}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Totals */}
-                <div className={styles.totalsSection}>
-                    <h3>{t('order.totals')}</h3>
-                    <div className={styles.totalsList}>
-                        <div className={styles.totalRow}>
-                            <span>{t('order.subtotal')}</span>
-                            <span>{formatCurrency(order.subtotal)} {tCommon('currency')}</span>
-                        </div>
-                        {order.shippingFee > 0 && (
-                            <div className={styles.totalRow}>
-                                <span>{t('order.shipping')}</span>
-                                <span>{formatCurrency(order.shippingFee)} {tCommon('currency')}</span>
-                            </div>
-                        )}
-                        {order.tax > 0 && (
-                            <div className={styles.totalRow}>
-                                <span>{t('order.tax')}</span>
-                                <span>{formatCurrency(order.tax)} {tCommon('currency')}</span>
-                            </div>
-                        )}
-                        {order.discount > 0 && (
-                            <div className={styles.totalRow}>
-                                <span>{t('order.discount')}</span>
-                                <span>-{formatCurrency(order.discount)} {tCommon('currency')}</span>
-                            </div>
-                        )}
-                        {order.orderType === 'deposit_reservation' && order.depositAmountVnd && (
-                            <>
-                                <div className={`${styles.totalRow} ${styles.depositRow}`}>
-                                    <span>{t('order.depositAmount')}</span>
-                                    <span className="text-accent">
-                                        {formatCurrency(order.depositAmountVnd)} {tCommon('currency')}
-                                    </span>
-                                </div>
-                                {order.remainingAmount && (
-                                    <div className={styles.totalRow}>
-                                        <span>{t('order.remainingBalance')}</span>
-                                        <span>{formatCurrency(order.remainingAmount)} {tCommon('currency')}</span>
-                                    </div>
-                                )}
-                            </>
-                        )}
-                        <div className={`${styles.totalRow} ${styles.totalRowFinal}`}>
-                            <strong>
-                                {order.orderType === 'deposit_reservation' && order.depositAmountVnd
-                                    ? t('order.depositDue')
-                                    : t('order.total')}
-                            </strong>
-                            <strong className="text-accent">
-                                {order.orderType === 'deposit_reservation' && order.depositAmountVnd
-                                    ? `${formatCurrency(order.depositAmountVnd)} ${tCommon('currency')}`
-                                    : `${formatCurrency(order.total)} ${tCommon('currency')}`}
-                            </strong>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Deposit Details */}
-                {order.orderType === 'deposit_reservation' && (
-                    <div className={styles.depositSection}>
-                        <h3>{t('order.depositDetails')}</h3>
-                        <div className={styles.depositInfo}>
-                            {order.depositAmountVnd && (
-                                <div className={styles.depositRow}>
-                                    <span>{t('order.depositAmount')}:</span>
-                                    <strong className="text-accent">
-                                        {formatCurrency(order.depositAmountVnd)} {tCommon('currency')}
-                                    </strong>
-                                </div>
-                            )}
-                            {order.depositDueAt && (
-                                <div className={styles.depositRow}>
-                                    <span>{t('order.depositDueAt')}:</span>
-                                    <strong>
-                                        {formatDate(order.depositDueAt)}
-                                    </strong>
-                                </div>
-                            )}
-                            {order.remainingAmount && (
-                                <div className={styles.depositRow}>
-                                    <span>{t('order.remainingBalance')}:</span>
-                                    <span>
-                                        {formatCurrency(order.remainingAmount)} {tCommon('currency')}
-                                    </span>
-                                </div>
-                            )}
-                            {order.depositReceivedAt && (
-                                <div className={styles.depositRow}>
-                                    <span>{t('order.depositReceivedAt')}:</span>
-                                    <span className="text-success">
-                                        {formatDate(order.depositReceivedAt)}
-                                    </span>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                )}
-
-                {/* Payment Status */}
-                <div className={styles.paymentSection}>
-                    <h3>{t('order.paymentStatus')}</h3>
-                    <p>
-                        <strong>{getPaymentStatusLabel(order.paymentStatus)}</strong>
-                    </p>
-                    <p className={styles.paymentMethod}>
-                        {t('order.paymentMethod')}: {order.paymentMethod === 'cod' ? t('order.paymentCod') : t('order.paymentBank')}
-                    </p>
-                </div>
-
-                {/* Actions */}
-                <div className={styles.actions}>
-                    <button
-                        type="button"
-                        className="btn btn-ghost"
-                        onClick={() => {
-                            setOrder(null);
-                            setOrderCode('');
-                            setEmailOrPhone('');
-                        }}
-                    >
-                        {t('actions.trackAnother')}
-                    </button>
-                    <Link href="/contact" className="btn btn-primary">
-                        {t('actions.contact')}
-                    </Link>
-                </div>
-            </div>
-        );
-    }
+    const isFormValid = orderCode.trim() && contact.trim() && 
+        (contactType === 'email' ? isValidEmail(contact.trim()) : isValidPhone(contact.trim()));
 
     return (
         <div className={styles.trackForm}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} noValidate>
                 <div className={styles.formGroup}>
                     <label htmlFor="orderCode">{t('form.orderCode')}</label>
                     <input
                         id="orderCode"
                         type="text"
                         value={orderCode}
-                        onChange={(e) => setOrderCode(e.target.value)}
+                        onChange={(e) => {
+                            setOrderCode(e.target.value);
+                            if (errors.orderCode) {
+                                setErrors(prev => ({ ...prev, orderCode: undefined }));
+                            }
+                        }}
                         placeholder={t('form.orderCodePlaceholder')}
                         required
                         disabled={loading}
+                        className={errors.orderCode ? 'input input-error' : 'input'}
+                        aria-invalid={!!errors.orderCode}
+                        aria-describedby={errors.orderCode ? 'orderCode-error' : undefined}
                     />
+                    {errors.orderCode && (
+                        <span id="orderCode-error" className="input-error-message">
+                            {errors.orderCode}
+                        </span>
+                    )}
                 </div>
 
                 <div className={styles.formGroup}>
-                    <label htmlFor="emailOrPhone">{t('form.emailOrPhone')}</label>
-                    <input
-                        id="emailOrPhone"
-                        type="text"
-                        value={emailOrPhone}
-                        onChange={(e) => setEmailOrPhone(e.target.value)}
-                        placeholder={t('form.emailOrPhonePlaceholder')}
-                        required
-                        disabled={loading}
-                    />
+                    <label>{t('form.contactType')}</label>
+                    <div className={styles.contactTypeToggle}>
+                        <button
+                            type="button"
+                            className={`${styles.toggleButton} ${contactType === 'email' ? styles.active : ''}`}
+                            onClick={() => {
+                                setContactType('email');
+                                setContact('');
+                                setErrors(prev => ({ ...prev, contact: undefined }));
+                            }}
+                            disabled={loading}
+                        >
+                            {t('form.email')}
+                        </button>
+                        <button
+                            type="button"
+                            className={`${styles.toggleButton} ${contactType === 'phone' ? styles.active : ''}`}
+                            onClick={() => {
+                                setContactType('phone');
+                                setContact('');
+                                setErrors(prev => ({ ...prev, contact: undefined }));
+                            }}
+                            disabled={loading}
+                        >
+                            {t('form.phone')}
+                        </button>
+                    </div>
                 </div>
 
-                {error && (
+                <div className={styles.formGroup}>
+                    <label htmlFor="contact">
+                        {contactType === 'email' ? t('form.email') : t('form.phone')}
+                    </label>
+                    <input
+                        id="contact"
+                        type={contactType === 'email' ? 'email' : 'tel'}
+                        value={contact}
+                        onChange={(e) => {
+                            setContact(e.target.value);
+                            if (errors.contact) {
+                                setErrors(prev => ({ ...prev, contact: undefined }));
+                            }
+                        }}
+                        placeholder={
+                            contactType === 'email' 
+                                ? t('form.emailPlaceholder')
+                                : t('form.phonePlaceholder')
+                        }
+                        required
+                        disabled={loading}
+                        className={errors.contact ? 'input input-error' : 'input'}
+                        aria-invalid={!!errors.contact}
+                        aria-describedby={errors.contact ? 'contact-error' : undefined}
+                    />
+                    {errors.contact && (
+                        <span id="contact-error" className="input-error-message">
+                            {errors.contact}
+                        </span>
+                    )}
+                </div>
+
+                {errorMessage && (
                     <div className={styles.errorMessage}>
-                        {error}
+                        {errorMessage}
                     </div>
                 )}
 
                 <button
                     type="submit"
-                    className="btn btn-primary"
-                    disabled={loading}
+                    className="btn btn-primary btn-large"
+                    disabled={loading || !isFormValid}
                 >
-                    {loading ? t('form.loading') : t('form.submit')}
+                    {loading ? (
+                        <>
+                            <LoadingSpinner size="sm" />
+                            {t('form.loading')}
+                        </>
+                    ) : (
+                        t('form.submit')
+                    )}
                 </button>
             </form>
         </div>
     );
 }
-

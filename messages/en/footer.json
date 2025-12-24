@@ -25,7 +25,8 @@
         "returns": "Returns",
         "payment": "Payment",
         "privacy": "Privacy",
-        "terms": "Terms"
+        "terms": "Terms",
+        "trackOrder": "Track Order"
     },
     "trust": {
         "title": "Quality Commitment",

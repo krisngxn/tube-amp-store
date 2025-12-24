@@ -43,6 +43,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
         import(`../../messages/${locale}/policies.json`),
         import(`../../messages/${locale}/admin.json`),
         import(`../../messages/${locale}/tracking.json`),
+        import(`../../messages/${locale}/account.json`),
+        import(`../../messages/${locale}/auth.json`),
     ]);
 
     // Extract successful imports, use empty object for failed ones
@@ -60,6 +62,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
         policies,
         admin,
         tracking,
+        account,
+        auth,
     ] = translationImports.map((result, index) => {
         if (result.status === 'fulfilled') {
             return result.value;
@@ -85,6 +89,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
             policies: policies.default,
             admin: admin.default,
             tracking: tracking.default,
+            account: account.default,
+            auth: auth.default,
         },
     };
 });

@@ -1,11 +1,350 @@
 # Project Progress - Restore The Basic
 
-**Last Updated:** December 18, 2025  
+**Last Updated:** December 24, 2025  
 **Current Phase:** Phase 3 - Deployment & Reliability
 
 ---
 
 ## 🎯 Recent Updates
+
+### ✅ Minimal User Auth + Order History + Order Claiming (December 24, 2025)
+
+**Status:** ✅ Complete and Production Ready
+
+#### Overview
+Implemented a minimal customer account system that adds convenience (order history + profile autofill) without breaking the existing guest-first tracking flow. Customers can sign up, sign in, view their order history, and claim past guest orders to their account.
+
+#### Core Principles Maintained
+- ✅ Guest checkout remains fully supported
+- ✅ Order code alone is never treated as a credential
+- ✅ Tracking remains secure (requires code + email/phone or valid token)
+- ✅ Orders remain immutable (no payment state changes from client)
+- ✅ No breaking changes to existing flows
+
+#### Features Implemented
+
+1. **Database Schema**
+   - Created `order_claims` table for audit trail
+   - Tracks claim method (tracking_lookup or token_link), timestamp, IP hash
+   - RLS policies ensure users can only view their own claims
+   - Existing `orders.user_id` field used (already nullable for guest orders)
+
+2. **Authentication System**
+   - Auth utility functions: `getCurrentUser()`, `requireAuth()`, `getUserProfile()`
+   - Sign-in page (`/auth/sign-in`) with email/password
+   - Sign-up page (`/auth/sign-up`) with email/password validation
+   - Sign-out action (`/auth/sign-out`) with redirect
+   - Automatic profile creation on sign-up
+   - Profile upsert on sign-in (ensures profile exists)
+
+3. **Account Pages**
+   - Account layout with navigation (`/account`)
+   - Order history page (`/account/orders`) - lists all user's orders
+   - Order detail page (`/account/orders/[code]`) - full order details
+   - Empty state for users with no orders
+   - Server-side ownership enforcement (users can only view their own orders)
+
+4. **Order Claiming System**
+   - Claim API endpoint (`POST /api/order/claim/[orderCode]`)
+   - Security: Requires proof of ownership (tracking lookup or valid token)
+   - Email/phone matching for verification
+   - Idempotent (can claim multiple times safely)
+   - Audit trail in `order_claims` table
+   - Claim CTA component on tracking pages
+
+5. **Order Creation Enhancement**
+   - Automatically attaches `user_id` if user is logged in
+   - Ensures `user_profiles` record exists before creating order
+   - Guest orders remain `user_id = null`
+   - No breaking changes to guest checkout flow
+
+6. **Tracking UI Updates**
+   - Added `ClaimOrderCTA` component to tracking pages
+   - Shows "Sign in to save" for unauthenticated users
+   - Shows "Save to my account" for authenticated users
+   - Handles already-claimed orders gracefully
+   - Non-blocking (tracking works without sign-in)
+
+7. **Email Updates**
+   - Added sign-in CTA to order confirmation emails
+   - Localized (EN/VI)
+   - Non-blocking (email failures don't break order creation)
+
+8. **Translation System**
+   - Added `account.json` translations (EN/VI)
+   - Added `auth.json` translations (EN/VI)
+   - Added claim translations to `tracking.json` (EN/VI)
+   - Added sign-in CTA to `emails.json` (EN/VI)
+   - Updated translation loader to include new namespaces
+
+9. **UI Fixes**
+   - Fixed duplicate status badges (only show payment status when different)
+   - Updated `StatusBadge` component to support translated labels
+   - Fixed translation keys not loading (added to i18n loader)
+
+#### Files Created
+
+**Database Migration:**
+- `supabase/CREATE_ORDER_CLAIMS_TABLE.sql` - Order claims audit table
+
+**Auth System:**
+- `src/lib/auth/user.ts` - Customer auth utilities
+- `src/app/auth/sign-in/page.tsx` - Sign-in page
+- `src/app/auth/sign-in/page.module.css` - Sign-in styles
+- `src/app/auth/sign-up/page.tsx` - Sign-up page
+- `src/app/auth/sign-up/page.module.css` - Sign-up styles
+- `src/app/auth/sign-out/route.ts` - Sign-out action
+
+**Account Pages:**
+- `src/app/account/layout.tsx` - Account layout with navigation
+- `src/app/account/layout.module.css` - Account layout styles
+- `src/app/account/orders/page.tsx` - Order history list
+- `src/app/account/orders/page.module.css` - Order list styles
+- `src/app/account/orders/[code]/page.tsx` - Order detail page
+- `src/app/account/orders/[code]/page.module.css` - Order detail styles
+
+**Order Claiming:**
+- `src/app/api/order/claim/[orderCode]/route.ts` - Claim API endpoint
+- `src/app/order/track/ClaimOrderCTA.tsx` - Claim CTA component
+- `src/app/order/track/ClaimOrderCTA.module.css` - Claim CTA styles
+
+**Translations:**
+- `messages/en/auth.json` - Auth translations
+- `messages/vi/auth.json` - Vietnamese auth translations
+- `messages/en/account.json` - Account translations
+- `messages/vi/account.json` - Vietnamese account translations
+
+#### Files Modified
+
+**Order Creation:**
+- `src/app/api/orders/route.ts` - Attach user_id if authenticated, ensure profile exists
+
+**Tracking Pages:**
+- `src/app/order/track/page.tsx` - Added ClaimOrderCTA
+- `src/app/order/track/TrackingForm.tsx` - Added ClaimOrderCTA
+- `src/app/order/track/[code]/page.tsx` - Added ClaimOrderCTA
+
+**Email System:**
+- `src/lib/emails/service.ts` - Added sign-in CTA to order confirmation emails
+
+**Translation System:**
+- `src/i18n/request.ts` - Added account.json and auth.json to translation loader
+- `messages/en/tracking.json` - Added claim translations
+- `messages/vi/tracking.json` - Added Vietnamese claim translations
+- `messages/en/emails.json` - Added sign-in CTA translations
+- `messages/vi/emails.json` - Added Vietnamese sign-in CTA translations
+
+**UI Components:**
+- `src/components/ui/StatusBadge.tsx` - Added label prop for translations
+- `src/app/account/orders/page.tsx` - Fixed duplicate badges, added translations
+- `src/app/account/orders/[code]/page.tsx` - Fixed duplicate badges, added translations
+
+#### Technical Details
+
+**Claim Eligibility Rules:**
+- User must be authenticated
+- User must have proven access via tracking lookup (code + email/phone) OR valid token link
+- User's email must match order email OR phone must match order phone
+- Idempotent: if already claimed by same user, returns success
+
+**Security Features:**
+- Server-side ownership validation
+- Email/phone matching for claim verification
+- Audit trail for all claims
+- RLS policies enforce order ownership
+- Generic error messages prevent enumeration
+
+**Order Association:**
+- New orders created while logged in: `user_id = current_user_id`
+- Guest orders: `user_id = null`
+- Claimed orders: `user_id = current_user_id` (updated via claim API)
+
+#### Testing Notes
+
+**Guest Flow:**
+1. Place order as guest → Receive email with order code + tracking link
+2. Track via code+email/phone → Verify order displays
+3. Sign up → Sign in → Claim order → Verify appears in history
+
+**Authenticated Flow:**
+1. Sign in → Place order → Verify automatically appears in history
+2. View order history → Click order → Verify detail page works
+3. Claim past guest order → Verify appears in history
+
+**Security:**
+1. Try to view another user's order → Verify 404
+2. Try to claim order with mismatched email → Verify rejection
+3. Claim same order twice → Verify idempotent (no duplicates)
+
+#### Known Limitations
+
+1. **Profile Management:** No full profile editing UI (can be added later)
+2. **Password Reset:** Not implemented (can use Supabase built-in)
+3. **Email Verification:** Relies on Supabase default behavior
+
+---
+
+### ✅ UI/UX Audit & Visual Polish Pass (December 18, 2025)
+
+**Status:** ✅ Complete - Audit Documented, Foundation Components Created
+
+#### Overview
+Conducted comprehensive UI/UX audit of entire application and delivered structured recommendations, design system proposal, and foundational shared components to improve visual consistency, spacing, typography, and accessibility across all pages.
+
+#### Deliverables Created
+
+1. **Comprehensive UI Audit Document** (`UI_UX_AUDIT.md`)
+   - Global issues analysis (10 categories, prioritized P0-P2)
+   - Design system proposal (type scale, spacing, components)
+   - Page-by-page recommendations (11 pages reviewed)
+   - Implementation plan (3 phases)
+   - Concrete code examples for immediate fixes
+
+2. **Quick Start Guide** (`UI_UX_QUICK_START.md`)
+   - Summary of completed work
+   - Next steps checklist
+   - Component usage examples
+   - Testing checklist
+
+3. **Shared UI Components**
+   - `StatusBadge` - Consistent status indicators with semantic colors
+   - `EmptyState` - Reusable empty states with icons and actions
+   - `LoadingSpinner` - Loading indicators (3 sizes)
+
+4. **Global CSS Enhancements**
+   - Added missing button variants: `.btn-sm`, `.btn-large`, `.btn-danger`
+   - Added form input error states: `.input-error`, `.input-error-message`
+   - Improved focus states: visible focus rings on all interactive elements
+   - Added disabled state styling for inputs
+
+#### Critical Issues Identified (P0)
+
+1. **Mobile Responsiveness**
+   - Product detail page grid breaks awkwardly on tablet
+   - Cart layout needs better mobile stacking
+   - Checkout form fields too narrow on mobile
+   - Admin tables overflow (no horizontal scroll)
+
+2. **Spacing Inconsistency**
+   - Mixed use of utility classes and CSS modules
+   - Inconsistent gaps in grids
+   - Section padding varies across pages
+   - Form field spacing inconsistent
+
+3. **Missing Form States**
+   - Error states not consistently styled
+   - Missing disabled state styling
+   - Focus rings inconsistent
+
+4. **Loading States**
+   - Skeleton loaders exist but inconsistently applied
+   - No loading spinners for async actions
+   - Button loading states missing
+
+#### High Impact Issues (P1)
+
+1. **Button Variants Missing**
+   - No `.btn-sm` variant (referenced but not defined)
+   - No `.btn-large` variant (referenced but not defined)
+   - No `.btn-danger` variant (used in admin but not styled)
+
+2. **Status Badge Inconsistency**
+   - Order status badges inconsistent between admin and customer views
+   - Payment status colors not standardized
+   - Badge sizes vary
+
+3. **Empty States Missing**
+   - Empty product list missing
+   - Empty order history missing
+   - Empty search results missing
+
+4. **Modal/Dialog Inconsistency**
+   - Cancel order modal uses custom styles
+   - Change request modal uses custom styles
+   - Refund modal uses custom styles
+   - No shared modal component
+
+#### Quick Fixes Applied
+
+1. **Product Detail Page Spacing**
+   - Reduced grid gap from `var(--space-3xl)` to `var(--space-2xl)`
+   - Added responsive breakpoint for better mobile stacking
+
+2. **Matching Section Spacing**
+   - Increased gap between matching items
+   - Added borders to matching items for better separation
+   - Improved tab content spacing
+
+3. **Homepage Matching Form**
+   - Added proper spacing between form fields and submit button
+   - Fixed inconsistent form group class names
+   - Centered submit button with proper margin
+
+4. **Product Tabs Section**
+   - Added top margin to tabs section
+   - Increased gap between tab navigation and content
+   - Added spacing rules for headings inside tab content
+
+#### Files Created
+
+**Documentation:**
+- `UI_UX_AUDIT.md` - Complete audit report with recommendations
+- `UI_UX_QUICK_START.md` - Quick reference guide
+
+**Shared Components:**
+- `src/components/ui/StatusBadge.tsx` - Status badge component
+- `src/components/ui/StatusBadge.module.css` - Status badge styles
+- `src/components/ui/EmptyState.tsx` - Empty state component
+- `src/components/ui/EmptyState.module.css` - Empty state styles
+- `src/components/ui/LoadingSpinner.tsx` - Loading spinner component
+- `src/components/ui/LoadingSpinner.module.css` - Loading spinner styles
+
+#### Files Modified
+
+**Global Styles:**
+- `src/app/globals.css` - Added button variants, form error states, focus states
+
+**Product Pages:**
+- `src/app/product/[slug]/ProductPage.module.css` - Improved spacing, responsive breakpoints
+- `src/app/product/[slug]/ProductTabs.module.css` - Improved spacing, tab content spacing
+
+**Homepage:**
+- `src/app/page.tsx` - Fixed form spacing, consistent class names
+- `src/app/HomePage.module.css` - Added form submit spacing, improved form group spacing
+
+#### Implementation Plan
+
+**Phase 1: Foundation (P0) - Critical Fixes**
+- ✅ Add missing button variants
+- ✅ Add form input error states
+- ✅ Create LoadingSpinner component
+- [ ] Fix mobile responsiveness (product detail, cart, checkout, admin tables)
+- [ ] Add loading states to all async buttons
+- [ ] Standardize error display
+
+**Phase 2: Components (P1) - High Impact**
+- ✅ Create StatusBadge component
+- ✅ Create EmptyState component
+- [ ] Replace all status badges with StatusBadge component
+- [ ] Add empty states to product list, order history
+- [ ] Create reusable Modal component
+- [ ] Standardize typography
+
+**Phase 3: Polish (P2) - Visual Refinement**
+- [ ] Add micro-interactions (hover/focus/active states)
+- [ ] Improve accessibility (focus traps, ARIA labels, skip links)
+- [ ] Visual hierarchy improvements
+- [ ] Status timeline redesign
+
+#### Next Steps
+
+1. Review `UI_UX_AUDIT.md` for complete analysis
+2. Start Phase 1 implementation (mobile fixes, loading states)
+3. Use `UI_UX_QUICK_START.md` for quick reference
+4. Implement components incrementally
+5. Test after each change
+
+---
 
 ### ✅ Multiple Images per Product with Upload During Creation (December 18, 2025)
 
@@ -1022,15 +1361,21 @@ Implemented a comprehensive order tracking system that allows customers to track
 - ✅ Multiple images per product with primary image support
 - ✅ Image upload during product creation (no need to save first)
 - ✅ Product gallery lightbox on storefront
+- ✅ UI/UX audit and foundation components (StatusBadge, EmptyState, LoadingSpinner)
+- ✅ Global CSS enhancements (button variants, form states, focus states)
+- ✅ Minimal user authentication (sign-in, sign-up, sign-out)
+- ✅ Order history for authenticated users
+- ✅ Order claiming (guest orders can be attached to accounts)
 - ✅ Full localization (vi/en)
 - ✅ Responsive design (mobile, tablet, desktop)
 
 ### Database
-- **Tables:** 16+ with relationships (added `order_tracking_tokens`)
+- **Tables:** 17+ with relationships (added `order_tracking_tokens`, `order_claims`)
 - **Triggers:** 5+ automatic triggers
-- **RLS Policies:** 16+ security policies (added token table RLS)
+- **RLS Policies:** 18+ security policies (added token table RLS, order claims RLS)
 - **Email Logging:** Order email tracking table
 - **Token Storage:** Database-backed with SHA-256 hashing
+- **Order Claims:** Audit trail for order claiming
 
 ---
 
@@ -1046,13 +1391,16 @@ Implemented a comprehensive order tracking system that allows customers to track
 7. ✅ Customer self-service cancellation - **COMPLETE**
 8. ✅ Customer change requests - **COMPLETE**
 9. ✅ Deposit reservation with COD payment - **COMPLETE**
+10. ✅ Minimal user auth + order history + order claiming - **COMPLETE**
 
 ### Short-term Goals
 - [ ] SMS notifications for order updates
-- [ ] Order history for authenticated users
+- ✅ Order history for authenticated users - **COMPLETE**
 - [ ] Export order details as PDF
 - [ ] Advanced order search and filtering
 - [ ] Order analytics dashboard
+- [ ] Profile management UI (edit name, phone, address)
+- [ ] Password reset flow
 
 ### Long-term Enhancements
 - [ ] Move token storage to Redis/database
@@ -1069,14 +1417,16 @@ Implemented a comprehensive order tracking system that allows customers to track
 1. ~~**Token Storage:** In-memory (not persistent)~~ ✅ **FIXED** - Now using database storage
 2. **Rate Limiting:** Simple IP-based (can be bypassed)
 3. ~~**No Token Revocation:** Tokens valid until expiry~~ ✅ **FIXED** - Tokens can be revoked via `revoked_at` field
-4. **No Order History:** Only current order view
+4. ~~**No Order History:** Only current order view~~ ✅ **FIXED** - Order history available for authenticated users
 
 ### Future Improvements
 - ~~Move to Redis for token storage~~ ✅ **COMPLETE** - Using database instead
 - Implement more robust rate limiting
 - ~~Add token revocation~~ ✅ **COMPLETE** - Via `revoked_at` field
-- Add order history for users
+- ~~Add order history for users~~ ✅ **COMPLETE** - Full order history with claiming
 - Add PDF export functionality
+- Add profile management UI
+- Add password reset flow
 
 ---
 
@@ -1085,6 +1435,8 @@ Implemented a comprehensive order tracking system that allows customers to track
 ### New Documentation
 - ✅ `ORDER_TRACKING.md` - Complete order tracking system documentation
 - ✅ `REFUNDS.md` - Complete Stripe refunds system documentation
+- ✅ `UI_UX_AUDIT.md` - Comprehensive UI/UX audit with recommendations
+- ✅ `UI_UX_QUICK_START.md` - Quick reference guide for UI improvements
 
 ### Updated Documentation
 - Translation files updated with tracking namespace
@@ -1113,6 +1465,6 @@ Implemented a comprehensive order tracking system that allows customers to track
 
 ---
 
-**Last Updated:** December 18, 2025  
-**Version:** 1.8.0 (Multiple Images per Product)  
-**Status:** ✅ Multiple images per product with upload during creation, lightbox gallery, and primary image management implemented
+**Last Updated:** December 24, 2025  
+**Version:** 2.0.0 (Minimal User Auth + Order History)  
+**Status:** ✅ User authentication, order history, and order claiming implemented. Guest-first approach maintained. All features production-ready.

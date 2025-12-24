@@ -6,11 +6,27 @@
         "orderCodePlaceholder": "ví dụ: ORD-20241212-000001",
         "emailOrPhone": "Email hoặc Số Điện Thoại",
         "emailOrPhonePlaceholder": "Nhập email hoặc số điện thoại của bạn",
+        "contactType": "Loại Liên Hệ",
+        "email": "Email",
+        "phone": "Số Điện Thoại",
+        "emailPlaceholder": "Nhập địa chỉ email của bạn",
+        "phonePlaceholder": "Nhập số điện thoại của bạn",
         "submit": "Theo Dõi Đơn Hàng",
-        "loading": "Đang tìm kiếm..."
+        "loading": "Đang tìm kiếm...",
+        "errors": {
+            "orderCodeRequired": "Mã đơn hàng là bắt buộc",
+            "contactRequired": "Email hoặc số điện thoại là bắt buộc",
+            "invalidEmail": "Vui lòng nhập địa chỉ email hợp lệ",
+            "invalidPhone": "Vui lòng nhập số điện thoại hợp lệ"
+        }
+    },
+    "empty": {
+        "title": "Theo Dõi Đơn Hàng",
+        "description": "Nhập mã đơn hàng và thông tin liên hệ để xem chi tiết đơn hàng của bạn."
     },
     "errors": {
         "notFound": "Không tìm thấy đơn hàng. Vui lòng kiểm tra lại mã đơn hàng và thông tin liên hệ.",
+        "notFoundTitle": "Không Tìm Thấy Đơn Hàng",
         "network": "Lỗi kết nối. Vui lòng thử lại sau.",
         "invalidToken": "Liên kết theo dõi không hợp lệ hoặc đã hết hạn.",
         "missingToken": "Liên kết theo dõi thiếu token.",
@@ -119,6 +135,17 @@
         "maxFiles": "Tối đa 3 tệp",
         "maxSize": "Tối đa 5MB mỗi tệp",
         "allowedTypes": "Chỉ chấp nhận JPG, PNG, hoặc WEBP"
+    },
+    "claim": {
+        "signInPrompt": "Đăng nhập để lưu đơn hàng này vào tài khoản và xem trong lịch sử đơn hàng.",
+        "signInToSave": "Đăng nhập để lưu đơn hàng",
+        "savePrompt": "Lưu đơn hàng này vào tài khoản để xem trong lịch sử đơn hàng.",
+        "saveOrder": "Lưu vào tài khoản",
+        "claiming": "Đang lưu...",
+        "success": "Đã lưu đơn hàng thành công! Đang chuyển đến đơn hàng của bạn...",
+        "claimed": "Đơn hàng này đã được lưu vào tài khoản của bạn.",
+        "viewOrders": "Xem đơn hàng của tôi",
+        "error": "Không thể lưu đơn hàng. Vui lòng thử lại."
     }
 }
 

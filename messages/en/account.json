@@ -1,0 +1,20 @@
+{
+    "title": "My Account",
+    "welcome": "Welcome, {name}!",
+    "signOut": "Sign Out",
+    "nav": {
+        "orders": "Orders"
+    },
+    "orders": {
+        "title": "Order History",
+        "subtitle": "View all your past orders",
+        "orderCode": "Order Code",
+        "total": "Total",
+        "empty": {
+            "title": "No orders yet",
+            "description": "You haven't placed any orders yet. Start shopping to see your orders here.",
+            "action": "Browse Products"
+        }
+    }
+}
+

@@ -1,0 +1,57 @@
+.accountLayout {
+    min-height: 60vh;
+    padding: var(--space-xl) 0;
+}
+
+.accountHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.accountHeader h1 {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.welcomeText {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--text-base);
+}
+
+.signOutForm {
+    margin: 0;
+}
+
+.accountNav {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.navLink {
+    padding: var(--space-sm) var(--space-md);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.navLink:hover {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+}
+
+.accountContent {
+    /* Content area */
+}
+

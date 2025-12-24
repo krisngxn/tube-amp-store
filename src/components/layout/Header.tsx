@@ -26,6 +26,7 @@ export default function Header() {
     { href: '/guides', label: t('guides') },
     { href: '/reviews', label: t('reviews') },
     { href: '/contact', label: t('contact') },
+    { href: '/order/track', label: t('trackOrder') },
   ];
 
   return (

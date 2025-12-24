@@ -1,0 +1,31 @@
+.claimCTA {
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.claimPrompt {
+    margin: 0 0 var(--space-md) 0;
+    color: var(--color-text-primary);
+    font-size: var(--text-base);
+}
+
+.successMessage {
+    margin: 0 0 var(--space-md) 0;
+    color: var(--color-success);
+    font-size: var(--text-base);
+    font-weight: 500;
+}
+
+.errorMessage {
+    margin: 0 0 var(--space-md) 0;
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+}
+

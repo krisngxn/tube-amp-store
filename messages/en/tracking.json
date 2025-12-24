@@ -6,11 +6,27 @@
         "orderCodePlaceholder": "e.g., ORD-20241212-000001",
         "emailOrPhone": "Email or Phone",
         "emailOrPhonePlaceholder": "Enter your email or phone number",
+        "contactType": "Contact Type",
+        "email": "Email",
+        "phone": "Phone",
+        "emailPlaceholder": "Enter your email address",
+        "phonePlaceholder": "Enter your phone number",
         "submit": "Track Order",
-        "loading": "Tracking..."
+        "loading": "Tracking...",
+        "errors": {
+            "orderCodeRequired": "Order code is required",
+            "contactRequired": "Email or phone is required",
+            "invalidEmail": "Please enter a valid email address",
+            "invalidPhone": "Please enter a valid phone number"
+        }
+    },
+    "empty": {
+        "title": "Track Your Order",
+        "description": "Enter your order code and contact information to view your order details."
     },
     "errors": {
         "notFound": "Order not found. Please check your order code and contact information.",
+        "notFoundTitle": "Order Not Found",
         "network": "Network error. Please try again later.",
         "invalidToken": "Invalid or expired tracking link.",
         "missingToken": "Tracking link is missing required token.",
@@ -119,6 +135,17 @@
         "maxFiles": "Max 3 files",
         "maxSize": "Max 5MB each",
         "allowedTypes": "JPG, PNG, or WEBP only"
+    },
+    "claim": {
+        "signInPrompt": "Sign in to save this order to your account and view it in your order history.",
+        "signInToSave": "Sign In to Save Order",
+        "savePrompt": "Save this order to your account to view it in your order history.",
+        "saveOrder": "Save to My Account",
+        "claiming": "Saving...",
+        "success": "Order saved successfully! Redirecting to your orders...",
+        "claimed": "This order is already saved to your account.",
+        "viewOrders": "View My Orders",
+        "error": "Failed to save order. Please try again."
     }
 }
 

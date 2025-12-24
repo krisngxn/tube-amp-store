@@ -1,0 +1,97 @@
+.authPage {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    padding: var(--space-xl) 0;
+}
+
+.authCard {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.authCard h1 {
+    margin: 0 0 var(--space-sm) 0;
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.subtitle {
+    margin: 0 0 var(--space-lg) 0;
+    color: var(--color-text-secondary);
+    font-size: var(--text-base);
+}
+
+.authForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.formGroup label {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    font-size: var(--text-sm);
+}
+
+.formGroup input {
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.formGroup input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-alpha);
+}
+
+.formGroup input:disabled {
+    background-color: var(--color-bg-secondary);
+    cursor: not-allowed;
+}
+
+.formGroup .hint {
+    color: var(--color-text-secondary);
+    font-size: var(--text-xs);
+    margin-top: calc(var(--space-xs) * -1);
+}
+
+.errorMessage {
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+}
+
+.authFooter {
+    margin-top: var(--space-lg);
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+}
+
+.authFooter .link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.authFooter .link:hover {
+    text-decoration: underline;
+}
+

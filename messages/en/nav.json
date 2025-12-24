@@ -12,5 +12,6 @@
     "admin": "Admin",
     "cart": "Cart",
     "matchingAdvice": "Matching Advice",
-    "chatForMatching": "Chat for Matching"
+    "chatForMatching": "Chat for Matching",
+    "trackOrder": "Track Order"
 }

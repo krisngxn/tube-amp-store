@@ -25,7 +25,8 @@
         "returns": "Đổi Trả",
         "payment": "Thanh Toán",
         "privacy": "Bảo Mật",
-        "terms": "Điều Khoản"
+        "terms": "Điều Khoản",
+        "trackOrder": "Theo Dõi Đơn Hàng"
     },
     "trust": {
         "title": "Cam Kết Chất Lượng",

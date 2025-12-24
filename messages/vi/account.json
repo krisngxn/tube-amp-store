@@ -1,0 +1,20 @@
+{
+    "title": "Tài khoản của tôi",
+    "welcome": "Chào mừng, {name}!",
+    "signOut": "Đăng xuất",
+    "nav": {
+        "orders": "Đơn hàng"
+    },
+    "orders": {
+        "title": "Lịch sử đơn hàng",
+        "subtitle": "Xem tất cả đơn hàng của bạn",
+        "orderCode": "Mã đơn hàng",
+        "total": "Tổng tiền",
+        "empty": {
+            "title": "Chưa có đơn hàng",
+            "description": "Bạn chưa đặt đơn hàng nào. Bắt đầu mua sắm để xem đơn hàng ở đây.",
+            "action": "Xem sản phẩm"
+        }
+    }
+}
+

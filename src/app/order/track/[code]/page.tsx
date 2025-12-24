@@ -4,6 +4,7 @@ import styles from './page.module.css';
 import TrackingForm from '@/app/order/track/TrackingForm';
 import OrderActions from './OrderActions';
 import DepositProofUpload from './DepositProofUpload';
+import ClaimOrderCTA from '@/app/order/track/ClaimOrderCTA';
 import type { TrackedOrderDTO } from '@/lib/repositories/orders/tracking';
 import type { Metadata } from 'next';
 import { getDepositProofByOrderId, canUploadProof } from '@/lib/repositories/deposit-proofs';
@@ -302,6 +303,14 @@ export default async function TrackOrderDetailPage({ params, searchParams }: Tra
                             locale={locale}
                         />
                     )}
+
+                    {/* Claim CTA */}
+                    <ClaimOrderCTA
+                        orderCode={code}
+                        orderId={order.id}
+                        claimMethod="token_link"
+                        token={token!}
+                    />
 
                     {/* Actions */}
                     <OrderActions order={order} token={token!} />
