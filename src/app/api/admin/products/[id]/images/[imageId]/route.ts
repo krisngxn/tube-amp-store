@@ -34,53 +34,84 @@ export async function PATCH(
             return NextResponse.json({ error: 'Image not found' }, { status: 404 });
         }
 
-        // Handle setting as cover (sort_order = 0)
-        if (body.setAsCover === true) {
-            // Get all images for this product
+        // Handle setting as primary/cover
+        if (body.setAsPrimary === true || body.setAsCover === true) {
+            // First, unset all other primary images for this product
+            await supabase
+                .from('product_images')
+                .update({ is_primary: false })
+                .eq('product_id', productId)
+                .neq('id', imageId);
+
+            // Get all images for this product to handle sort_order
             const { data: allImages } = await supabase
                 .from('product_images')
-                .select('id, sort_order')
+                .select('id, sort_order, is_primary')
                 .eq('product_id', productId)
                 .order('sort_order', { ascending: true });
 
             if (allImages) {
-                // Reorder: move current cover to position 1, set this one to 0
-                const updates: Array<{ id: string; sort_order: number }> = [];
+                // Find current primary image (if any)
+                const currentPrimary = allImages.find(img => img.is_primary && img.id !== imageId);
                 
-                // Set this image to 0
-                updates.push({ id: imageId, sort_order: 0 });
+                // Set this image as primary with sort_order = 0
+                await supabase
+                    .from('product_images')
+                    .update({ 
+                        is_primary: true,
+                        sort_order: 0 
+                    })
+                    .eq('id', imageId);
 
-                // Reorder others (skip the one we're moving to cover)
+                // Reorder others: move old primary to position 1, then continue
                 let newSortOrder = 1;
                 for (const img of allImages) {
                     if (img.id !== imageId) {
-                        updates.push({ id: img.id, sort_order: newSortOrder });
+                        await supabase
+                            .from('product_images')
+                            .update({ sort_order: newSortOrder })
+                            .eq('id', img.id);
                         newSortOrder++;
                     }
                 }
-
-                // Apply all updates
-                for (const update of updates) {
-                    await supabase
-                        .from('product_images')
-                        .update({ sort_order: update.sort_order })
-                        .eq('id', update.id);
-                }
+            } else {
+                // No other images, just set this one as primary
+                await supabase
+                    .from('product_images')
+                    .update({ 
+                        is_primary: true,
+                        sort_order: 0 
+                    })
+                    .eq('id', imageId);
             }
         }
 
-        // Update other fields
+        // Update other fields (only if not setting as primary)
         const updateData: {
             alt_text?: string;
             sort_order?: number;
+            is_primary?: boolean;
         } = {};
 
         if (body.altText !== undefined) {
             updateData.alt_text = body.altText || null;
         }
 
-        if (body.sortOrder !== undefined && body.setAsCover !== true) {
+        if (body.sortOrder !== undefined && body.setAsPrimary !== true && body.setAsCover !== true) {
             updateData.sort_order = body.sortOrder;
+        }
+
+        // Handle is_primary field directly (if set without setAsPrimary)
+        if (body.isPrimary !== undefined && body.setAsPrimary !== true && body.setAsCover !== true) {
+            if (body.isPrimary === true) {
+                // Unset other primary images first
+                await supabase
+                    .from('product_images')
+                    .update({ is_primary: false })
+                    .eq('product_id', productId)
+                    .neq('id', imageId);
+            }
+            updateData.is_primary = body.isPrimary;
         }
 
         if (Object.keys(updateData).length > 0) {
@@ -132,10 +163,10 @@ export async function DELETE(
         const { id: productId, imageId } = await params;
         const supabase = createServiceClient();
 
-        // Get image record to get storage_path
+        // Get image record to get storage_path and check if it's primary
         const { data: image, error: fetchError } = await supabase
             .from('product_images')
-            .select('storage_path, sort_order')
+            .select('storage_path, sort_order, is_primary')
             .eq('id', imageId)
             .eq('product_id', productId)
             .single();
@@ -167,17 +198,33 @@ export async function DELETE(
         }
 
         // Re-normalize sort_order (0..n-1) for remaining images
+        // If deleted image was primary, set first remaining image as primary
         const { data: remainingImages } = await supabase
             .from('product_images')
-            .select('id, sort_order')
+            .select('id, sort_order, is_primary')
             .eq('product_id', productId)
             .order('sort_order', { ascending: true });
 
         if (remainingImages && remainingImages.length > 0) {
+            const wasPrimary = image.is_primary;
+            
             for (let i = 0; i < remainingImages.length; i++) {
+                const updateData: { sort_order: number; is_primary?: boolean } = { sort_order: i };
+                
+                // If deleted image was primary and this is the first image, make it primary
+                if (wasPrimary && i === 0 && !remainingImages[i].is_primary) {
+                    // Unset any other primary images first
+                    await supabase
+                        .from('product_images')
+                        .update({ is_primary: false })
+                        .eq('product_id', productId);
+                    
+                    updateData.is_primary = true;
+                }
+                
                 await supabase
                     .from('product_images')
-                    .update({ sort_order: i })
+                    .update(updateData)
                     .eq('id', remainingImages[i].id);
             }
         }

@@ -208,6 +208,36 @@ a:hover {
   transform: none !important;
 }
 
+.btn-sm {
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.875rem;
+  min-height: 32px;
+}
+
+.btn-large {
+  padding: var(--space-md) var(--space-2xl);
+  font-size: 1.125rem;
+  min-height: 48px;
+}
+
+.btn-danger {
+  background: var(--color-error);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #b85a5a;
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+
 /* Cards */
 .card {
   background: var(--color-bg-secondary);
@@ -249,6 +279,36 @@ a:hover {
 
 .input::placeholder {
   color: var(--color-text-muted);
+}
+
+.input-error {
+  border-color: var(--color-error);
+}
+
+.input-error:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(201, 107, 107, 0.15);
+}
+
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--color-bg-secondary);
+}
+
+.input-error-message {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: 0.875rem;
+  color: var(--color-error);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.input-error-message::before {
+  content: '⚠';
+  font-size: 1em;
 }
 
 .select {

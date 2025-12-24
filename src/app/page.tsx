@@ -125,7 +125,7 @@ export default function HomePage() {
                                         onChange={(e) => setMatchingForm({ ...matchingForm, sensitivity: e.target.value })}
                                     />
                                 </div>
-                                <div className="form-group">
+                                <div className={styles.formGroup}>
                                     <label className="label">{t('matching.form.impedance.label')}</label>
                                     <select
                                         className="input select"
@@ -138,7 +138,7 @@ export default function HomePage() {
                                         <option value="16">{t('matching.form.impedance.options.16')}</option>
                                     </select>
                                 </div>
-                                <div className="form-group">
+                                <div className={styles.formGroup}>
                                     <label className="label">{t('matching.form.roomSize.label')}</label>
                                     <select
                                         className="input select"
@@ -150,7 +150,7 @@ export default function HomePage() {
                                         <option value="large">{t('matching.form.roomSize.options.large')}</option>
                                     </select>
                                 </div>
-                                <div className="form-group">
+                                <div className={styles.formGroup}>
                                     <label className="label">{t('matching.form.listeningLevel.label')}</label>
                                     <select
                                         className="input select"
@@ -173,9 +173,11 @@ export default function HomePage() {
                                     onChange={(e) => setMatchingForm({ ...matchingForm, genres: e.target.value })}
                                 />
                             </div>
-                            <button type="submit" className="btn btn-primary">
-                                {t('matching.form.submit')}
-                            </button>
+                            <div className={styles.formSubmit}>
+                                <button type="submit" className="btn btn-primary">
+                                    {t('matching.form.submit')}
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

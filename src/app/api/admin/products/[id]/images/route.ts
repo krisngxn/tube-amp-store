@@ -79,17 +79,20 @@ export async function POST(
             );
         }
 
-        // Get the next sort_order (end of list)
+        // Get existing images to determine sort_order and is_primary
         const { data: existingImages } = await supabase
             .from('product_images')
-            .select('sort_order')
+            .select('sort_order, is_primary')
             .eq('product_id', productId)
-            .order('sort_order', { ascending: false })
-            .limit(1);
+            .order('sort_order', { ascending: false });
 
+        const isFirstImage = !existingImages || existingImages.length === 0;
         const nextSortOrder = existingImages && existingImages.length > 0
             ? existingImages[0].sort_order + 1
             : 0;
+        
+        // First image should be primary
+        const isPrimary = isFirstImage;
 
         // Get public URL
         const { data: urlData } = supabase.storage
@@ -105,6 +108,7 @@ export async function POST(
                 url: urlData.publicUrl,
                 alt_text: altText,
                 sort_order: nextSortOrder,
+                is_primary: isPrimary,
             })
             .select()
             .single();
@@ -127,6 +131,7 @@ export async function POST(
                 url: imageRecord.url,
                 alt_text: imageRecord.alt_text,
                 sort_order: imageRecord.sort_order,
+                is_primary: imageRecord.is_primary,
             },
         });
     } catch (error) {
@@ -157,7 +162,7 @@ export async function GET(
 
         const { data: images, error } = await supabase
             .from('product_images')
-            .select('*')
+            .select('id, storage_path, url, alt_text, sort_order, is_primary, created_at')
             .eq('product_id', productId)
             .order('sort_order', { ascending: true });
 

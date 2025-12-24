@@ -50,6 +50,8 @@ export default function ProductForm({ product }: ProductFormProps) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
+    const [selectedImages, setSelectedImages] = useState<File[]>([]);
+    const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
     useEffect(() => {
         // Load English translation if editing
@@ -72,6 +74,25 @@ export default function ProductForm({ product }: ProductFormProps) {
                 });
         }
     }, [product]);
+
+    const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        if (!files || files.length === 0) return;
+
+        const newFiles = Array.from(files);
+        setSelectedImages((prev) => [...prev, ...newFiles]);
+
+        // Create previews
+        const newPreviews = newFiles.map((file) => URL.createObjectURL(file));
+        setImagePreviews((prev) => [...prev, ...newPreviews]);
+    };
+
+    const removeImage = (index: number) => {
+        setSelectedImages((prev) => prev.filter((_, i) => i !== index));
+        // Revoke object URL to prevent memory leak
+        URL.revokeObjectURL(imagePreviews[index]);
+        setImagePreviews((prev) => prev.filter((_, i) => i !== index));
+    };
 
     const handleSubmit = async (e: React.FormEvent, publish: boolean = false) => {
         e.preventDefault();
@@ -116,11 +137,29 @@ export default function ProductForm({ product }: ProductFormProps) {
             const url = isEdit ? `/api/admin/products/${product.id}` : '/api/admin/products';
             const method = isEdit ? 'PUT' : 'POST';
 
-            const response = await fetch(url, {
-                method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            });
+            let response: Response;
+            
+            // If creating new product and has images, use FormData
+            if (!isEdit && selectedImages.length > 0) {
+                const formDataToSend = new FormData();
+                formDataToSend.append('productData', JSON.stringify(payload));
+                
+                selectedImages.forEach((file, index) => {
+                    formDataToSend.append(`images[${index}]`, file);
+                });
+
+                response = await fetch(url, {
+                    method,
+                    body: formDataToSend,
+                });
+            } else {
+                // Use JSON for edit or create without images
+                response = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+            }
 
             const result = await response.json();
 
@@ -130,7 +169,16 @@ export default function ProductForm({ product }: ProductFormProps) {
 
             setSuccess(true);
             
-            // If creating new product, redirect to edit page to add images
+            // Clear selected images after successful creation
+            if (!isEdit) {
+                selectedImages.forEach((_, index) => {
+                    URL.revokeObjectURL(imagePreviews[index]);
+                });
+                setSelectedImages([]);
+                setImagePreviews([]);
+            }
+            
+            // If creating new product, redirect to edit page
             if (!isEdit && result.id) {
                 setTimeout(() => {
                     router.push(`/admin/products/${result.id}`);
@@ -431,12 +479,59 @@ export default function ProductForm({ product }: ProductFormProps) {
             </div>
 
             <div id="product-images-section" className={styles.formSection}>
+                <h2>{t('products.images.title')}</h2>
                 {isEdit && product?.id ? (
                     <ProductImageManager productId={product.id} />
                 ) : (
-                    <div className={styles.imageManagerPlaceholder}>
-                        <p>{t('products.images.saveFirst')}</p>
-                        <p className={styles.hint}>{t('products.images.saveFirstHint')}</p>
+                    <div className={styles.imageUploadSection}>
+                        <label className={styles.imageUploadLabel}>
+                            <input
+                                type="file"
+                                multiple
+                                accept="image/jpeg,image/jpg,image/png,image/webp"
+                                onChange={handleImageSelect}
+                                disabled={loading}
+                                style={{ display: 'none' }}
+                            />
+                            <div className={styles.imageUploadButton}>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M12 5v14m-7-7h14"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                    />
+                                </svg>
+                                {t('products.images.upload')}
+                            </div>
+                        </label>
+                        {selectedImages.length > 0 && (
+                            <div className={styles.imagePreviewGrid}>
+                                {imagePreviews.map((preview, index) => (
+                                    <div key={index} className={styles.imagePreviewCard}>
+                                        <img src={preview} alt={`Preview ${index + 1}`} />
+                                        {index === 0 && (
+                                            <div className={styles.primaryBadge}>
+                                                {t('products.images.cover')}
+                                            </div>
+                                        )}
+                                        <button
+                                            type="button"
+                                            className={styles.removeImageButton}
+                                            onClick={() => removeImage(index)}
+                                            aria-label="Remove image"
+                                        >
+                                            ×
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                        {selectedImages.length === 0 && (
+                            <p className={styles.imageUploadHint}>
+                                {t('products.images.uploadHint')}
+                            </p>
+                        )}
                     </div>
                 )}
             </div>

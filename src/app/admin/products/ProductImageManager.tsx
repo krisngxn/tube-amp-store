@@ -12,6 +12,7 @@ interface ProductImage {
     url: string;
     alt_text?: string;
     sort_order: number;
+    is_primary?: boolean;
 }
 
 interface ProductImageManagerProps {
@@ -87,22 +88,22 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
         }
     };
 
-    const handleSetCover = async (imageId: string) => {
+    const handleSetPrimary = async (imageId: string) => {
         try {
             const response = await fetch(`/api/admin/products/${productId}/images/${imageId}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ setAsCover: true }),
+                body: JSON.stringify({ setAsPrimary: true }),
             });
 
             if (!response.ok) {
                 const data = await response.json();
-                throw new Error(data.error || 'Failed to set cover');
+                throw new Error(data.error || 'Failed to set primary');
             }
 
             await loadImages();
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'Failed to set cover');
+            setError(err instanceof Error ? err.message : 'Failed to set primary');
         }
     };
 
@@ -224,11 +225,11 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
                 <div className={styles.gallery}>
                     {sortedImages.map((image, index) => {
                         const imageUrl = getPublicImageUrl(image.storage_path || image.url);
-                        const isCover = image.sort_order === 0;
+                        const isPrimary = image.is_primary === true || (image.is_primary === undefined && image.sort_order === 0);
 
                         return (
                             <div key={image.id} className={styles.imageCard}>
-                                {isCover && <div className={styles.coverBadge}>{t('cover')}</div>}
+                                {isPrimary && <div className={styles.coverBadge}>{t('cover')}</div>}
                                 <div className={styles.imagePreview}>
                                     <Image
                                         src={imageUrl}
@@ -255,9 +256,9 @@ export default function ProductImageManager({ productId }: ProductImageManagerPr
                                         >
                                             ↓
                                         </button>
-                                        {!isCover && (
+                                        {!isPrimary && (
                                             <button
-                                                onClick={() => handleSetCover(image.id)}
+                                                onClick={() => handleSetPrimary(image.id)}
                                                 className="btn btn-secondary btn-sm"
                                             >
                                                 {t('setCover')}

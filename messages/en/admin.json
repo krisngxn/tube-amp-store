@@ -113,7 +113,8 @@
             "cancel": "Cancel",
             "noAlt": "No alt text",
             "saveFirst": "Save the product first to upload images",
-            "saveFirstHint": "After saving, you'll be able to upload and manage product images here."
+            "saveFirstHint": "After saving, you'll be able to upload and manage product images here.",
+            "uploadHint": "Select images to upload. The first image will be set as the cover image."
         }
     },
     "pagination": {

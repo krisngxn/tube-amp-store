@@ -25,8 +25,15 @@
 .productMain {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-3xl);
+    gap: var(--space-2xl);
     margin-bottom: var(--space-3xl);
+}
+
+@media (max-width: 1024px) {
+    .productMain {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+    }
 }
 
 .gallerySection {
@@ -126,9 +133,10 @@
 }
 
 .matchingItem {
-    padding: var(--space-md);
+    padding: var(--space-lg);
     background: var(--color-bg-tertiary);
     border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
 }
 
 .relatedProducts {

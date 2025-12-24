@@ -7,6 +7,136 @@
 
 ## 🎯 Recent Updates
 
+### ✅ Multiple Images per Product with Upload During Creation (December 18, 2025)
+
+**Status:** ✅ Complete and Production Ready
+
+#### Overview
+Enhanced the product system to support multiple images per product with a primary image flag, improved admin UX for uploading images during product creation (no need to save first), and added lightbox functionality to the storefront gallery.
+
+#### Features Implemented
+
+1. **Database Schema Enhancement**
+   - Added `is_primary` boolean field to `product_images` table
+   - Unique index ensures at most one primary image per product
+   - Migration script: `supabase/ADD_IS_PRIMARY_TO_PRODUCT_IMAGES.sql`
+   - Backward compatible with `sort_order = 0` fallback
+
+2. **Admin Panel - Image Upload During Creation**
+   - Image upload UI added to product creation form
+   - Users can select multiple images before saving product
+   - Visual preview grid with thumbnails
+   - First image automatically marked as primary/cover
+   - Remove button for each preview
+   - No need to save product first, then upload images separately
+
+3. **API Endpoints Enhanced**
+   - Updated `/api/admin/products` POST endpoint to accept `multipart/form-data`
+   - Handles product data + images in single request
+   - Creates product first, then uploads images using product ID
+   - First image automatically set as primary
+   - Graceful error handling (continues if some images fail)
+   - Updated PATCH endpoint to handle `is_primary` field
+   - New bulk reorder endpoint: `/api/admin/products/[id]/images/reorder`
+
+4. **Storefront Gallery Enhancement**
+   - Added lightbox functionality to product gallery
+   - Click main image to open full-size lightbox
+   - Keyboard navigation (Arrow keys, Escape)
+   - Previous/Next buttons
+   - Image counter display
+   - Responsive design for mobile/tablet/desktop
+
+5. **Repository Functions Updated**
+   - Updated to use `is_primary` flag throughout
+   - Primary image selection logic: prefer `is_primary`, fallback to `sort_order = 0`, then first image
+   - Backward compatible with existing data
+
+#### Files Created
+
+**Database Migration:**
+- `supabase/ADD_IS_PRIMARY_TO_PRODUCT_IMAGES.sql` - Adds `is_primary` field and constraints
+
+**API Routes:**
+- `src/app/api/admin/products/[id]/images/reorder/route.ts` - Bulk reorder endpoint
+
+#### Files Modified
+
+**Database Schema:**
+- `supabase/schema.sql` - Added `is_primary` field and indexes
+
+**API Endpoints:**
+- `src/app/api/admin/products/route.ts` - Accepts multipart/form-data with images
+- `src/app/api/admin/products/[id]/images/route.ts` - Updated to set `is_primary` on upload
+- `src/app/api/admin/products/[id]/images/[imageId]/route.ts` - Handles `is_primary` updates
+
+**Admin UI:**
+- `src/app/admin/products/ProductForm.tsx` - Added image upload UI for new products
+- `src/app/admin/products/ProductForm.module.css` - Added image preview styles
+- `src/app/admin/products/ProductImageManager.tsx` - Updated to use `is_primary` field
+
+**Storefront:**
+- `src/app/product/[slug]/ProductGallery.tsx` - Added lightbox functionality
+- `src/app/product/[slug]/ProductGallery.module.css` - Added lightbox styles
+
+**Repository:**
+- `src/lib/repositories/products.ts` - Updated to use `is_primary` flag
+
+**Translations:**
+- `messages/en/admin.json` - Added image upload hint
+- `messages/vi/admin.json` - Added Vietnamese image upload hint
+
+#### Technical Details
+
+**Primary Image Logic:**
+- Database constraint ensures at most one `is_primary = true` per product
+- First uploaded image automatically set as primary
+- When setting new primary, old primary is automatically unset
+- When deleting primary image, first remaining image becomes primary
+
+**Image Upload Flow (New Product):**
+1. User fills product form and selects images
+2. Form shows preview thumbnails
+3. On submit: Product created → Images uploaded → First image set as primary
+4. User redirected to edit page
+
+**Lightbox Features:**
+- Full-screen image viewing
+- Keyboard shortcuts (← → for navigation, Esc to close)
+- Click outside to close
+- Image counter (e.g., "2 / 5")
+- Responsive touch-friendly controls
+
+#### Testing Notes
+
+**Image Upload During Creation:**
+1. Navigate to create new product
+2. Fill form and select multiple images
+3. Verify previews show correctly
+4. Submit form → Verify product created with images
+5. Check first image is marked as primary
+
+**Primary Image Management:**
+1. Create product with multiple images
+2. Set different image as primary → Verify old primary unset
+3. Delete primary image → Verify new primary assigned
+4. Reorder images → Verify primary preserved
+
+**Storefront Gallery:**
+1. View product with multiple images
+2. Click main image → Verify lightbox opens
+3. Navigate with arrow keys → Verify works
+4. Click outside → Verify closes
+5. Test on mobile → Verify responsive
+
+#### Known Limitations
+
+1. **Image Size:** Max 10MB per image (configurable in `validateImageFile`)
+2. **File Types:** Only JPEG, PNG, WebP supported
+3. **Bulk Upload:** Images uploaded sequentially (not in parallel)
+
+---
+
 ### ✅ Deployment Stability & Dynamic Rendering Fixes (December 18, 2025)
 
 **Status:** ✅ Complete and Production Ready  
@@ -889,6 +1019,9 @@ Implemented a comprehensive order tracking system that allows customers to track
 - ✅ Order-level optional deposit logic (paymentMode as single source of truth)
 - ✅ Customer order cancellation (self-service with inventory restoration)
 - ✅ Customer change requests (non-automated, admin-handled)
+- ✅ Multiple images per product with primary image support
+- ✅ Image upload during product creation (no need to save first)
+- ✅ Product gallery lightbox on storefront
 - ✅ Full localization (vi/en)
 - ✅ Responsive design (mobile, tablet, desktop)
 
@@ -981,5 +1114,5 @@ Implemented a comprehensive order tracking system that allows customers to track
 ---
 
 **Last Updated:** December 18, 2025  
-**Version:** 1.7.0 (Deployment Stability & Dynamic Rendering)  
-**Status:** ✅ Deployment stabilized on Vercel, dynamic rendering and Supabase/i18n errors resolved
+**Version:** 1.8.0 (Multiple Images per Product)  
+**Status:** ✅ Multiple images per product with upload during creation, lightbox gallery, and primary image management implemented

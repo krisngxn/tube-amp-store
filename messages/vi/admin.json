@@ -113,7 +113,8 @@
             "cancel": "Hủy",
             "noAlt": "Không có alt text",
             "saveFirst": "Lưu sản phẩm trước để tải lên hình ảnh",
-            "saveFirstHint": "Sau khi lưu, bạn sẽ có thể tải lên và quản lý hình ảnh sản phẩm tại đây."
+            "saveFirstHint": "Sau khi lưu, bạn sẽ có thể tải lên và quản lý hình ảnh sản phẩm tại đây.",
+            "uploadHint": "Chọn hình ảnh để tải lên. Hình ảnh đầu tiên sẽ được đặt làm ảnh bìa."
         }
     },
     "pagination": {

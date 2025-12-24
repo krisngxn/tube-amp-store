@@ -41,3 +41,135 @@
     box-shadow: 0 0 0 1px var(--color-accent-primary);
 }
 
+.zoomHint {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: var(--space-xs);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.galleryMain:hover .zoomHint {
+    opacity: 1;
+}
+
+/* Lightbox Styles */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.lightboxContent {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    height: 90%;
+    max-height: 90vh;
+    cursor: default;
+}
+
+.lightboxClose {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: background var(--transition-fast);
+}
+
+.lightboxClose:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.lightboxPrev,
+.lightboxNext {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    font-size: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: background var(--transition-fast);
+}
+
+.lightboxPrev {
+    left: var(--space-md);
+}
+
+.lightboxNext {
+    right: var(--space-md);
+}
+
+.lightboxPrev:hover,
+.lightboxNext:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.lightboxCounter {
+    position: absolute;
+    bottom: var(--space-md);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .lightboxPrev,
+    .lightboxNext {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+    }
+
+    .lightboxClose {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+    }
+
+    .lightboxContent {
+        width: 95%;
+        height: 85%;
+    }
+}
+

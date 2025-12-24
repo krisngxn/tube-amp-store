@@ -189,9 +189,11 @@ function MatchingTab({ product }: { product: ProductDetailDTO }) {
 
     return (
         <div>
-            {product.matchingNotes ? (
-                <p className="text-secondary mb-6">{product.matchingNotes}</p>
-            ) : null}
+            {product.matchingNotes && (
+                <div className="mb-8">
+                    <p className="text-secondary">{product.matchingNotes}</p>
+                </div>
+            )}
 
             <div className={styles.matchingSpecs}>
                 {product.recommendedSensitivityMin && (

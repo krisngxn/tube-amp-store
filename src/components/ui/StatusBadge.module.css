@@ -1,0 +1,31 @@
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-sm);
+  border: 1px solid;
+}
+
+.statusBadge.pending {
+  background: rgba(201, 160, 95, 0.15);
+  color: var(--color-warning);
+  border-color: var(--color-warning);
+}
+
+.statusBadge.confirmed {
+  background: rgba(107, 155, 110, 0.15);
+  color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.statusBadge.cancelled {
+  background: rgba(201, 107, 107, 0.15);
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+

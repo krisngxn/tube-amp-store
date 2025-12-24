@@ -163,7 +163,8 @@ CREATE TABLE public.product_images (
     storage_path TEXT NOT NULL, -- Path in Supabase Storage: products/{product_id}/{image_id}.jpg
     url TEXT, -- Public URL (computed from storage_path, kept for backward compatibility)
     alt_text TEXT,
-    sort_order INTEGER DEFAULT 0, -- 0 = cover image, higher numbers = gallery order
+    sort_order INTEGER DEFAULT 0, -- Gallery order (0 = first, higher numbers = later)
+    is_primary BOOLEAN DEFAULT false, -- Marks the primary/cover image (at most one per product)
     created_at TIMESTAMPTZ DEFAULT NOW(),
     
     -- Ensure unique sort_order per product (optional, can be relaxed if needed)
@@ -172,6 +173,12 @@ CREATE TABLE public.product_images (
 
 -- Index for faster queries
 CREATE INDEX idx_product_images_product_id_sort ON public.product_images(product_id, sort_order);
+
+-- Index for primary image queries
+CREATE INDEX idx_product_images_is_primary ON public.product_images(product_id, is_primary) WHERE is_primary = true;
+
+-- Ensure at most one primary image per product
+CREATE UNIQUE INDEX idx_product_images_single_primary ON public.product_images(product_id) WHERE is_primary = true;
 
 -- Product categories/tags
 CREATE TABLE public.product_tags (

@@ -17,12 +17,13 @@ interface ProductTranslationRow {
 }
 
 interface ProductImageRow {
+    id?: string;
     storage_path?: string; // New schema
     url?: string; // Old schema (backward compatibility)
     alt_text?: string;
     sort_order?: number; // New schema
     position?: number; // Old schema (backward compatibility)
-    is_primary?: boolean; // Old schema (backward compatibility)
+    is_primary?: boolean; // Primary image flag
 }
 
 interface ProductRow {
@@ -123,7 +124,6 @@ export async function listProducts(
           url,
           alt_text,
           sort_order,
-          position,
           is_primary
         )
       `,
@@ -220,11 +220,11 @@ export async function listProducts(
         // Map to DTOs
         const items: ProductCardDTO[] = (data || []).map((product: ProductRow) => {
             const translation = product.product_translations?.[0];
-            // Handle both old and new schema
+            // Find primary image: prefer is_primary flag, fallback to sort_order = 0, then first image
             const primaryImage = product.product_images?.find(
-                (img: ProductImageRow) => 
-                    (img.sort_order !== undefined && img.sort_order === 0) || 
-                    (img.is_primary === true)
+                (img: ProductImageRow) => img.is_primary === true
+            ) || product.product_images?.find(
+                (img: ProductImageRow) => img.sort_order === 0
             ) || product.product_images?.[0]; // Fallback to first image
 
             // Determine image URL - prefer storage_path first (most reliable), then url
@@ -337,7 +337,6 @@ export async function getProductBySlug(
           url,
           alt_text,
           sort_order,
-          position,
           is_primary
         )
       `
@@ -365,17 +364,18 @@ export async function getProductBySlug(
         
         const englishName = englishData?.name;
 
-        // Map images - handle both old and new schema
+        // Map images - use is_primary and sort_order
         const images: ProductImage[] = (productData.product_images || [])
             .sort((a, b) => {
-                // Use sort_order if available, otherwise use position, otherwise use 0
-                const aOrder = a.sort_order ?? a.position ?? 0;
-                const bOrder = b.sort_order ?? b.position ?? 0;
+                // Sort by sort_order (primary should be 0)
+                const aOrder = a.sort_order ?? 0;
+                const bOrder = b.sort_order ?? 0;
                 return aOrder - bOrder;
             })
             .map((img) => {
-                const sortOrder = img.sort_order ?? img.position ?? 0;
-                const isPrimary = img.sort_order === 0 || img.is_primary === true;
+                const sortOrder = img.sort_order ?? 0;
+                // Primary: explicit is_primary flag, or sort_order = 0 if no flag set
+                const isPrimary = img.is_primary === true || (img.is_primary === undefined && sortOrder === 0);
                 
                 // Prefer storage_path first (most reliable), then url, then placeholder
                 // This matches the admin ProductImageManager logic
@@ -416,6 +416,7 @@ export async function getProductBySlug(
             priceVnd: productData.price,
             compareAtPriceVnd: productData.compare_at_price || undefined,
             imageUrl: (() => {
+                // Find primary image: prefer explicit isPrimary flag, fallback to first image
                 const primaryImg = images.find((img) => img.isPrimary) || images[0];
                 return primaryImg?.url || '/images/placeholder-product.jpg';
             })(),
@@ -506,7 +507,6 @@ export async function getRelatedProducts(
           url,
           alt_text,
           sort_order,
-          position,
           is_primary
         )
       `
@@ -569,11 +569,11 @@ export async function getRelatedProducts(
         // Map to DTOs
         const items: ProductCardDTO[] = relatedProducts.map((product: ProductRow) => {
             const translation = product.product_translations?.[0];
-            // Handle both old and new schema
+            // Find primary image: prefer is_primary flag, fallback to sort_order = 0, then first image
             const primaryImage = product.product_images?.find(
-                (img: ProductImageRow) => 
-                    (img.sort_order !== undefined && img.sort_order === 0) || 
-                    (img.is_primary === true)
+                (img: ProductImageRow) => img.is_primary === true
+            ) || product.product_images?.find(
+                (img: ProductImageRow) => img.sort_order === 0
             ) || product.product_images?.[0]; // Fallback to first image
 
             // Determine image URL - prefer storage_path first (most reliable), then url

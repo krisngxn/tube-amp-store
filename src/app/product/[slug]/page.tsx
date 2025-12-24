@@ -221,7 +221,7 @@ export default async function ProductPage({ params }: PageProps) {
 
         {/* Matching Section */}
         {(product.recommendedSensitivityMin || (product.taps && product.taps.length > 0)) && (
-          <section className={`${styles.matchingSection} card p - 8 mb - 16`}>
+          <section className={`${styles.matchingSection} card p-8 mb-16`}>
             <h2 className="mb-6">{t('matching.title')}</h2>
             <div className={styles.matchingInfo}>
               {product.recommendedSensitivityMin && (
